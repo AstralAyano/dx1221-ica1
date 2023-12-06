@@ -19,4 +19,21 @@ public class Collision {
 
         return true;
     }
+
+    public static boolean AABBCollision(float x1, float y1, float width1, float height1, float x2, float y2, float width2, float height2)
+    {
+        float xScale1 = width1 / 2;
+        float yScale1 = height1 / 2;
+        float xScale2 = width2 / 2;
+        float yScale2 = height2 / 2;
+        // within left & right side
+        if (x1 > x2 - xScale1 - xScale2 &&  //within left side
+            x1 < x2 + xScale1 + xScale2 &&  //within right side
+            y1 < y2 + yScale1 + yScale2 &&  //within top side
+            y1 > y2 - yScale1 - yScale2)    //within bottom side
+            {
+                return true;
+            }
+        return false;
+    }
 }

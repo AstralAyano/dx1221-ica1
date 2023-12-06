@@ -2,7 +2,11 @@ package com.nypsdm.dx1221_week04;
 
 import android.graphics.Bitmap;
 import android.graphics.Canvas;
+import android.util.Log;
 import android.view.SurfaceView;
+
+import androidx.constraintlayout.motion.widget.Debug;
+
 import java.util.Random;
 
 public class SmurfEntity implements EntityBase, Collidable{
@@ -61,10 +65,12 @@ public class SmurfEntity implements EntityBase, Collidable{
         if (TouchManager.Instance.HasTouch())
         {
             // 6. Check collision here!!!
-            float imgRadius = spritesheet.GetWidth() * 0.5f; // get the radius of the smurf image so that we can check if touch x, y  is on this image by using S-S collision method
+            //float imgRadius = spritesheet.GetWidth() * 0.5f; // get the radius of the smurf image so that we can check if touch x, y  is on this image by using S-S collision method
+            float imgWidth = spritesheet.GetWidth();
+            float imgHeight = spritesheet.GetHeight();
 
-
-            if (Collision.SphereToSphere(TouchManager.Instance.GetPosX(), TouchManager.Instance.GetPosY(), 0.0f, xPos, yPos, imgRadius) || hasTouched)
+            //if (Collision.SphereToSphere(TouchManager.Instance.GetPosX(), TouchManager.Instance.GetPosY(), 0.0f, xPos, yPos, imgRadius) || hasTouched)
+            if (Collision.AABBCollision(TouchManager.Instance.GetPosX(), TouchManager.Instance.GetPosY(), 0.0f, 0.0f, xPos, yPos, imgWidth, imgHeight) || hasTouched)
             {
                 // Other than check the finger that touch on the screen, the x, y = the image area hence meant this is the image I want to interact with, we
                 // also want to touch and hold and drag this image
@@ -80,6 +86,11 @@ public class SmurfEntity implements EntityBase, Collidable{
                 xPos += xDir * _dt;
                 yPos += yDir * _dt;
             }
+        }
+        else
+        {
+            //reset when player lifts finger from screen
+            hasTouched = false;
         }
 
     }

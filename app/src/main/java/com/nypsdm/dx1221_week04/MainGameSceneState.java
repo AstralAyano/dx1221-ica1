@@ -53,7 +53,7 @@ public class MainGameSceneState implements StateBase {
         if (TouchManager.Instance.IsDown())
         {
 			//6. Example of touch on screen in the main game to trigger back to Main menu
-            StateManager.Instance.ChangeState("MainMenu");
+            //StateManager.Instance.ChangeState("MainMenu");
         }
     }
 }

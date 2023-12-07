@@ -40,6 +40,9 @@ public class RenderBackground implements EntityBase {
     @Override
     public void Update(float _dt)
     {
+        if (GameSystem.Instance.GetIsPaused())
+            return;
+
         //Scrolling background horizontally.
         xPos -= _dt * 500; // To deal with the speed of the scrolling.
 

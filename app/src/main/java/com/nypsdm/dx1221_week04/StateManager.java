@@ -8,6 +8,7 @@ import android.graphics.Canvas;
 import android.view.SurfaceView;
 
 import java.util.HashMap;
+import java.util.Objects;
 
 public class StateManager {
     // Singleton Instance
@@ -16,9 +17,12 @@ public class StateManager {
     // Container to store all our states!
     private HashMap<String, StateBase> stateMap = new HashMap<String, StateBase>();
 
-    private StateBase prevState = null;
-    private StateBase currState = null;
-    private StateBase nextState = null;
+    // KS (28/11/23): We convert hard references of StateBase instances, to soft references using
+    // strings instead. Each soft reference would allow us to grab its corresponding hard reference
+    // any time the hard reference is ready (i.e. on StateManager.Update(dt)).
+    private String prevState = null;
+    private String currState = null;
+    private String nextState = null;
 
     private SurfaceView view = null;
 
@@ -40,38 +44,38 @@ public class StateManager {
 
     void ChangeState(String _nextState)
     {
-        // Try to assign the next state
-        nextState = stateMap.get(_nextState);
-
-        // If no next state, we assign back to current state
-        if (nextState == null)
-            nextState = currState;
-
-        else
+        if (_nextState != null) {
+            nextState = _nextState;
             prevState = currState;
-
-        // Extra to add if possible : throw some warning if next state function fails
+        } else {
+            nextState = currState;
+        }
     }
 
     void Update(float _dt)
     {
-        if (nextState != currState)
-        {
-            // We need to change state
-            currState.OnExit();
-            nextState.OnEnter(view);
+        StateBase curr = stateMap.get(currState);
+        if (!Objects.equals(nextState, currState) || currState == null) {
+            StateBase next = stateMap.get(nextState);
+            if (curr != null) curr.OnExit();
+            if (next != null) next.OnEnter(view);
+            prevState = currState;
             currState = nextState;
+            curr = next;
         }
 
-        if (currState == null)
-            return;
+        if (curr != null)
+            curr.Update(_dt);
 
-        currState.Update(_dt);
+        curr.Update(_dt);
     }
 
     void Render(Canvas _canvas)
     {
-        currState.Render(_canvas);
+
+        StateBase curr = stateMap.get(currState);
+        if (curr != null)
+            curr.Render(_canvas);
     }
 
     String GetCurrentState()
@@ -79,7 +83,7 @@ public class StateManager {
         if (currState == null)
             return "INVALID";
 
-        return currState.GetName();
+        return currState;
     }
 
     String GetPrevState()
@@ -87,21 +91,7 @@ public class StateManager {
         if (prevState == null)
             return "INVALID";
 
-        return prevState.GetName();
-    }
-
-    void Start(String _newCurrent)
-    {
-        // Make sure only can call once at the start
-        if (currState != null || nextState != null)
-            return;
-
-        currState = stateMap.get(_newCurrent);
-        if (currState != null)
-        {
-            currState.OnEnter(view);
-            nextState = currState;
-        }
+        return prevState;
     }
 
     public void Clean(){

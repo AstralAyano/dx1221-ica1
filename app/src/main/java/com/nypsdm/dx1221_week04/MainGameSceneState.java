@@ -24,6 +24,8 @@ public class MainGameSceneState implements StateBase {
         // Add more entities
         SmurfEntity.Create();
 
+        MovementButtonEntity.Create();
+
         PauseButtonEntity.Create();
 
         RenderTextEntity.Create();

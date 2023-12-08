@@ -6,8 +6,8 @@ import android.graphics.Typeface;
 import android.util.DisplayMetrics;
 import android.view.SurfaceView;
 
-public class PauseButtonEntity implements EntityBase {
-
+public class PauseButtonEntity implements EntityBase
+{
     private boolean isDone = false;
     private boolean isInit = false;
 
@@ -49,8 +49,8 @@ public class PauseButtonEntity implements EntityBase {
         ScreenWidth = metrics.widthPixels;
         ScreenHeight = metrics.heightPixels;
 
-        ScaledbmpP = Bitmap.createScaledBitmap(bmpP, ScreenWidth / 10, ScreenHeight / 10, true);
-        ScaledbmpP1 = Bitmap.createScaledBitmap(bmpP, ScreenWidth / 10, ScreenHeight / 10, true);
+        ScaledbmpP = Bitmap.createScaledBitmap(bmpP, ScreenWidth / 15, ScreenWidth / 15, true);
+        ScaledbmpP1 = Bitmap.createScaledBitmap(bmpP, ScreenWidth / 15, ScreenWidth / 15, true);
 
         // Position the button. As of now, it is default fix number.
         // You can use the screen width and height as a basis.

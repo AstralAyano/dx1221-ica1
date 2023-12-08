@@ -27,9 +27,6 @@ public class GameSystem {
         // Please add state, NextPage.
         StateManager.Instance.AddState(new SettingPage());
 
-        // Please add state, GamePage.
-        //StateManager.Instance.AddState(new GamePage());
-
         // Please add state, MainGameSceneState.
         StateManager.Instance.AddState(new MainGameSceneState());
     }

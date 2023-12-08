@@ -37,7 +37,7 @@ public class SmurfEntity implements EntityBase, Collidable{
     public void Init(SurfaceView _view) {
         // New method using our own resource manager : Returns pre-loaded one if exists
         // 2. Loading spritesheet
-        spritesheet = new Sprite(ResourceManager.Instance.GetBitmap(R.drawable.smurf_sprite), 4, 4, 16);
+        spritesheet = new Sprite(ResourceManager.Instance.GetBitmap(R.drawable.playerspritesheet), 7, 4, 28);
 	
         // 3. Get some random position of x and y
         Random ranGen = new Random(); // Random generator under the java utility library
@@ -51,7 +51,9 @@ public class SmurfEntity implements EntityBase, Collidable{
         isInit = true;
 
         // To Set the Animation Frames
-        //spritesheet.SetAnimationFrames(1,4);
+        spritesheet.SetAnimationFrames(0,4);
+
+        MovementButtonEntity.SetEntity(this);
     }
 
     @Override

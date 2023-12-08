@@ -31,6 +31,12 @@ public class MovementButtonEntity implements EntityBase
 
     float x;
 
+    private boolean jump = false,
+                    jumping = false,
+                    falling = false;
+
+    private float jumpDuration = 1.0f,
+                  jumpTimer = 0.0f;
 
     @Override
     public boolean IsDone() {
@@ -72,6 +78,45 @@ public class MovementButtonEntity implements EntityBase
 
         buttonDelay += _dt;  // Button press effect. Not a critical thingy.
 
+        // gravity
+        float y = player.yPos;
+        if (falling)
+        {
+            player.yPos += 200 * _dt;
+        }
+        if (MainGameSceneState.camera.verticalCollision)
+        {
+            player.yPos = y;
+            falling = false;
+        }
+        else
+        {
+            falling = true;
+        }
+
+        // jump logic
+        if (jump && !jumping && !falling)
+        {
+            jumping = true;
+            jump = false;
+        }
+        if (jumping)
+        {
+            jump = false;
+            falling = false;
+            player.yPos -= 200 * _dt;
+            if (jumpTimer < jumpDuration)
+            {
+                jumpTimer += _dt;
+            }
+            else
+            {
+                jumping = false;
+                falling = true;
+                jumpTimer = 0;
+            }
+        }
+
         if (TouchManager.Instance.HasTouch()) {
             float leftButtonRadius = ScaledbmpLeft.getHeight() * 0.5f;
             float rightButtonRadius = ScaledbmpRight.getHeight() * 0.5f;
@@ -91,10 +136,10 @@ public class MovementButtonEntity implements EntityBase
             if (Collision.SphereToSphere((TouchManager.Instance.GetPosX()), TouchManager.Instance.GetPosY(), 0.0f, ScreenWidth - 200, yPos, jumpButtonRadius))
             {
                 // Jump
+                jump = true;
             }
         }
         else {
-
         }
     }
 

@@ -1,9 +1,8 @@
 package com.nypsdm.dx1221_week04;
 
-import android.app.Activity;
 import android.graphics.Bitmap;
 import android.graphics.Canvas;
-import android.view.MotionEvent;
+import android.util.Log;
 import android.view.SurfaceView;
 
 // Created by TanSiewLan2021
@@ -14,6 +13,10 @@ public class MainGameSceneState implements StateBase {
     private SmurfEntity smurfEntity;
 
     private float timer = 0.0f;
+
+    private int[][] map;
+    private int tileWidth;
+    private int tileHeight;
 
     @Override
     public String GetName() {
@@ -26,28 +29,44 @@ public class MainGameSceneState implements StateBase {
         camera = EntityManager.Instance.GetCamera();
         view = _view;
 
-        camera.SetPosition(-_view.getWidth() / 2, -_view.getHeight() / 2);
+        //camera.SetPosition(-_view.getWidth() / 2, -_view.getHeight() / 2);
+        camera.SetPosition(0, 0);
 
         // 3. Create Background
         RenderBackground.Create();
 
         // Render TileSet and TileMap
         int[][] tileMap = {
-                {0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0},
-                {0, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, 0},
-                {0, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, 0},
-                {0, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, 0},
-                {0, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, 0},
-                {0, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, 0},
-                {0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0}
+                {0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0},
+                {0, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, 0},
+                {0, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, 0},
+                {0, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, 0},
+                {0, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, 0},
+                {0, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, 0},
+                {0, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, 0},
+                {0, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, 0},
+                {0, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, 0},
+                {0, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, 0},
+                {0, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, 0},
+                {0, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, 0},
+                {0, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, 0},
+                {0, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, 0},
+                {0, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, 0},
+                {0, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, 0},
+                {0, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, 0},
+                {0, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, 0},
+                {0, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, 0},
+                {0, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, 0, -1, -1, -1, -1, -1, 0},
+                {0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0}
         };
+        map = tileMap;
 
         // Assume you have a single image for the tileset
         Bitmap tileSetImage = ResourceManager.Instance.GetBitmap(R.drawable.tileset);
 
         // Set the width and height of each tile in pixels
-        int tileWidth = 64;
-        int tileHeight = 64;
+        tileWidth = 64;
+        tileHeight = 64;
 
         TileMapEntity tileMapEntity = new TileMapEntity(tileMap, tileWidth, tileHeight, tileSetImage);
         EntityManager.Instance.AddEntity(tileMapEntity, EntityBase.ENTITY_TYPE.ENT_DEFAULT);
@@ -87,19 +106,7 @@ public class MainGameSceneState implements StateBase {
     @Override
     public void Update(float _dt)
     {
-        if (smurfEntity != null) {
-            // Calculate the desired camera position based on the center of the screen
-            float targetCameraOffsetX = smurfEntity.GetPosX() - view.getWidth() / 2;
-            float targetCameraOffsetY = smurfEntity.GetPosY() - view.getHeight() / 2;
 
-            // Smoothly interpolate the camera position towards the target
-            float smoothingFactor = 0.1f;  // Adjust this value for the desired level of smoothness
-            float cameraOffsetX = camera.GetX() + (targetCameraOffsetX - camera.GetX()) * smoothingFactor;
-            float cameraOffsetY = camera.GetY() + (targetCameraOffsetY - camera.GetY()) * smoothingFactor;
-
-            // Set the camera position
-            // camera.SetPosition(cameraOffsetX, cameraOffsetY);
-        }
 
         EntityManager.Instance.Update(_dt);
 
@@ -108,6 +115,42 @@ public class MainGameSceneState implements StateBase {
 			//6. Example of touch on screen in the main game to trigger back to Main menu
             //StateManager.Instance.ChangeState("MainMenu");
         }
+
+        CheckVerticalCollisionWithMap(map);
+        CheckHorizontalCollisionWithMap(map);
+    }
+
+    private int CheckVerticalCollisionWithMap(int[][] map)
+    {
+        for (int r = 0; r < map.length; r++)
+        {
+            for (int c = 0; c < map[r].length; c++)
+            {
+                if (map[r][c] >= 0 && Collision.AABBVerticalCollision(smurfEntity.xPos, smurfEntity.yPos, smurfEntity.imgWidth, smurfEntity.imgHeight, (c * tileWidth - tileWidth / 2) - camera.GetX(), (r * tileHeight - tileHeight / 2) - camera.GetY(), tileWidth, tileHeight))
+                {
+                    camera.verticalCollision = true;
+                    return 1;
+                }
+            }
+        }
+        camera.verticalCollision = false;
+        return 0;
+    }
+    private int CheckHorizontalCollisionWithMap(int[][] map)
+    {
+        for (int r = 0; r < map.length; r++)
+        {
+            for (int c = 0; c < map[r].length; c++)
+            {
+                if (map[r][c] >= 0 && Collision.AABBHorizontalCollision(smurfEntity.xPos, smurfEntity.yPos, smurfEntity.imgWidth, smurfEntity.imgHeight, (c * tileWidth - tileWidth / 2) - camera.GetX(), (r * tileHeight - tileHeight / 2) - camera.GetY(), tileWidth, tileHeight))
+                {
+                    camera.horizontalCollision = true;
+                    return 1;
+                }
+            }
+        }
+        camera.horizontalCollision = false;
+        return 0;
     }
 }
 

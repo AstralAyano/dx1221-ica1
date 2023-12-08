@@ -18,6 +18,7 @@ public class SmurfEntity implements EntityBase, Collidable{
 
     // Variables to be used or can be used.
     public float xPos, yPos, xDir, yDir, lifeTime;
+    public float imgWidth, imgHeight;
     
     // For use with the TouchManager.class
     private boolean hasTouched = false;
@@ -71,38 +72,6 @@ public class SmurfEntity implements EntityBase, Collidable{
             int keyCode = KeyboardManager.getInstance().GetKeyCode();
             SmurfEntityKeyInputs.handleKeyEvent(keyCode, this);
         }
-
-        // 5. Deal with the touch on screen for interaction of the image using collision check
-        if (TouchManager.Instance.HasTouch())
-        {
-            // 6. Check collision here!!!
-            //float imgRadius = spritesheet.GetWidth() * 0.5f; // get the radius of the smurf image so that we can check if touch x, y  is on this image by using S-S collision method
-            float imgWidth = spritesheet.GetWidth();
-            float imgHeight = spritesheet.GetHeight();
-
-            //if (Collision.SphereToSphere(TouchManager.Instance.GetPosX(), TouchManager.Instance.GetPosY(), 0.0f, xPos, yPos, imgRadius) || hasTouched)
-            if (Collision.AABBCollision(TouchManager.Instance.GetPosX(), TouchManager.Instance.GetPosY(), 0.0f, 0.0f, xPos, yPos, imgWidth, imgHeight) || hasTouched)
-            {
-                // Other than check the finger that touch on the screen, the x, y = the image area hence meant this is the image I want to interact with, we
-                // also want to touch and hold and drag this image
-
-                // Collided!
-                hasTouched = true;
-
-                // 7. Drag the sprite around the screen
-                xPos = TouchManager.Instance.GetPosX(); // As we drag along the screen, xPos will change.
-                yPos = TouchManager.Instance.GetPosY(); // As we drag across the screen, yPos will change.
-
-                xPos += xDir * _dt;
-                yPos += yDir * _dt;
-            }
-        }
-        else
-        {
-            //reset when player lifts finger from screen
-            hasTouched = false;
-        }
-
     }
 
     @Override

@@ -4,11 +4,11 @@ package com.nypsdm.dx1221_week04;
 // Create a GamePage is an activity class used to hold the GameView which will have a surfaceview
 
 import androidx.fragment.app.FragmentActivity;
-
 import android.app.Activity;
 import android.content.Intent;
 import android.graphics.Canvas;
 import android.os.Bundle;
+import android.view.KeyEvent;
 import android.view.MotionEvent;
 import android.view.SurfaceView;
 
@@ -39,6 +39,12 @@ public class GamePage extends FragmentActivity
         TouchManager.Instance.Update(x, y, event.getAction());
 
         return true;
+    }
+
+    @Override
+    public boolean onKeyDown(int keyCode, KeyEvent event) {
+        KeyboardManager.getInstance().handleKeyEvent(event);
+        return super.onKeyDown(keyCode, event);
     }
 
 }

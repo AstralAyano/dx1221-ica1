@@ -82,7 +82,7 @@ public class MainMenu extends Activity implements OnClickListener, StateBase
 
         StateManager.Instance.Init(new SurfaceView(this));
         GameSystem.Instance.Init(new SurfaceView(this));
-        StateManager.Instance.Start("MainMenu");
+        StateManager.Instance.ChangeState("MainMenu");
     }
 
     @Override

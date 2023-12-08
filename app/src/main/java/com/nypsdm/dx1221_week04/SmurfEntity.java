@@ -2,10 +2,7 @@ package com.nypsdm.dx1221_week04;
 
 import android.graphics.Bitmap;
 import android.graphics.Canvas;
-import android.util.Log;
 import android.view.SurfaceView;
-
-import androidx.constraintlayout.motion.widget.Debug;
 
 import java.util.Random;
 
@@ -65,6 +62,12 @@ public class SmurfEntity implements EntityBase, Collidable{
         // 4. Update spritesheet
         spritesheet.Update(_dt);
 
+        if (KeyboardManager.getInstance().HasInput())
+        {
+            int keyCode = KeyboardManager.getInstance().GetKeyCode();
+            SmurfEntityKeyInputs.handleKeyEvent(keyCode, this);
+        }
+
         // 5. Deal with the touch on screen for interaction of the image using collision check
         if (TouchManager.Instance.HasTouch())
         {
@@ -83,7 +86,6 @@ public class SmurfEntity implements EntityBase, Collidable{
                 hasTouched = true;
 
                 // 7. Drag the sprite around the screen
-
                 xPos = TouchManager.Instance.GetPosX(); // As we drag along the screen, xPos will change.
                 yPos = TouchManager.Instance.GetPosY(); // As we drag across the screen, yPos will change.
 

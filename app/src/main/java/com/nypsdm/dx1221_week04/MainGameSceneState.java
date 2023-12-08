@@ -115,42 +115,33 @@ public class MainGameSceneState implements StateBase {
 			//6. Example of touch on screen in the main game to trigger back to Main menu
             //StateManager.Instance.ChangeState("MainMenu");
         }
-
-        CheckVerticalCollisionWithMap(map);
-        CheckHorizontalCollisionWithMap(map);
+        CheckCollisions(map);
     }
 
-    private int CheckVerticalCollisionWithMap(int[][] map)
+    private void CheckCollisions(int[][] map)
     {
-        for (int r = 0; r < map.length; r++)
-        {
-            for (int c = 0; c < map[r].length; c++)
-            {
-                if (map[r][c] >= 0 && Collision.AABBVerticalCollision(smurfEntity.xPos, smurfEntity.yPos, smurfEntity.imgWidth, smurfEntity.imgHeight, (c * tileWidth - tileWidth / 2) - camera.GetX(), (r * tileHeight - tileHeight / 2) - camera.GetY(), tileWidth, tileHeight))
-                {
-                    camera.verticalCollision = true;
-                    return 1;
-                }
-            }
-        }
+        int[] col;
         camera.verticalCollision = false;
-        return 0;
-    }
-    private int CheckHorizontalCollisionWithMap(int[][] map)
-    {
+        camera.horizontalCollision = false;
+
         for (int r = 0; r < map.length; r++)
         {
             for (int c = 0; c < map[r].length; c++)
             {
-                if (map[r][c] >= 0 && Collision.AABBHorizontalCollision(smurfEntity.xPos, smurfEntity.yPos, smurfEntity.imgWidth, smurfEntity.imgHeight, (c * tileWidth - tileWidth / 2) - camera.GetX(), (r * tileHeight - tileHeight / 2) - camera.GetY(), tileWidth, tileHeight))
+                if (map[r][c] >= 0)
                 {
-                    camera.horizontalCollision = true;
-                    return 1;
+                    col = Collision.AABBCollision(smurfEntity.xPos, smurfEntity.yPos, smurfEntity.imgWidth, smurfEntity.imgHeight, (c * tileWidth - tileWidth / 2) - camera.GetX(), (r * tileHeight - tileHeight / 2) - camera.GetY(), tileWidth, tileHeight);
+                    if (col[0] == 1 || col[1] == 1)
+                    {
+                        camera.verticalCollision = true;
+                    }
+                    if (col[2] == 1 || col[3] == 1)
+                    {
+                        camera.horizontalCollision = true;
+                    }
                 }
             }
         }
-        camera.horizontalCollision = false;
-        return 0;
     }
 }
 

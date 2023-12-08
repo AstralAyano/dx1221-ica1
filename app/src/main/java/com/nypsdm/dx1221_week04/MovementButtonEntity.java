@@ -55,7 +55,7 @@ public class MovementButtonEntity implements EntityBase
         // Load the images.
         bmpLeft = ResourceManager.Instance.GetBitmap(R.drawable.arrowleft);
         bmpRight = ResourceManager.Instance.GetBitmap(R.drawable.arrowright);
-        bmpJump = ResourceManager.Instance.GetBitmap(R.drawable.arrowleft);
+        bmpJump = ResourceManager.Instance.GetBitmap(R.drawable.arrowup);
 
         DisplayMetrics metrics = _view.getResources().getDisplayMetrics();
         ScreenWidth = metrics.widthPixels;

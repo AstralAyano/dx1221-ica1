@@ -9,7 +9,7 @@ import android.view.SurfaceView;
 // Created by TanSiewLan2021
 
 public class MainGameSceneState implements StateBase {
-    private Camera camera;
+    public static Camera camera;
     private SurfaceView view;
     private SmurfEntity smurfEntity;
 
@@ -23,8 +23,10 @@ public class MainGameSceneState implements StateBase {
     @Override
     public void OnEnter(SurfaceView _view)
     {
-        camera = new Camera();
+        camera = EntityManager.Instance.GetCamera();
         view = _view;
+
+        camera.SetPosition(-_view.getWidth() / 2, -_view.getHeight() / 2);
 
         // 3. Create Background
         RenderBackground.Create();
@@ -96,7 +98,7 @@ public class MainGameSceneState implements StateBase {
             float cameraOffsetY = camera.GetY() + (targetCameraOffsetY - camera.GetY()) * smoothingFactor;
 
             // Set the camera position
-            camera.SetPosition(cameraOffsetX, cameraOffsetY);
+            // camera.SetPosition(cameraOffsetX, cameraOffsetY);
         }
 
         EntityManager.Instance.Update(_dt);

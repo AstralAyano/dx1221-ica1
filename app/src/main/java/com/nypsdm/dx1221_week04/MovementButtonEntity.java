@@ -27,6 +27,8 @@ public class MovementButtonEntity implements EntityBase
 
     private float buttonDelay = 0;
 
+    float x;
+
 
     @Override
     public boolean IsDone() {
@@ -40,6 +42,7 @@ public class MovementButtonEntity implements EntityBase
 
     @Override
     public void Init(SurfaceView _view) {
+        x = MainGameSceneState.camera.GetX();
         // indicate the images to be used.
         // Load the images.
         bmpLeft = ResourceManager.Instance.GetBitmap(R.drawable.arrowleft);
@@ -71,11 +74,13 @@ public class MovementButtonEntity implements EntityBase
 
             if (Collision.SphereToSphere((TouchManager.Instance.GetPosX()), TouchManager.Instance.GetPosY(), 0.0f, xPos, yPos, leftButtonRadius))
             {
-                player.xPos -= 100 * _dt;
+                x -= 200 * _dt;
+                MainGameSceneState.camera.SetPosition(x, MainGameSceneState.camera.GetY());
             }
             else if (Collision.SphereToSphere((TouchManager.Instance.GetPosX()), TouchManager.Instance.GetPosY(), 0.0f, xPos + 300, yPos, rightButtonRadius))
             {
-                player.xPos += 100 * _dt;
+                x += 200 * _dt;
+                MainGameSceneState.camera.SetPosition(x, MainGameSceneState.camera.GetY());
             }
         }
         else {

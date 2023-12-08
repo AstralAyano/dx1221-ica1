@@ -45,11 +45,8 @@ public class SmurfEntity implements EntityBase, Collidable{
         // 3. Get some random position of x and y
         Random ranGen = new Random(); // Random generator under the java utility library
 
-        xPos = ranGen.nextFloat() * _view.getWidth();
-        yPos = ranGen.nextFloat() * _view.getHeight();
-
-        xDir = ranGen.nextFloat() * 100.0f - 50.0f;
-        yDir = ranGen.nextFloat() * 100.0f - 50.0f;
+        xPos = _view.getWidth() / 2;
+        yPos = _view.getHeight() / 2;
 
         isInit = true;
 

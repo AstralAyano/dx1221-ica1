@@ -14,9 +14,24 @@ public class EntityManager {
     public final static EntityManager Instance = new EntityManager();
     private LinkedList<EntityBase> entityList = new LinkedList<EntityBase>();
     private SurfaceView view = null;
+    private Camera camera; // Add a private member variable for the camera
+
+    private static final EntityManager instance = new EntityManager();
+
+    public static EntityManager Instance() {
+        return instance;
+    }
+
+    // ... (other existing methods)
+
+    // Add a method to get the camera
+    public Camera GetCamera() {
+        return camera;
+    }
 
     private EntityManager()
     {
+        camera = new Camera();
     }
 
     public void Init(SurfaceView _view)

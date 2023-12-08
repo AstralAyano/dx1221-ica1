@@ -9,6 +9,8 @@ import android.view.SurfaceView;
 public class RenderBackground implements EntityBase {
 
 	//7. Render a scrolling background
+    private Camera camera;
+    private float lastX;
     private Bitmap bmp = null;
     private boolean isDone = false;
     private float xPos = 0, yPos = 0;
@@ -26,6 +28,8 @@ public class RenderBackground implements EntityBase {
     @Override
     public void Init(SurfaceView _view)
     {
+        camera = EntityManager.Instance.GetCamera();
+
         //Load image from the resource
         bmp = BitmapFactory.decodeResource(_view.getResources(),R.drawable.gamescene);
 
@@ -44,11 +48,20 @@ public class RenderBackground implements EntityBase {
             return;
 
         //Scrolling background horizontally.
-        xPos -= _dt * 500; // To deal with the speed of the scrolling.
+        float cameraMovement = camera.GetX() - lastX;
 
-        if(xPos < -ScreenWidth)
-        {
-            xPos = 0;
+        if (cameraMovement != 0) {
+            // Adjust the background position based on camera movement
+            xPos -= cameraMovement * 0.5f;
+            lastX = camera.GetX();
+
+            // Wrap around when reaching the edge
+            if (xPos < -ScreenWidth) {
+                xPos += ScreenWidth;
+            }
+            else if (xPos > 0) {
+                xPos -= ScreenWidth;
+            }
         }
         //Check if xPos is decreased - screenwidth
         //if so, set xPos to 0, then can start to render the next image.
@@ -62,6 +75,7 @@ public class RenderBackground implements EntityBase {
         //Once the 1st image reached 0 based on scrolling from my right to my left.
         //draw the next image.
         //Draw = render
+
         _canvas.drawBitmap(scaledbmp, xPos, yPos, null);
         _canvas.drawBitmap(scaledbmp, xPos + ScreenWidth, yPos, null);
         //xPos will change and yPos which is set as 0 will be no change.

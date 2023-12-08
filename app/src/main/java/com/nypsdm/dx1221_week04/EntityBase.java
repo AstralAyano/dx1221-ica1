@@ -12,6 +12,7 @@ public interface EntityBase
      {
          //ENT_PLAYER,
          ENT_SMURF,
+         ENT_ENEMY,
          ENT_BUTTON,
          ENT_PAUSE,
          ENT_TEXT,

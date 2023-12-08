@@ -91,7 +91,7 @@ public class EntityManager {
         removalList.clear();
     }
 
-    public void Render(Canvas _canvas)
+    public void Render(Canvas _canvas, float _cameraOffsetX, float _cameraOffsetY)
     {
       
         // Use the new "rendering layer" to sort the render order
@@ -102,9 +102,14 @@ public class EntityManager {
             }
         });
 
-        for(int i = 0; i <entityList.size(); ++i)
-        {
-            entityList.get(i).Render(_canvas);
+        for (int i = 0; i < entityList.size(); ++i) {
+            EntityBase entity = entityList.get(i);
+
+            // Use the camera offset when rendering entities
+            float transformedX = entity.GetPosX() - _cameraOffsetX;
+            float transformedY = entity.GetPosY() - _cameraOffsetY;
+
+            entity.Render(_canvas, transformedX, transformedY);
         }
     }
 

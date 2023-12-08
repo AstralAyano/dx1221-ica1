@@ -23,9 +23,12 @@ public interface EntityBase
     void SetIsDone(boolean _isDone);
     void Init(SurfaceView _view);
     void Update(float _dt);
-    void Render(Canvas _canvas);
+    void Render(Canvas _canvas, float x, float y);
     boolean IsInit();
     int GetRenderLayer();
     void SetRenderLayer(int _newLayer);
 	ENTITY_TYPE GetEntityType();
+
+    float GetPosX();
+    float GetPosY();
 }

@@ -25,7 +25,7 @@ public class TileMapEntity implements EntityBase
     }
 
     @Override
-    public void Render(Canvas canvas)
+    public void Render(Canvas canvas, float x, float y)
     {
         for (int row = 0; row < numRows; row++)
         {
@@ -37,8 +37,8 @@ public class TileMapEntity implements EntityBase
                 if (tileIndex >= 0)
                 {
                     // Calculate the position to render the tile
-                    int x = col * tileWidth;
-                    int y = row * tileHeight;
+                    int xPos = col * tileWidth;
+                    int yPos = row * tileHeight;
 
                     // Calculate the source rectangle to extract the tile from the tileset image
                     int srcX = (tileIndex % (tileSet.getWidth() / tileWidth)) * tileWidth;
@@ -46,7 +46,7 @@ public class TileMapEntity implements EntityBase
                     Rect srcRect = new Rect(srcX, srcY, srcX + tileWidth, srcY + tileHeight);
 
                     // Draw the tile on the canvas
-                    canvas.drawBitmap(tileSet, srcRect, new Rect(x, y, x + tileWidth, y + tileHeight), null);
+                    canvas.drawBitmap(tileSet, srcRect, new Rect((int)x + xPos, (int)y + yPos, (int)x + xPos + tileWidth, (int)y + yPos + tileHeight), null);
                 }
             }
         }
@@ -95,5 +95,15 @@ public class TileMapEntity implements EntityBase
     public ENTITY_TYPE GetEntityType() {
         // Provide your implementation here
         return ENTITY_TYPE.ENT_DEFAULT;
+    }
+
+    @Override
+    public float GetPosX() {
+        return 0;
+    }
+
+    @Override
+    public float GetPosY() {
+        return 0;
     }
 }

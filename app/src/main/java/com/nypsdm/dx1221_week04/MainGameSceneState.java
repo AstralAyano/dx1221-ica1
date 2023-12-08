@@ -9,6 +9,10 @@ import android.view.SurfaceView;
 // Created by TanSiewLan2021
 
 public class MainGameSceneState implements StateBase {
+    private Camera camera;
+    private SurfaceView view;
+    private SmurfEntity smurfEntity;
+
     private float timer = 0.0f;
 
     @Override
@@ -19,6 +23,9 @@ public class MainGameSceneState implements StateBase {
     @Override
     public void OnEnter(SurfaceView _view)
     {
+        camera = new Camera();
+        view = _view;
+
         // 3. Create Background
         RenderBackground.Create();
 
@@ -44,7 +51,7 @@ public class MainGameSceneState implements StateBase {
         EntityManager.Instance.AddEntity(tileMapEntity, EntityBase.ENTITY_TYPE.ENT_DEFAULT);
 
         // Add more entities
-        SmurfEntity.Create();
+        smurfEntity = SmurfEntity.Create();
 
         MovementButtonEntity.Create();
 
@@ -67,13 +74,31 @@ public class MainGameSceneState implements StateBase {
     @Override
     public void Render(Canvas _canvas)
     {
-        EntityManager.Instance.Render(_canvas);
+        // Calculate the camera offset based on the camera's position
+        float cameraOffsetX = camera.GetX();
+        float cameraOffsetY = camera.GetY();
 
+        // Render entities with the camera offset
+        EntityManager.Instance.Render(_canvas, cameraOffsetX, cameraOffsetY);
     }
 
     @Override
     public void Update(float _dt)
     {
+        if (smurfEntity != null) {
+            // Calculate the desired camera position based on the center of the screen
+            float targetCameraOffsetX = smurfEntity.GetPosX() - view.getWidth() / 2;
+            float targetCameraOffsetY = smurfEntity.GetPosY() - view.getHeight() / 2;
+
+            // Smoothly interpolate the camera position towards the target
+            float smoothingFactor = 0.1f;  // Adjust this value for the desired level of smoothness
+            float cameraOffsetX = camera.GetX() + (targetCameraOffsetX - camera.GetX()) * smoothingFactor;
+            float cameraOffsetY = camera.GetY() + (targetCameraOffsetY - camera.GetY()) * smoothingFactor;
+
+            // Set the camera position
+            camera.SetPosition(cameraOffsetX, cameraOffsetY);
+        }
+
         EntityManager.Instance.Update(_dt);
 
         if (TouchManager.Instance.IsDown())

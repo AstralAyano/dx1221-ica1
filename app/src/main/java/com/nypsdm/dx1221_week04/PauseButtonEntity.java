@@ -89,7 +89,7 @@ public class PauseButtonEntity implements EntityBase
     }
 
     @Override
-    public void Render(Canvas _canvas) {
+    public void Render(Canvas _canvas, float x, float y) {
         if (Paused == false)
             _canvas.drawBitmap(ScaledbmpP, xPos - ScaledbmpP.getWidth() * 0.5f, yPos - ScaledbmpP.getHeight() * 0.5f, null);
         else
@@ -122,6 +122,13 @@ public class PauseButtonEntity implements EntityBase
         return ENTITY_TYPE.ENT_PAUSE;
     }
 
-//    @Override
-//    public String GetType() { return "PauseButtonEntity"; }
+    @Override
+    public float GetPosX() {
+        return 0;
+    }
+
+    @Override
+    public float GetPosY() {
+        return 0;
+    }
 }

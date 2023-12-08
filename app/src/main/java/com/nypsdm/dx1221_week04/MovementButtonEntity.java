@@ -84,7 +84,7 @@ public class MovementButtonEntity implements EntityBase
     }
 
     @Override
-    public void Render(Canvas _canvas) {
+    public void Render(Canvas _canvas, float x, float y) {
         _canvas.drawBitmap(ScaledbmpLeft, xPos - ScaledbmpLeft.getWidth() * 0.5f, yPos - ScaledbmpLeft.getHeight() * 0.5f, null);
         _canvas.drawBitmap(ScaledbmpRight, (xPos + 300) - ScaledbmpRight.getWidth() * 0.5f, yPos - ScaledbmpRight.getHeight() * 0.5f, null);
     }
@@ -118,5 +118,15 @@ public class MovementButtonEntity implements EntityBase
     public static void SetEntity(SmurfEntity entity)
     {
         player = entity;
+    }
+
+    @Override
+    public float GetPosX() {
+        return 0;
+    }
+
+    @Override
+    public float GetPosY() {
+        return 0;
     }
 }

@@ -11,6 +11,7 @@ public class SmurfEntity implements EntityBase, Collidable{
     // 1. Declare the use of spritesheet using Sprite class.
     public Bitmap bmp = null; // Usual method of loading a bmp/image
     public Sprite spritesheet = null; // Define.
+    private SurfaceView view;
 
     private boolean isDone = false;
     private boolean isInit = false;
@@ -35,6 +36,8 @@ public class SmurfEntity implements EntityBase, Collidable{
 
     @Override
     public void Init(SurfaceView _view) {
+        view = _view;
+
         // New method using our own resource manager : Returns pre-loaded one if exists
         // 2. Loading spritesheet
         spritesheet = new Sprite(ResourceManager.Instance.GetBitmap(R.drawable.playerspritesheet), 7, 4, 28);
@@ -106,11 +109,10 @@ public class SmurfEntity implements EntityBase, Collidable{
     }
 
     @Override
-    public void Render(Canvas _canvas) {
+    public void Render(Canvas _canvas, float x, float y) {
        
         // This is for our sprite animation!
         spritesheet.Render(_canvas, (int)xPos, (int)yPos);
-
     }
 
     @Override
@@ -152,6 +154,14 @@ public class SmurfEntity implements EntityBase, Collidable{
     @Override
     public float GetPosY() {
         return yPos;
+    }
+
+    public float GetXDir() {
+        return xDir;
+    }
+
+    public float GetYDir() {
+        return yDir;
     }
 
     @Override

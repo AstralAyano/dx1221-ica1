@@ -42,7 +42,7 @@ public class MainMenu extends Activity implements OnClickListener, StateBase
     @Override
     public void Render(Canvas _canvas)
     {
-        EntityManager.Instance.Render(_canvas);
+        EntityManager.Instance.Render(_canvas, 0, 0);
     }
 
     @Override

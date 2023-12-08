@@ -56,7 +56,7 @@ public class RenderBackground implements EntityBase {
     }
 
     @Override
-    public void Render(Canvas _canvas)
+    public void Render(Canvas _canvas, float x, float y)
     {
         //We draw 2 images of the same kind.
         //Once the 1st image reached 0 based on scrolling from my right to my left.
@@ -90,5 +90,15 @@ public class RenderBackground implements EntityBase {
         RenderBackground result = new RenderBackground();
         EntityManager.Instance.AddEntity(result, ENTITY_TYPE.ENT_DEFAULT);
         return result;
+    }
+
+    @Override
+    public float GetPosX() {
+        return 0;
+    }
+
+    @Override
+    public float GetPosY() {
+        return 0;
     }
 }

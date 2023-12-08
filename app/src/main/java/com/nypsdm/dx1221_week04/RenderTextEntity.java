@@ -58,7 +58,7 @@ public class RenderTextEntity implements EntityBase
     }
 
     @Override
-    public void Render(Canvas _canvas) {
+    public void Render(Canvas _canvas, float x, float y) {
         paint.setARGB(255, red, green, blue); // U can put direct numbers here ranging from 0 to 255. If red = 255, it is red, 0 = black.
         // 255, 255 ,0, 0 -- red color
         paint.setTypeface(myfont);  // load the font we want using the font type.
@@ -93,4 +93,13 @@ public class RenderTextEntity implements EntityBase
     @Override
     public ENTITY_TYPE GetEntityType(){return ENTITY_TYPE.ENT_TEXT;}
 
+    @Override
+    public float GetPosX() {
+        return 0;
+    }
+
+    @Override
+    public float GetPosY() {
+        return 0;
+    }
 }

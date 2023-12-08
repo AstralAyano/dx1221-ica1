@@ -41,7 +41,7 @@ public class SettingPage extends Activity implements StateBase
     @Override
     public void Render(Canvas _canvas)
     {
-        EntityManager.Instance.Render(_canvas);
+        EntityManager.Instance.Render(_canvas, 0, 0);
     }
 
     @Override

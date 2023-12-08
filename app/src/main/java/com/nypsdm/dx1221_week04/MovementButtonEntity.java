@@ -14,10 +14,12 @@ public class MovementButtonEntity implements EntityBase
     // We have 2 different pause images so that we can create the effect of a button press and there is a change in the images.
     private Bitmap bmpLeft = null;
     private Bitmap bmpRight = null;
+    private Bitmap bmpJump = null;
 
     // Scaled version of the buttons.
     private Bitmap ScaledbmpLeft = null;
     private Bitmap ScaledbmpRight = null;
+    private Bitmap ScaledbmpJump = null;
 
     private int xPos, yPos = 0;
 
@@ -47,6 +49,7 @@ public class MovementButtonEntity implements EntityBase
         // Load the images.
         bmpLeft = ResourceManager.Instance.GetBitmap(R.drawable.arrowleft);
         bmpRight = ResourceManager.Instance.GetBitmap(R.drawable.arrowright);
+        bmpJump = ResourceManager.Instance.GetBitmap(R.drawable.arrowleft);
 
         DisplayMetrics metrics = _view.getResources().getDisplayMetrics();
         ScreenWidth = metrics.widthPixels;
@@ -54,6 +57,7 @@ public class MovementButtonEntity implements EntityBase
 
         ScaledbmpLeft = Bitmap.createScaledBitmap(bmpLeft, ScreenWidth / 15, ScreenWidth / 15, true);
         ScaledbmpRight = Bitmap.createScaledBitmap(bmpRight, ScreenWidth / 15, ScreenWidth / 15, true);
+        ScaledbmpJump = Bitmap.createScaledBitmap(bmpJump, ScreenWidth / 15, ScreenWidth / 15, true);
 
         // Position the button. As of now, it is default fix number.
         // You can use the screen width and height as a basis.
@@ -71,6 +75,7 @@ public class MovementButtonEntity implements EntityBase
         if (TouchManager.Instance.HasTouch()) {
             float leftButtonRadius = ScaledbmpLeft.getHeight() * 0.5f;
             float rightButtonRadius = ScaledbmpRight.getHeight() * 0.5f;
+            float jumpButtonRadius = ScaledbmpJump.getHeight() * 0.5f;
 
             if (Collision.SphereToSphere((TouchManager.Instance.GetPosX()), TouchManager.Instance.GetPosY(), 0.0f, xPos, yPos, leftButtonRadius))
             {
@@ -82,6 +87,11 @@ public class MovementButtonEntity implements EntityBase
                 x += 200 * _dt;
                 MainGameSceneState.camera.SetPosition(x, MainGameSceneState.camera.GetY());
             }
+
+            if (Collision.SphereToSphere((TouchManager.Instance.GetPosX()), TouchManager.Instance.GetPosY(), 0.0f, ScreenWidth - 200, yPos, jumpButtonRadius))
+            {
+                // Jump
+            }
         }
         else {
 
@@ -92,6 +102,7 @@ public class MovementButtonEntity implements EntityBase
     public void Render(Canvas _canvas, float x, float y) {
         _canvas.drawBitmap(ScaledbmpLeft, xPos - ScaledbmpLeft.getWidth() * 0.5f, yPos - ScaledbmpLeft.getHeight() * 0.5f, null);
         _canvas.drawBitmap(ScaledbmpRight, (xPos + 300) - ScaledbmpRight.getWidth() * 0.5f, yPos - ScaledbmpRight.getHeight() * 0.5f, null);
+        _canvas.drawBitmap(ScaledbmpJump, (ScreenWidth - 200) - ScaledbmpJump.getWidth() * 0.5f, yPos - ScaledbmpJump.getHeight() * 0.5f, null);
     }
 
     @Override

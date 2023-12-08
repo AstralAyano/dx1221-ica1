@@ -3,6 +3,8 @@ package com.nypsdm.dx1221_week04;
 import android.graphics.Bitmap;
 import android.graphics.Canvas;
 import android.graphics.Rect;
+import android.util.Log;
+
 public class Sprite {
     private int row = 0;
     private int col = 0;
@@ -62,9 +64,13 @@ public class Sprite {
     public void SetAnimationFrames(int _start, int _end)
     {
         timeAcc = 0.0f;
-        currentFrame = _start;
         startFrame = _start;
         endFrame = _end;
+        currentFrame = _start;
+
+        Log.d("Debug", "Start Frame : " + Integer.toString(startFrame));
+        Log.d("Debug", "End Frame : " + Integer.toString(endFrame));
+        Log.d("Debug", "Current Frame : " + Integer.toString(currentFrame));
     }
 
     public int GetHeight()

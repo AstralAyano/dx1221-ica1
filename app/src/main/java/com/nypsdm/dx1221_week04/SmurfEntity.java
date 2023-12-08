@@ -50,6 +50,8 @@ public class SmurfEntity implements EntityBase, Collidable{
 
         isInit = true;
 
+        // To Set the Animation Frames
+        //spritesheet.SetAnimationFrames(1,4);
     }
 
     @Override

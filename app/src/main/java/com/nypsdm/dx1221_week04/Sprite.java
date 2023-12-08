@@ -29,7 +29,7 @@ public class Sprite {
         width = bmp.getWidth() / _col;
         height = bmp.getHeight() / _row;
 
-        timePerFrame = 1.0f / (float)_fps;
+        timePerFrame = 8.0f / (float)_fps;
 
         endFrame = _col * _row;
     }

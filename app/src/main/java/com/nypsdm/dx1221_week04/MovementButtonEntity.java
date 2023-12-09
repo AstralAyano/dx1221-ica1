@@ -32,11 +32,9 @@ public class MovementButtonEntity implements EntityBase
     float x;
 
     private boolean jump = false,
-                    jumping = false,
-                    falling = false;
+                    jumping = false;
 
-    private float jumpDuration = 1.0f,
-                  jumpTimer = 0.0f;
+    private float xVelocity, yVelocity;
 
     @Override
     public boolean IsDone() {
@@ -69,6 +67,8 @@ public class MovementButtonEntity implements EntityBase
         // You can use the screen width and height as a basis.
         xPos = 200;
         yPos = ScreenHeight - 200;
+        xVelocity = 0;
+        yVelocity = 0;
 
         isInit = true;
     }
@@ -80,41 +80,28 @@ public class MovementButtonEntity implements EntityBase
 
         // gravity
         float y = player.yPos;
-        if (falling)
-        {
-            player.yPos += 200 * _dt;
-        }
-        if (MainGameSceneState.camera.verticalCollision)
-        {
-            player.yPos = y;
-            falling = false;
-        }
-        else
-        {
-            falling = true;
-        }
+        yVelocity += 200 * _dt;
+        player.yPos += yVelocity * _dt;
 
         // jump logic
-        if (jump && !jumping && !falling)
+        if (jump && !jumping)
         {
             jumping = true;
-            jump = false;
+            yVelocity = -400;
+        }
+
+        if (MainGameSceneState.camera.verticalCollision && !jump)
+        {
+            player.yPos = y;
+            if (yVelocity > 0)
+            {
+                yVelocity = 0;
+            }
+            jumping = false;
         }
         if (jumping)
         {
             jump = false;
-            falling = false;
-            player.yPos -= 200 * _dt;
-            if (jumpTimer < jumpDuration)
-            {
-                jumpTimer += _dt;
-            }
-            else
-            {
-                jumping = false;
-                falling = true;
-                jumpTimer = 0;
-            }
         }
 
         if (TouchManager.Instance.HasTouch()) {
@@ -124,12 +111,32 @@ public class MovementButtonEntity implements EntityBase
 
             if (Collision.SphereToSphere((TouchManager.Instance.GetPosX()), TouchManager.Instance.GetPosY(), 0.0f, xPos, yPos, leftButtonRadius))
             {
-                x -= 200 * _dt;
+                float xPos = x;
+                xVelocity = -200;
+                x += xVelocity * _dt;
+                if (MainGameSceneState.camera.horizontalCollision)
+                {
+                    x = xPos;
+                    if (xVelocity < 0)
+                    {
+                        yVelocity = 0;
+                    }
+                }
                 MainGameSceneState.camera.SetPosition(x, MainGameSceneState.camera.GetY());
             }
             else if (Collision.SphereToSphere((TouchManager.Instance.GetPosX()), TouchManager.Instance.GetPosY(), 0.0f, xPos + 300, yPos, rightButtonRadius))
             {
-                x += 200 * _dt;
+                float xPos = x;
+                xVelocity = 200;
+                x += xVelocity * _dt;
+                if (MainGameSceneState.camera.horizontalCollision)
+                {
+                    x = xPos;
+                    if (xVelocity > 0)
+                    {
+                        yVelocity = 0;
+                    }
+                }
                 MainGameSceneState.camera.SetPosition(x, MainGameSceneState.camera.GetY());
             }
 

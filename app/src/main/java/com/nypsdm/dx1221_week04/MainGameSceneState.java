@@ -130,12 +130,11 @@ public class MainGameSceneState implements StateBase {
             {
                 if (map[r][c] >= 0)
                 {
-                    col = Collision.AABBCollision(smurfEntity.xPos, smurfEntity.yPos, smurfEntity.imgWidth, smurfEntity.imgHeight, (c * tileWidth - tileWidth / 2) - camera.GetX(), (r * tileHeight - tileHeight / 2) - camera.GetY(), tileWidth, tileHeight);
+                    col = Collision.AABBCollision((c * tileWidth - tileWidth / 2) - camera.GetX(), (r * tileHeight - tileHeight / 2) - camera.GetY(), tileWidth, tileHeight, smurfEntity.xPos, smurfEntity.yPos, smurfEntity.imgWidth, smurfEntity.imgHeight);
                     if (col[0] == 1 || col[1] == 1)
                     {
                         camera.verticalCollision = true;
-                    }
-                    if (col[2] == 1 || col[3] == 1)
+                    }if (col[2] == 1 || col[3] == 1)
                     {
                         camera.horizontalCollision = true;
                     }

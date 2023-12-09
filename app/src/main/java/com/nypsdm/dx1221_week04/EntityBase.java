@@ -11,6 +11,7 @@ public interface EntityBase
     enum ENTITY_TYPE
      {
          //ENT_PLAYER,
+         ENT_TILE,
          ENT_SMURF,
          ENT_ENEMY,
          ENT_BUTTON,

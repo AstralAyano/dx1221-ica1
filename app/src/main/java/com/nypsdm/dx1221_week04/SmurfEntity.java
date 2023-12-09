@@ -2,6 +2,7 @@ package com.nypsdm.dx1221_week04;
 
 import android.graphics.Bitmap;
 import android.graphics.Canvas;
+import android.util.Log;
 import android.view.SurfaceView;
 
 import java.util.Random;
@@ -143,10 +144,9 @@ public class SmurfEntity implements EntityBase, Collidable{
         // physical feedback.
         // SetIsDone(true) --> allows you to delete the entity from the screen.
 
-        //if (_other.GetType() == "StarEntity") //Another Entity
+        if (_other.GetType() == "TileEntity") //Another Entity
         {
-            //SetIsDone(true);
-            //Play an audio
+            Log.d("Debug", "Collided with TileEntity");
         }
     }
 

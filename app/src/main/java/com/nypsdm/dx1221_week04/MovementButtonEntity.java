@@ -8,6 +8,7 @@ import android.view.SurfaceView;
 public class MovementButtonEntity implements EntityBase
 {
     static SmurfEntity player;
+    public TileMapEntity tileMap;
     private boolean isDone = false;
     private boolean isInit = false;
 
@@ -142,6 +143,8 @@ public class MovementButtonEntity implements EntityBase
                 yVelocity = 0;
             }
         }
+
+        tileMap.SetPosition(x, yPos);
     }
 
     @Override

@@ -20,26 +20,25 @@ public class Collision {
         return true;
     }
 
-    public static int[] AABBCollision(float x1, float y1, float width1, float height1, float x2, float y2, float width2, float height2)
+    public static boolean AABBCollision(float x1, float y1, float width1, float height1, float x2, float y2, float width2, float height2)
     {
         float xScale1 = width1 / 2;
         float yScale1 = height1 / 2;
         float xScale2 = width2 / 2;
         float yScale2 = height2 / 2;
 
-        int[] collisions = new int[4];
 
         if ((x1 - x2) * (x1 - x2) < (xScale1 + xScale2) * (xScale1 + xScale2)) // find distance squared and check
         {
             // check top collision
             if (y1 + yScale1 > y2 - yScale2 && y1 < y2)
             {
-                collisions[0] = 1;
+                return true;
             }
             // check bottom collision
             else if (y1 - yScale1 < y2 + yScale2 && y1 > y2)
             {
-                collisions[1] = 1;
+                return true;
             }
         }
         if ((y1 - y2) * (y1 - y2) < (yScale1 + yScale2) * (yScale1 + yScale2)) // find distance squared and check
@@ -47,15 +46,15 @@ public class Collision {
             // check left collision
             if (x1 + xScale1 > x2 - xScale2 && x1 < x2)
             {
-                collisions[2] = 1;
+                return true;
             }
             // check right collision
             else if (x1 - xScale1 < x2 + xScale2 && x1 > x2)
             {
-                collisions[3] = 1;
+                return true;
             }
         }
 
-        return collisions; // 0 - top, 1 - bottom, 2 - left, 3 - right
+        return false;
     }
 }

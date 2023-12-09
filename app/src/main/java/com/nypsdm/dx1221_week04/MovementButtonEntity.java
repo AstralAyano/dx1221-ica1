@@ -34,6 +34,8 @@ public class MovementButtonEntity implements EntityBase
     private boolean jump = false,
                     jumping = false;
 
+    private boolean left;
+
     private float xVelocity, yVelocity;
 
     @Override
@@ -78,32 +80,6 @@ public class MovementButtonEntity implements EntityBase
 
         buttonDelay += _dt;  // Button press effect. Not a critical thingy.
 
-        // gravity
-        float y = player.yPos;
-        yVelocity += 200 * _dt;
-        player.yPos += yVelocity * _dt;
-
-        // jump logic
-        if (jump && !jumping)
-        {
-            jumping = true;
-            yVelocity = -400;
-        }
-
-        if (MainGameSceneState.camera.verticalCollision && !jump)
-        {
-            player.yPos = y;
-            if (yVelocity > 0)
-            {
-                yVelocity = 0;
-            }
-            jumping = false;
-        }
-        if (jumping)
-        {
-            jump = false;
-        }
-
         if (TouchManager.Instance.HasTouch()) {
             float leftButtonRadius = ScaledbmpLeft.getHeight() * 0.5f;
             float rightButtonRadius = ScaledbmpRight.getHeight() * 0.5f;
@@ -111,34 +87,36 @@ public class MovementButtonEntity implements EntityBase
 
             if (Collision.SphereToSphere((TouchManager.Instance.GetPosX()), TouchManager.Instance.GetPosY(), 0.0f, xPos, yPos, leftButtonRadius))
             {
-                float xPos = x;
-                xVelocity = -200;
-                x += xVelocity * _dt;
-                if (MainGameSceneState.camera.horizontalCollision)
+                if (!MainGameSceneState.camera.collision)
                 {
-                    x = xPos;
-                    if (xVelocity < 0)
-                    {
-                        yVelocity = 0;
-                    }
+                    x -= 200 * _dt;
+                    left = true;
                 }
-                MainGameSceneState.camera.SetPosition(x, MainGameSceneState.camera.GetY());
             }
             else if (Collision.SphereToSphere((TouchManager.Instance.GetPosX()), TouchManager.Instance.GetPosY(), 0.0f, xPos + 300, yPos, rightButtonRadius))
             {
-                float xPos = x;
-                xVelocity = 200;
-                x += xVelocity * _dt;
-                if (MainGameSceneState.camera.horizontalCollision)
+                if (!MainGameSceneState.camera.collision)
                 {
-                    x = xPos;
-                    if (xVelocity > 0)
-                    {
-                        yVelocity = 0;
-                    }
+                    x += 200 * _dt;
+                    left = false;
                 }
-                MainGameSceneState.camera.SetPosition(x, MainGameSceneState.camera.GetY());
             }
+            if (MainGameSceneState.camera.collision)
+            {
+                if (left)
+                {
+                    x += 200 * _dt;
+                }
+                else
+                {
+                    x -= 200 * _dt;
+                }
+                if (xVelocity != 0)
+                {
+                    xVelocity = 0;
+                }
+            }
+            MainGameSceneState.camera.SetPosition(x, MainGameSceneState.camera.GetY());
 
             if (Collision.SphereToSphere((TouchManager.Instance.GetPosX()), TouchManager.Instance.GetPosY(), 0.0f, ScreenWidth - 200, yPos, jumpButtonRadius))
             {
@@ -147,6 +125,22 @@ public class MovementButtonEntity implements EntityBase
             }
         }
         else {
+        }
+
+        // gravity
+        if (yVelocity < 200)
+        {
+            //yVelocity += 200 * _dt;
+        }
+
+        player.yPos += yVelocity * _dt;
+        if (MainGameSceneState.camera.collision)
+        {
+            player.yPos -= yVelocity * _dt;
+            if (yVelocity != 0)
+            {
+                yVelocity = 0;
+            }
         }
     }
 

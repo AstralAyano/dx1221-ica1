@@ -141,25 +141,18 @@ public class MainGameSceneState implements StateBase {
             return;
         }
 
-        int[] col;
-        camera.verticalCollision = false;
-        camera.horizontalCollision = false;
+        camera.collision = false;
 
         for (int r = 0; r < map.size(); r++)
         {
             for (int c = 0; c < map.get(r).length; c++)
             {
-                Log.e("CheckCollisions", String.valueOf((c * tileWidth - tileWidth / 2) - camera.GetX()));
                 if (map.get(r)[c] >= 0)
                 {
-                    col = Collision.AABBCollision((c * tileWidth - tileWidth / 2) - camera.GetX(), (r * tileHeight - tileHeight / 2) - camera.GetY(), tileWidth, tileHeight, smurfEntity.xPos, smurfEntity.yPos, smurfEntity.imgWidth, smurfEntity.imgHeight);
-                    if (col[0] == 1 || col[1] == 1)
+                    if (Collision.AABBCollision((c * tileWidth + tileWidth / 2) - camera.GetX(), (r * tileHeight - tileHeight / 2) - camera.GetY(), tileWidth, tileHeight, smurfEntity.xPos, smurfEntity.yPos, smurfEntity.imgWidth, smurfEntity.imgHeight))
                     {
-                        camera.verticalCollision = true;
-                    }
-                    if (col[2] == 1 || col[3] == 1)
-                    {
-                        camera.horizontalCollision = true;
+                        Log.e("CheckCollisions", "colliding");
+                        camera.collision = true;
                     }
                 }
             }

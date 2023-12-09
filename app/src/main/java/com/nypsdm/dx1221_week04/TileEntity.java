@@ -33,6 +33,16 @@ public class TileEntity implements EntityBase, Collidable
     }
 
     @Override
+    public float GetWidth() {
+        return 64;
+    }
+
+    @Override
+    public float GetHeight() {
+        return 64;
+    }
+
+    @Override
     public void OnHit(Collidable _other) {
 
     }

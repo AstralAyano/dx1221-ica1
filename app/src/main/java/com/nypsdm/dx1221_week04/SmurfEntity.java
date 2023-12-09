@@ -133,7 +133,17 @@ public class SmurfEntity implements EntityBase, Collidable{
 
     @Override
     public float GetRadius() {
-        return spritesheet.GetHeight() * 0.5f;
+        return 64;
+    }
+
+    @Override
+    public float GetWidth() {
+        return 64;
+    }
+
+    @Override
+    public float GetHeight() {
+        return 64;
     }
 
     @Override

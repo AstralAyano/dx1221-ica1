@@ -81,7 +81,17 @@ public class EnemyEntity implements EntityBase, Collidable {
 
     @Override
     public float GetRadius() {
-        return 50;
+        return 64;
+    }
+
+    @Override
+    public float GetWidth() {
+        return 64;
+    }
+
+    @Override
+    public float GetHeight() {
+        return 64;
     }
 
     @Override

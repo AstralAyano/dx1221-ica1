@@ -3,6 +3,7 @@ package com.nypsdm.dx1221_week04;
 import android.graphics.Bitmap;
 import android.graphics.Canvas;
 import android.util.DisplayMetrics;
+import android.util.Log;
 import android.view.SurfaceView;
 
 public class MovementButtonEntity implements EntityBase
@@ -37,8 +38,6 @@ public class MovementButtonEntity implements EntityBase
 
     private boolean left;
 
-    private float xVelocity, yVelocity;
-
     @Override
     public boolean IsDone() {
         return isDone;
@@ -70,8 +69,8 @@ public class MovementButtonEntity implements EntityBase
         // You can use the screen width and height as a basis.
         xPos = 200;
         yPos = ScreenHeight - 200;
-        xVelocity = 0;
-        yVelocity = 0;
+        player.xVelocity = 0;
+        player.yVelocity = 0;
 
         isInit = true;
     }
@@ -90,7 +89,8 @@ public class MovementButtonEntity implements EntityBase
             {
                 if (!MainGameSceneState.camera.collision)
                 {
-                    x -= 200 * _dt;
+                    Log.d("Debug", "Left Button Pressed");
+                    x += 200 * _dt;
                     left = true;
                 }
             }
@@ -98,7 +98,8 @@ public class MovementButtonEntity implements EntityBase
             {
                 if (!MainGameSceneState.camera.collision)
                 {
-                    x += 200 * _dt;
+                    Log.d("Debug", "Right Button Pressed");
+                    x -= 200 * _dt;
                     left = false;
                 }
             }
@@ -112,9 +113,9 @@ public class MovementButtonEntity implements EntityBase
                 {
                     x -= 200 * _dt;
                 }
-                if (xVelocity != 0)
+                if (player.xVelocity != 0)
                 {
-                    xVelocity = 0;
+                    player.xVelocity = 0;
                 }
             }
             MainGameSceneState.camera.SetPosition(x, MainGameSceneState.camera.GetY());
@@ -129,22 +130,27 @@ public class MovementButtonEntity implements EntityBase
         }
 
         // gravity
-        if (yVelocity < 200)
+        if (player.yVelocity < 200 && !player.onGround)
         {
-            //yVelocity += 200 * _dt;
+            player.yVelocity += 200 * _dt;
+        }
+        else
+        {
+            player.yVelocity = 0;
         }
 
-        player.yPos += yVelocity * _dt;
-        if (MainGameSceneState.camera.collision)
-        {
-            player.yPos -= yVelocity * _dt;
-            if (yVelocity != 0)
-            {
-                yVelocity = 0;
-            }
-        }
+        player.yPos += player.yVelocity * _dt;
+//        if (MainGameSceneState.camera.collision)
+//        {
+//            Log.d("Debug", "Inside");
+//            player.yPos -= yVelocity * _dt;
+//            if (yVelocity != 0)
+//            {
+//                yVelocity = 0;
+//            }
+//        }
 
-        tileMap.SetPosition(x, yPos);
+        tileMap.SetPosition(x, 0);
     }
 
     @Override

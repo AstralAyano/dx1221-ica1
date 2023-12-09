@@ -19,6 +19,8 @@ public class SmurfEntity implements EntityBase, Collidable{
 
     // Variables to be used or can be used.
     public float xPos, yPos, xDir, yDir, lifeTime;
+    public float xVelocity, yVelocity;
+    public boolean onGround;
     public float imgWidth, imgHeight;
     
     // For use with the TouchManager.class
@@ -154,10 +156,20 @@ public class SmurfEntity implements EntityBase, Collidable{
         // physical feedback.
         // SetIsDone(true) --> allows you to delete the entity from the screen.
 
+        TileEntity tileEntity = _other instanceof TileEntity ? ((TileEntity ) _other) : null;
+
         if (_other.GetType() == "TileEntity") //Another Entity
         {
-            Log.d("Debug", "Collided with TileEntity");
+            //Log.d("Debug", "Collided with TileEntity");
+            if (!tileEntity._isEmpty)
+            {
+                onGround = true;
+            }
+            else
+            {
+                onGround = false;
+                Log.d("Debug", "OnGround : False");
+            }
         }
     }
-
 }

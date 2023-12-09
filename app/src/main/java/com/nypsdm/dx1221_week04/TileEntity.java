@@ -4,6 +4,7 @@ import android.graphics.Bitmap;
 import android.graphics.Canvas;
 import android.graphics.Paint;
 import android.graphics.Rect;
+import android.util.Log;
 import android.view.SurfaceView;
 
 import androidx.constraintlayout.helper.widget.Layer;
@@ -63,7 +64,7 @@ public class TileEntity implements EntityBase, Collidable
 
     @Override
     public void Update(float _dt) {
-
+        //Log.d("TileEntity", Float.toString(TileMapEntity.x));
     }
 
     @Override
@@ -71,7 +72,7 @@ public class TileEntity implements EntityBase, Collidable
     {
         if (!_isEmpty)
         {
-            _canvas.drawBitmap(tileSet, srcRect, new Rect((int)TileMapEntity.x + (int)xPos, (int)TileMapEntity.y + (int)yPos, (int)TileMapEntity.x + (int)xPos + 64, (int)TileMapEntity.y + (int)yPos + 64), null);
+            _canvas.drawBitmap(tileSet, srcRect, new Rect((int)GetPosX(), (int)GetPosY(), (int)GetPosX() + 64, (int)GetPosY() + 64), null);
         }
     }
 
@@ -114,11 +115,11 @@ public class TileEntity implements EntityBase, Collidable
 
     @Override
     public float GetPosX() {
-        return xPos;
+        return xPos + tileMap.GetPosX();
     }
 
     @Override
     public float GetPosY() {
-        return yPos;
+        return yPos + tileMap.GetPosY();
     }
 }

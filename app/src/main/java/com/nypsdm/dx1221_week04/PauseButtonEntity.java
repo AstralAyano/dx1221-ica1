@@ -49,13 +49,13 @@ public class PauseButtonEntity implements EntityBase
         ScreenWidth = metrics.widthPixels;
         ScreenHeight = metrics.heightPixels;
 
-        ScaledbmpP = Bitmap.createScaledBitmap(bmpP, ScreenWidth / 15, ScreenWidth / 15, true);
-        ScaledbmpP1 = Bitmap.createScaledBitmap(bmpP, ScreenWidth / 15, ScreenWidth / 15, true);
+        ScaledbmpP = Bitmap.createScaledBitmap(bmpP, ScreenWidth / 20, ScreenWidth / 20, true);
+        ScaledbmpP1 = Bitmap.createScaledBitmap(bmpP, ScreenWidth / 20, ScreenWidth / 20, true);
 
         // Position the button. As of now, it is default fix number.
         // You can use the screen width and height as a basis.
-        xPos = ScreenWidth - 150;
-        yPos = 150;
+        xPos = ScreenWidth - 175;
+        yPos = 175;
 
         isInit = true;
     }

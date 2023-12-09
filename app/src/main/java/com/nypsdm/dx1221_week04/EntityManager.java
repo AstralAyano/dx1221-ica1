@@ -84,7 +84,8 @@ public class EntityManager {
                     {
                         Collidable second = (Collidable) otherEntity;
 
-                        if (Collision.SphereToSphere(first.GetPosX(), first.GetPosY(), first.GetRadius(), second.GetPosX(), second.GetPosY(), second.GetRadius()))
+                        //if (Collision.SphereToSphere(first.GetPosX(), first.GetPosY(), first.GetRadius(), second.GetPosX(), second.GetPosY(), second.GetRadius()))
+                        if (Collision.AABBCollision(first.GetPosX(), first.GetPosY(), first.GetWidth(), first.GetHeight(), second.GetPosX(), second.GetPosY(), second.GetWidth(), second.GetHeight()))
                         {
                             first.OnHit(second);
                             second.OnHit(first);

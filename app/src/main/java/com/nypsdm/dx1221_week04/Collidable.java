@@ -8,6 +8,8 @@ public interface Collidable {
     float GetPosX();
     float GetPosY();
     float GetRadius();
+    float GetWidth();
+    float GetHeight();
 
     void OnHit(Collidable _other);
 }

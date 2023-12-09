@@ -134,7 +134,8 @@ public class MainGameSceneState implements StateBase {
                     if (col[0] == 1 || col[1] == 1)
                     {
                         camera.verticalCollision = true;
-                    }if (col[2] == 1 || col[3] == 1)
+                    }
+                    if (col[2] == 1 || col[3] == 1)
                     {
                         camera.horizontalCollision = true;
                     }

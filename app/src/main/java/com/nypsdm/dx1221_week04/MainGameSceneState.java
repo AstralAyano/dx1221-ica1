@@ -5,6 +5,9 @@ import android.graphics.Canvas;
 import android.util.Log;
 import android.view.SurfaceView;
 
+import java.util.Arrays;
+import java.util.List;
+
 // Created by TanSiewLan2021
 
 public class MainGameSceneState implements StateBase {
@@ -14,7 +17,7 @@ public class MainGameSceneState implements StateBase {
 
     private float timer = 0.0f;
 
-    private int[][] map;
+    private List<int[]> map;
     private int tileWidth;
     private int tileHeight;
 
@@ -36,40 +39,52 @@ public class MainGameSceneState implements StateBase {
         RenderBackground.Create();
 
         // Render TileSet and TileMap
-        int[][] tileMap = {
-                {0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0},
-                {0, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, 0},
-                {0, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, 0},
-                {0, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, 0},
-                {0, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, 0},
-                {0, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, 0},
-                {0, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, 0},
-                {0, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, 0},
-                {0, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, 0},
-                {0, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, 0},
-                {0, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, 0},
-                {0, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, 0},
-                {0, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, 0},
-                {0, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, 0},
-                {0, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, 0},
-                {0, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, 0},
-                {0, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, 0},
-                {0, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, 0},
-                {0, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, 0},
-                {0, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, 0, -1, -1, -1, -1, -1, 0},
-                {0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0}
-        };
-        map = tileMap;
+        try
+        {
+            List<int[]> tileMapList = CSVReader.readCSVFile(view.getContext(), "level1.csv");
 
-        // Assume you have a single image for the tileset
-        Bitmap tileSetImage = ResourceManager.Instance.GetBitmap(R.drawable.tileset);
+            // Check if the list is not empty
+            if (!tileMapList.isEmpty())
+            {
+                // Determine the number of columns based on the first row
+                int colCount = tileMapList.get(0).length;
 
-        // Set the width and height of each tile in pixels
-        tileWidth = 64;
-        tileHeight = 64;
+                // Convert the list to a 2D array
+                int[][] tileMap = new int[tileMapList.size()][colCount];
 
-        TileMapEntity tileMapEntity = new TileMapEntity(tileMap, tileWidth, tileHeight, tileSetImage);
-        EntityManager.Instance.AddEntity(tileMapEntity, EntityBase.ENTITY_TYPE.ENT_DEFAULT);
+                for (int i = 0; i < tileMapList.size(); i++)
+                {
+                    tileMap[i] = tileMapList.get(i);
+                }
+
+                map = tileMapList;
+
+                // Log tileMap values for debugging
+                for (int i = 0; i < tileMap.length; i++)
+                {
+                    Log.d("TileMapRow", Arrays.toString(tileMap[i]));
+                }
+
+                Bitmap tileSetImage = ResourceManager.Instance.GetBitmap(R.drawable.tileset);
+
+                // Set the width and height of each tile in pixels
+                int tileWidth = 64;
+                int tileHeight = 64;
+
+                TileMapEntity tileMapEntity = new TileMapEntity(tileMap, tileWidth, tileHeight, tileSetImage);
+                EntityManager.Instance.AddEntity(tileMapEntity, EntityBase.ENTITY_TYPE.ENT_DEFAULT);
+            } else
+            {
+                Log.e("Debug", "TileMapList : Empty");
+            }
+
+        } catch (Exception e)
+        {
+            // Log any exception during initialization
+            e.printStackTrace();
+        }
+
+
 
         // Add more entities
         smurfEntity = SmurfEntity.Create();
@@ -118,17 +133,23 @@ public class MainGameSceneState implements StateBase {
         CheckCollisions(map);
     }
 
-    private void CheckCollisions(int[][] map)
+    private void CheckCollisions(List<int[]> map)
     {
+        if (map == null) {
+            // Handle the case where map is null
+            Log.e("CheckCollisions", "map is null");
+            return;
+        }
+
         int[] col;
         camera.verticalCollision = false;
         camera.horizontalCollision = false;
 
-        for (int r = 0; r < map.length; r++)
+        for (int r = 0; r < map.size(); r++)
         {
-            for (int c = 0; c < map[r].length; c++)
+            for (int c = 0; c < map.get(r).length; c++)
             {
-                if (map[r][c] >= 0)
+                if (map.get(r)[c] >= 0)
                 {
                     col = Collision.AABBCollision((c * tileWidth - tileWidth / 2) - camera.GetX(), (r * tileHeight - tileHeight / 2) - camera.GetY(), tileWidth, tileHeight, smurfEntity.xPos, smurfEntity.yPos, smurfEntity.imgWidth, smurfEntity.imgHeight);
                     if (col[0] == 1 || col[1] == 1)

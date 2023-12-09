@@ -3,6 +3,7 @@ package com.nypsdm.dx1221_week04;
 import android.graphics.Bitmap;
 import android.graphics.Canvas;
 import android.graphics.Rect;
+import android.util.Log;
 import android.view.SurfaceView;
 
 public class TileMapEntity implements EntityBase
@@ -20,6 +21,12 @@ public class TileMapEntity implements EntityBase
         this.tileWidth = tileWidth;
         this.tileHeight = tileHeight;
         this.tileSet = tileset;
+
+        // Add checks to ensure tileMap dimensions are valid
+        if (tileMap == null || tileMap.length == 0 || tileMap[0].length == 0) {
+            throw new IllegalArgumentException("Invalid tileMap dimensions");
+        }
+
         this.numRows = tileMap.length;
         this.numCols = tileMap[0].length;
     }
@@ -53,49 +60,31 @@ public class TileMapEntity implements EntityBase
     }
 
     @Override
-    public void Update(float dt) {
+    public void Update(float dt)
+    {
         // Update logic for the tilemap, if needed
     }
 
-    // Implement methods from BaseEntity
     @Override
-    public boolean IsDone() {
-        // Provide your implementation here
-        return false;
-    }
+    public boolean IsDone() { return false; }
 
     @Override
-    public void SetIsDone(boolean _isDone) {
-        // Provide your implementation here
-    }
+    public void SetIsDone(boolean _isDone) {  }
 
     @Override
-    public void Init(SurfaceView _view) {
-        // Provide your implementation here
-    }
+    public void Init(SurfaceView _view) {  }
 
     @Override
-    public boolean IsInit() {
-        // Provide your implementation here
-        return false;
-    }
+    public boolean IsInit() { return false; }
 
     @Override
-    public int GetRenderLayer() {
-        // Provide your implementation here
-        return 0;
-    }
+    public int GetRenderLayer() { return 0; }
 
     @Override
-    public void SetRenderLayer(int _newLayer) {
-        // Provide your implementation here
-    }
+    public void SetRenderLayer(int _newLayer) {   }
 
     @Override
-    public ENTITY_TYPE GetEntityType() {
-        // Provide your implementation here
-        return ENTITY_TYPE.ENT_DEFAULT;
-    }
+    public ENTITY_TYPE GetEntityType() { return ENTITY_TYPE.ENT_DEFAULT; }
 
     @Override
     public float GetPosX() {

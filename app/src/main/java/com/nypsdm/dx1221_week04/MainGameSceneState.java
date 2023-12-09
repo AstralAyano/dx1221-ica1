@@ -68,8 +68,8 @@ public class MainGameSceneState implements StateBase {
                 Bitmap tileSetImage = ResourceManager.Instance.GetBitmap(R.drawable.tileset);
 
                 // Set the width and height of each tile in pixels
-                int tileWidth = 64;
-                int tileHeight = 64;
+                tileWidth = 64;
+                tileHeight = 64;
 
                 TileMapEntity tileMapEntity = new TileMapEntity(tileMap, tileWidth, tileHeight, tileSetImage);
                 EntityManager.Instance.AddEntity(tileMapEntity, EntityBase.ENTITY_TYPE.ENT_DEFAULT);
@@ -149,6 +149,7 @@ public class MainGameSceneState implements StateBase {
         {
             for (int c = 0; c < map.get(r).length; c++)
             {
+                Log.e("CheckCollisions", String.valueOf((c * tileWidth - tileWidth / 2) - camera.GetX()));
                 if (map.get(r)[c] >= 0)
                 {
                     col = Collision.AABBCollision((c * tileWidth - tileWidth / 2) - camera.GetX(), (r * tileHeight - tileHeight / 2) - camera.GetY(), tileWidth, tileHeight, smurfEntity.xPos, smurfEntity.yPos, smurfEntity.imgWidth, smurfEntity.imgHeight);

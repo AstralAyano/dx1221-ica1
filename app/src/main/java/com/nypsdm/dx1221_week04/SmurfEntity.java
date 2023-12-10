@@ -2,13 +2,14 @@ package com.nypsdm.dx1221_week04;
 
 import android.graphics.Bitmap;
 import android.graphics.Canvas;
+import android.service.quicksettings.Tile;
 import android.util.Log;
 import android.view.SurfaceView;
 
 import java.util.Random;
 
 public class SmurfEntity implements EntityBase, Collidable{
-    
+
     // 1. Declare the use of spritesheet using Sprite class.
     public Bitmap bmp = null; // Usual method of loading a bmp/image
     public Sprite spritesheet = null; // Define.
@@ -20,9 +21,10 @@ public class SmurfEntity implements EntityBase, Collidable{
     // Variables to be used or can be used.
     public float xPos, yPos, xDir, yDir, lifeTime;
     public float xVelocity, yVelocity;
-    public boolean onGround;
+    public boolean onGround, touchingWall;
+    public boolean jump, jumping;
     public float imgWidth, imgHeight;
-    
+
     // For use with the TouchManager.class
     private boolean hasTouched = false;
 
@@ -45,7 +47,7 @@ public class SmurfEntity implements EntityBase, Collidable{
         // New method using our own resource manager : Returns pre-loaded one if exists
         // 2. Loading spritesheet
         spritesheet = new Sprite(ResourceManager.Instance.GetBitmap(R.drawable.playerspritesheet), 7, 4, 28);
-	
+
         // 3. Get some random position of x and y
         Random ranGen = new Random(); // Random generator under the java utility library
 
@@ -75,11 +77,33 @@ public class SmurfEntity implements EntityBase, Collidable{
             int keyCode = KeyboardManager.getInstance().GetKeyCode();
             SmurfEntityKeyInputs.handleKeyEvent(keyCode, this);
         }
+
+        // gravity
+        if (yVelocity < 200 && !onGround)
+        {
+            yVelocity += 200 * _dt;
+            jump = false;
+        }
+        else if (onGround && !jump)
+        {
+            jumping = false;
+            yPos -= yVelocity * _dt;
+            yVelocity = 0;
+        }
+
+        // jump
+        if (jump && !jumping)
+        {
+            jumping = true;
+            yVelocity = -400;
+        }
+
+        yPos += yVelocity * _dt;
     }
 
     @Override
     public void Render(Canvas _canvas, float x, float y) {
-       
+
         // This is for our sprite animation!
         spritesheet.Render(_canvas, (int)xPos, (int)yPos);
     }
@@ -133,7 +157,6 @@ public class SmurfEntity implements EntityBase, Collidable{
         return yDir;
     }
 
-    @Override
     public float GetRadius() {
         return 64;
     }
@@ -160,16 +183,36 @@ public class SmurfEntity implements EntityBase, Collidable{
 
         if (_other.GetType() == "TileEntity") //Another Entity
         {
+            //collide with ground
             //Log.d("Debug", "Collided with TileEntity");
-            if (!tileEntity._isEmpty)
+            if (!tileEntity._isEmpty && getAngle(tileEntity.xPos, tileEntity.yPos) <= 180)
             {
                 onGround = true;
             }
             else
             {
                 onGround = false;
-                Log.d("Debug", "OnGround : False");
+                //Log.d("Debug", "OnGround : False");
+            }
+
+            // collide with wall
+            if (!tileEntity._isEmpty && getAngle(tileEntity.xPos, tileEntity.yPos) > 180)
+            {
+                touchingWall = true;
+                Log.d("Debug", "TouchingWall : True");
             }
         }
+    }
+
+    public float getAngle(float x, float y)
+    {
+        float angle = (float) Math.toDegrees(Math.atan2(y - yPos, x - xPos));
+
+        if(angle < 0)
+        {
+            angle += 360;
+        }
+
+        return angle;
     }
 }

@@ -33,8 +33,7 @@ public class MovementButtonEntity implements EntityBase
 
     float x;
 
-    private boolean jump = false,
-                    jumping = false;
+    private boolean hasMoved;
 
     private boolean left;
 
@@ -87,59 +86,52 @@ public class MovementButtonEntity implements EntityBase
 
             if (Collision.SphereToSphere((TouchManager.Instance.GetPosX()), TouchManager.Instance.GetPosY(), 0.0f, xPos, yPos, leftButtonRadius))
             {
-                if (!MainGameSceneState.camera.collision)
+                if (!player.touchingWall)
                 {
                     Log.d("Debug", "Left Button Pressed");
-                    x += 200 * _dt;
+                    player.xVelocity = 200;
+                    x += player.xVelocity * _dt;
                     left = true;
+                    hasMoved = true;
                 }
             }
             else if (Collision.SphereToSphere((TouchManager.Instance.GetPosX()), TouchManager.Instance.GetPosY(), 0.0f, xPos + 300, yPos, rightButtonRadius))
             {
-                if (!MainGameSceneState.camera.collision)
+                if (!player.touchingWall)
                 {
                     Log.d("Debug", "Right Button Pressed");
-                    x -= 200 * _dt;
+                    player.xVelocity = 200;
+                    x -= player.xVelocity * _dt;
                     left = false;
+                    hasMoved = true;
                 }
             }
-            if (MainGameSceneState.camera.collision)
+            if (player.touchingWall && hasMoved)
             {
                 if (left)
                 {
-                    x += 200 * _dt;
+                    x -= player.xVelocity * _dt;
                 }
                 else
                 {
-                    x -= 200 * _dt;
+                    x += player.xVelocity * _dt;
                 }
-                if (player.xVelocity != 0)
-                {
-                    player.xVelocity = 0;
-                }
+                player.touchingWall = false;
+                player.xVelocity = 0;
+                Log.d("Debug", "TouchingWall : False");
+                hasMoved = false;
             }
             MainGameSceneState.camera.SetPosition(x, MainGameSceneState.camera.GetY());
 
             if (Collision.SphereToSphere((TouchManager.Instance.GetPosX()), TouchManager.Instance.GetPosY(), 0.0f, ScreenWidth - 200, yPos, jumpButtonRadius))
             {
                 // Jump
-                jump = true;
+                player.jump = true;
             }
         }
         else {
         }
 
-        // gravity
-        if (player.yVelocity < 200 && !player.onGround)
-        {
-            player.yVelocity += 200 * _dt;
-        }
-        else
-        {
-            player.yVelocity = 0;
-        }
-
-        player.yPos += player.yVelocity * _dt;
 //        if (MainGameSceneState.camera.collision)
 //        {
 //            Log.d("Debug", "Inside");

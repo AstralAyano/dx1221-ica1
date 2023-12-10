@@ -208,9 +208,7 @@ public class SmurfEntity implements EntityBase, Collidable{
         if (_other.GetType() == "EnemyEntity")
         {
             Log.d("Collision", "SmurfEntity collided with EnemyEntity");
-            Intent intent = new Intent();
-            intent.setClass(GamePage.Instance, NextPage.class);
-            StateManager.Instance.ChangeState("NextPage");
+            GamePage.Instance.ChangeToCombat();
         }
     }
 

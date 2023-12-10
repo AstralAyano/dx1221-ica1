@@ -43,7 +43,7 @@ public class EnemyEntity implements EntityBase, Collidable {
         // 3. Get some random position of x and y
         Random ranGen = new Random(); // Random generator under the java utility library
 
-        xPos = (int)MovementButtonEntity.x + _view.getWidth() / 4;
+        xPos = (int)MovementButtonEntity.x + 250;
         yPos = _view.getHeight() / 2;
 
         isInit = true;

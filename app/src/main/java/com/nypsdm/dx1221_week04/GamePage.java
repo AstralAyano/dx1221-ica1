@@ -48,5 +48,12 @@ public class GamePage extends FragmentActivity
         return super.onKeyDown(keyCode, event);
     }
 
+    public void ChangeToCombat()
+    {
+        Intent intent = new Intent();
+        intent.setClass(this, NextPage.class);
+        startActivity(intent);
+    }
+
 }
 

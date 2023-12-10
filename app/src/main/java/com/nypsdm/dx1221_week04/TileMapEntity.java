@@ -6,6 +6,9 @@ import android.graphics.Rect;
 import android.util.Log;
 import android.view.SurfaceView;
 
+import java.util.ArrayList;
+import java.util.List;
+
 public class TileMapEntity implements EntityBase
 {
     private int[][] tileMap; // Represents the layout of the tilemap
@@ -14,6 +17,12 @@ public class TileMapEntity implements EntityBase
     private Bitmap tileSet; // Single image containing all tiles
     private int numRows; // Number of rows in the tilemap
     private int numCols; // Number of columns in the tilemap
+
+    private ArrayList<TileEntity> tiles = new ArrayList<TileEntity>();
+
+    private boolean _isInit;
+    private Canvas canvas;
+    public float x, y;
 
     public TileMapEntity(int[][] tileMap, int tileWidth, int tileHeight, Bitmap tileset)
     {
@@ -32,7 +41,7 @@ public class TileMapEntity implements EntityBase
     }
 
     @Override
-    public void Render(Canvas canvas, float x, float y)
+    public void Render(Canvas _canvas, float _x, float _y)
     {
         for (int row = 0; row < numRows; row++)
         {
@@ -40,21 +49,22 @@ public class TileMapEntity implements EntityBase
             {
                 int tileIndex = tileMap[row][col];
 
-                // Skip rendering if the tile index is invalid
-                if (tileIndex >= 0)
-                {
-                    // Calculate the position to render the tile
-                    int xPos = col * tileWidth;
-                    int yPos = row * tileHeight;
+                // Calculate the position to render the tile
+                int xPos = col * tileWidth;
+                int yPos = row * tileHeight;
 
-                    // Calculate the source rectangle to extract the tile from the tileset image
-                    int srcX = (tileIndex % (tileSet.getWidth() / tileWidth)) * tileWidth;
-                    int srcY = (tileIndex / (tileSet.getWidth() / tileWidth)) * tileHeight;
-                    Rect srcRect = new Rect(srcX, srcY, srcX + tileWidth, srcY + tileHeight);
+                int index = (numCols * row + col);
 
-                    // Draw the tile on the canvas
-                    canvas.drawBitmap(tileSet, srcRect, new Rect((int)x + xPos, (int)y + yPos, (int)x + xPos + tileWidth, (int)y + yPos + tileHeight), null);
-                }
+                tiles.get(index).xPos = xPos;
+                tiles.get(index).yPos = yPos;
+
+                // Calculate the source rectangle to extract the tile from the tileset image
+                int srcX = (tileIndex % (tileSet.getWidth() / tileWidth)) * tileWidth;
+                int srcY = (tileIndex / (tileSet.getWidth() / tileWidth)) * tileHeight;
+                Rect srcRect = new Rect(srcX, srcY, srcX + tileWidth, srcY + tileHeight);
+
+                // Draw the tile on the canvas
+                tiles.get(index).RenderTile(canvas, tileSet, srcRect, new Rect((int)x + xPos, (int)y + yPos, (int)x + xPos + tileWidth, (int)y + yPos + tileHeight));
             }
         }
     }
@@ -72,10 +82,56 @@ public class TileMapEntity implements EntityBase
     public void SetIsDone(boolean _isDone) {  }
 
     @Override
-    public void Init(SurfaceView _view) {  }
+    public void Init(SurfaceView _view)
+    {
+        for (int row = 0; row < numRows; row++)
+        {
+            for (int col = 0; col < numCols; col++)
+            {
+                int tileIndex = tileMap[row][col];
+
+                // Skip rendering if the tile index is invalid
+                if (tileIndex >= 0)
+                {
+                    TileEntity newTile = TileEntity.Create(false, this);
+
+                    // Calculate the position to render the tile
+                    int xPos = col * tileWidth;
+                    int yPos = row * tileHeight;
+
+                    newTile.xPos = xPos;
+                    newTile.yPos = yPos;
+
+                    // Calculate the source rectangle to extract the tile from the tileset image
+                    int srcX = (tileIndex % (tileSet.getWidth() / tileWidth)) * tileWidth;
+                    int srcY = (tileIndex / (tileSet.getWidth() / tileWidth)) * tileHeight;
+                    Rect srcRect = new Rect(srcX, srcY, srcX + tileWidth, srcY + tileHeight);
+
+                    // Draw the tile on the canvas
+                    newTile.RenderTile(canvas, tileSet, srcRect, new Rect((int)x + xPos, (int)y + yPos, (int)x + xPos + tileWidth, (int)y + yPos + tileHeight));
+
+                    tiles.add(newTile);
+                }
+                else
+                {
+                    TileEntity newTile = TileEntity.Create(true, this);
+
+                    tiles.add(newTile);
+                }
+            }
+        }
+
+        _isInit = true;
+    }
+
+    public void SetPosition(float _x, float _y)
+    {
+        x = _x;
+        y = _y;
+    }
 
     @Override
-    public boolean IsInit() { return false; }
+    public boolean IsInit() { return _isInit; }
 
     @Override
     public int GetRenderLayer() { return 0; }
@@ -87,12 +143,10 @@ public class TileMapEntity implements EntityBase
     public ENTITY_TYPE GetEntityType() { return ENTITY_TYPE.ENT_DEFAULT; }
 
     @Override
-    public float GetPosX() {
-        return 0;
-    }
+    public float GetPosX() { return x; }
 
     @Override
     public float GetPosY() {
-        return 0;
+        return y;
     }
 }

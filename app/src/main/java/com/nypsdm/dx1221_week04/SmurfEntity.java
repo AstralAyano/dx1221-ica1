@@ -157,9 +157,18 @@ public class SmurfEntity implements EntityBase, Collidable{
         return yDir;
     }
 
-    @Override
     public float GetRadius() {
-        return spritesheet.GetHeight() * 0.5f;
+        return 64;
+    }
+
+    @Override
+    public float GetWidth() {
+        return 64;
+    }
+
+    @Override
+    public float GetHeight() {
+        return 64;
     }
 
     @Override
@@ -169,6 +178,8 @@ public class SmurfEntity implements EntityBase, Collidable{
         // If hit by star, you can play an audio, or have a visual feedback or
         // physical feedback.
         // SetIsDone(true) --> allows you to delete the entity from the screen.
+
+        TileEntity tileEntity = _other instanceof TileEntity ? ((TileEntity ) _other) : null;
 
         if (_other.GetType() == "TileEntity") //Another Entity
         {

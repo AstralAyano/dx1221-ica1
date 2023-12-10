@@ -3,7 +3,7 @@ package com.nypsdm.dx1221_week04;
 import android.graphics.Canvas;
 import android.view.SurfaceView;
 
-public class EnemyEntity implements EntityBase {
+public class EnemyEntity implements EntityBase, Collidable {
 
     private boolean isDone = false;
     private boolean isInit = false;
@@ -69,10 +69,38 @@ public class EnemyEntity implements EntityBase {
     public ENTITY_TYPE GetEntityType() { return ENTITY_TYPE.ENT_ENEMY; }
 
     @Override
+    public String GetType() {
+        return "Enemy";
+    }
+
+    @Override
     public float GetPosX() { return xPos; }
 
     @Override
     public float GetPosY() { return yPos; }
+
+    @Override
+    public float GetRadius() {
+        return 64;
+    }
+
+    @Override
+    public float GetWidth() {
+        return 64;
+    }
+
+    @Override
+    public float GetHeight() {
+        return 64;
+    }
+
+    @Override
+    public void OnHit(Collidable _other) {
+        if (_other.GetType() == "PlayerEntity")
+        {
+
+        }
+    }
 
     private boolean CheckTileCollisions() {
         // Implement collision check with tiles

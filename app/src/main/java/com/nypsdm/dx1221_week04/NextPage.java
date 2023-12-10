@@ -1,5 +1,4 @@
-package com.sdm.mgp2023;
-
+package com.nypsdm.dx1221_week04;
 import android.annotation.SuppressLint;
 import android.content.Intent;
 import android.graphics.Canvas;
@@ -11,6 +10,8 @@ import android.view.View.OnClickListener;
 import android.app.Activity;
 import android.view.ViewDebug;
 import android.widget.Button;
+
+import com.nypsdm.dx1221_week04.StateBase;
 
 import java.util.Arrays;
 import java.util.Random;
@@ -60,7 +61,7 @@ public class NextPage extends Activity implements OnClickListener, StateBase
 
         StateManager.Instance.Init(new SurfaceView(this));
         GameSystem.Instance.Init(new SurfaceView(this));
-        StateManager.Instance.Start("NextPage");
+        StateManager.Instance.ChangeState("NextPage");
 
         count = 0;
     }
@@ -253,7 +254,7 @@ public class NextPage extends Activity implements OnClickListener, StateBase
         p = new Player[3];
         for (int i = 0; i < p.length; i++)
         {
-            p[i] = StateManager.p[i];
+            //p[i] = StateManager.p[i];
         }
 
         entityCount += p.length;
@@ -400,7 +401,7 @@ public class NextPage extends Activity implements OnClickListener, StateBase
     {
         for (int i = 0; i < p.length; i++)
         {
-            StateManager.p[i] = p[i];
+            //StateManager.p[i] = p[i];
         }
     }
 

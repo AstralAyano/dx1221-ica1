@@ -3,11 +3,13 @@ package com.nypsdm.dx1221_week04;
 import android.graphics.Bitmap;
 import android.graphics.Canvas;
 import android.util.DisplayMetrics;
+import android.util.Log;
 import android.view.SurfaceView;
 
 public class MovementButtonEntity implements EntityBase
 {
     static SmurfEntity player;
+    public TileMapEntity tileMap;
     private boolean isDone = false;
     private boolean isInit = false;
 
@@ -33,8 +35,6 @@ public class MovementButtonEntity implements EntityBase
     float x;
 
     private boolean left;
-
-    private float xVelocity, yVelocity;
 
     @Override
     public boolean IsDone() {
@@ -67,8 +67,8 @@ public class MovementButtonEntity implements EntityBase
         // You can use the screen width and height as a basis.
         xPos = 200;
         yPos = ScreenHeight - 200;
-        xVelocity = 0;
-        yVelocity = 0;
+        player.xVelocity = 0;
+        player.yVelocity = 0;
 
         isInit = true;
     }

@@ -1,4 +1,4 @@
-package com.sdm.mgp2023;
+package com.nypsdm.dx1221_week04;
 
 import android.util.Log;
 

@@ -38,6 +38,8 @@ public class MainGameSceneState implements StateBase {
         // 3. Create Background
         RenderBackground.Create();
 
+        TileMapEntity tileMapEntity = null;
+
         // Render TileSet and TileMap
         try
         {
@@ -71,9 +73,10 @@ public class MainGameSceneState implements StateBase {
                 tileWidth = 64;
                 tileHeight = 64;
 
-                TileMapEntity tileMapEntity = new TileMapEntity(tileMap, tileWidth, tileHeight, tileSetImage);
+                tileMapEntity = new TileMapEntity(tileMap, tileWidth, tileHeight, tileSetImage);
                 EntityManager.Instance.AddEntity(tileMapEntity, EntityBase.ENTITY_TYPE.ENT_DEFAULT);
-            } else
+            }
+            else
             {
                 Log.e("Debug", "TileMapList : Empty");
             }
@@ -89,7 +92,8 @@ public class MainGameSceneState implements StateBase {
         // Add more entities
         smurfEntity = SmurfEntity.Create();
 
-        MovementButtonEntity.Create();
+        MovementButtonEntity moveEntity = MovementButtonEntity.Create();
+        moveEntity.tileMap = tileMapEntity;
 
         PauseButtonEntity.Create();
 

@@ -4,8 +4,6 @@ public class Camera {
     private float x;
     private float y;
 
-    public boolean collision;
-
     public Camera() {
         this.x = 0;
         this.y = 0;

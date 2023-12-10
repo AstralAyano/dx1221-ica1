@@ -130,33 +130,6 @@ public class MainGameSceneState implements StateBase {
 			//6. Example of touch on screen in the main game to trigger back to Main menu
             //StateManager.Instance.ChangeState("MainMenu");
         }
-        CheckCollisions(map);
-    }
-
-    private void CheckCollisions(List<int[]> map)
-    {
-        if (map == null) {
-            // Handle the case where map is null
-            Log.e("CheckCollisions", "map is null");
-            return;
-        }
-
-        camera.collision = false;
-
-        for (int r = 0; r < map.size(); r++)
-        {
-            for (int c = 0; c < map.get(r).length; c++)
-            {
-                if (map.get(r)[c] >= 0)
-                {
-                    if (Collision.AABBCollision((c * tileWidth + tileWidth / 2) - camera.GetX(), (r * tileHeight - tileHeight / 2) - camera.GetY(), tileWidth, tileHeight, smurfEntity.xPos, smurfEntity.yPos, smurfEntity.imgWidth, smurfEntity.imgHeight))
-                    {
-                        Log.e("CheckCollisions", "colliding");
-                        camera.collision = true;
-                    }
-                }
-            }
-        }
     }
 }
 

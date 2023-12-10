@@ -56,10 +56,12 @@ public class RenderBackground implements EntityBase {
             lastX = camera.GetX();
 
             // Wrap around when reaching the edge
-            if (xPos < -ScreenWidth) {
+            if (xPos < -ScreenWidth)
+            {
                 xPos += ScreenWidth;
             }
-            else if (xPos > 0) {
+            else if (xPos > 0)
+            {
                 xPos -= ScreenWidth;
             }
         }

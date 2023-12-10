@@ -1,10 +1,13 @@
 package com.nypsdm.dx1221_week04;
 
+import android.content.Intent;
 import android.graphics.Bitmap;
 import android.graphics.Canvas;
 import android.service.quicksettings.Tile;
 import android.util.Log;
 import android.view.SurfaceView;
+
+import androidx.activity.result.contract.ActivityResultContracts;
 
 import java.util.Random;
 
@@ -201,6 +204,13 @@ public class SmurfEntity implements EntityBase, Collidable{
                 touchingWall = true;
                 Log.d("Debug", "TouchingWall : True");
             }
+        }
+
+        if (_other.GetType() == "EnemyEntity")
+        {
+            Intent intent = new Intent();
+            intent.setClass(GamePage.Instance, NextPage.class);
+            StateManager.Instance.ChangeState("NextPage");
         }
     }
 

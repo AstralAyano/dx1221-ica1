@@ -5,6 +5,7 @@ package com.nypsdm.dx1221_week04;
 
 import androidx.fragment.app.FragmentActivity;
 import android.app.Activity;
+import android.content.Context;
 import android.content.Intent;
 import android.graphics.Canvas;
 import android.os.Bundle;

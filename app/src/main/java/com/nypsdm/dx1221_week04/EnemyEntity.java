@@ -1,9 +1,16 @@
 package com.nypsdm.dx1221_week04;
 
+import android.graphics.Bitmap;
 import android.graphics.Canvas;
 import android.view.SurfaceView;
 
+import java.util.Random;
+
 public class EnemyEntity implements EntityBase, Collidable {
+
+    public Bitmap bmp = null; // Usual method of loading a bmp/image
+    public Sprite spritesheet = null; // Define.
+    private SurfaceView view;
 
     private boolean isDone = false;
     private boolean isInit = false;
@@ -23,15 +30,29 @@ public class EnemyEntity implements EntityBase, Collidable {
 
     @Override
     public void Init(SurfaceView _view) {
-        // Initialize enemy scale and position
-        width = 50.0f;
-        height = 50.0f;
-        xPos = 100.0f;
-        yPos = 300.0f;
+        view = _view;
+
+        // New method using our own resource manager : Returns pre-loaded one if exists
+        // 2. Loading spritesheet
+        spritesheet = new Sprite(ResourceManager.Instance.GetBitmap(R.drawable.enemy1), 5, 4, 20);
+
+        // 3. Get some random position of x and y
+        Random ranGen = new Random(); // Random generator under the java utility library
+
+        xPos = _view.getWidth() / 4;
+        yPos = _view.getHeight() / 2;
+
+        isInit = true;
+
+        // To Set the Animation Frames
+        spritesheet.SetAnimationFrames(16,19);
     }
 
     @Override
     public void Update(float _dt) {
+        // Update spritesheet
+        spritesheet.Update(_dt);
+
         // Update logic for enemy movement
 
         // Check for collisions with tiles
@@ -47,13 +68,13 @@ public class EnemyEntity implements EntityBase, Collidable {
         }
 
         // Update enemy position based on speed and direction
-        xPos += speed * direction * _dt;
+        //xPos += speed * direction * _dt;
     }
 
     @Override
     public void Render(Canvas _canvas, float x, float y) {
         // This is for our sprite animation!
-
+        spritesheet.Render(_canvas, (int)x, (int)y);
     }
 
     @Override
@@ -70,7 +91,7 @@ public class EnemyEntity implements EntityBase, Collidable {
 
     @Override
     public String GetType() {
-        return "Enemy";
+        return "EnemyEntity";
     }
 
     @Override
@@ -96,7 +117,7 @@ public class EnemyEntity implements EntityBase, Collidable {
 
     @Override
     public void OnHit(Collidable _other) {
-        if (_other.GetType() == "PlayerEntity")
+        if (_other.GetType() == "SmurfEntity")
         {
 
         }

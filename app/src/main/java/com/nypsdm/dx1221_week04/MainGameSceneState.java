@@ -91,6 +91,7 @@ public class MainGameSceneState implements StateBase {
 
         // Add more entities
         smurfEntity = SmurfEntity.Create();
+        EnemyEntity.Create();
 
         MovementButtonEntity moveEntity = MovementButtonEntity.Create();
         moveEntity.tileMap = tileMapEntity;

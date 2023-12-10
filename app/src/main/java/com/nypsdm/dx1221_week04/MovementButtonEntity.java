@@ -87,7 +87,6 @@ public class MovementButtonEntity implements EntityBase
             {
                 if (!player.touchingWall)
                 {
-                    Log.d("Debug", "Left Button Pressed");
                     player.xVelocity = 200;
                     x += player.xVelocity * _dt;
                     left = true;
@@ -98,7 +97,6 @@ public class MovementButtonEntity implements EntityBase
             {
                 if (!player.touchingWall)
                 {
-                    Log.d("Debug", "Right Button Pressed");
                     player.xVelocity = 200;
                     x -= player.xVelocity * _dt;
                     left = false;

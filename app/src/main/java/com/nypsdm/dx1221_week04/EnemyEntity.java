@@ -2,12 +2,12 @@ package com.nypsdm.dx1221_week04;
 
 import android.graphics.Bitmap;
 import android.graphics.Canvas;
+import android.util.Log;
 import android.view.SurfaceView;
 
 import java.util.Random;
 
 public class EnemyEntity implements EntityBase, Collidable {
-
     public Bitmap bmp = null; // Usual method of loading a bmp/image
     public Sprite spritesheet = null; // Define.
     private SurfaceView view;
@@ -39,7 +39,7 @@ public class EnemyEntity implements EntityBase, Collidable {
         // 3. Get some random position of x and y
         Random ranGen = new Random(); // Random generator under the java utility library
 
-        xPos = _view.getWidth() / 4;
+        xPos = (int)MovementButtonEntity.x + _view.getWidth() / 4;
         yPos = _view.getHeight() / 2;
 
         isInit = true;
@@ -74,7 +74,7 @@ public class EnemyEntity implements EntityBase, Collidable {
     @Override
     public void Render(Canvas _canvas, float x, float y) {
         // This is for our sprite animation!
-        spritesheet.Render(_canvas, (int)MovementButtonEntity.x, (int)yPos);
+        spritesheet.Render(_canvas, (int)MovementButtonEntity.x + (int)xPos, (int)yPos);
     }
 
     @Override
@@ -119,7 +119,7 @@ public class EnemyEntity implements EntityBase, Collidable {
     public void OnHit(Collidable _other) {
         if (_other.GetType() == "SmurfEntity")
         {
-
+            Log.d("Collision", "EnemyEntity collided with SmurfEntity");
         }
     }
 

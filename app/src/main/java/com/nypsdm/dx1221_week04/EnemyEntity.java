@@ -74,7 +74,7 @@ public class EnemyEntity implements EntityBase, Collidable {
     @Override
     public void Render(Canvas _canvas, float x, float y) {
         // This is for our sprite animation!
-        spritesheet.Render(_canvas, (int)x, (int)y);
+        spritesheet.Render(_canvas, (int)MovementButtonEntity.x, (int)yPos);
     }
 
     @Override

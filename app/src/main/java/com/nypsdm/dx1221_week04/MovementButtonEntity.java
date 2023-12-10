@@ -32,7 +32,7 @@ public class MovementButtonEntity implements EntityBase
 
     private float buttonDelay = 0;
 
-    float x;
+    static float x;
 
     private boolean left;
 

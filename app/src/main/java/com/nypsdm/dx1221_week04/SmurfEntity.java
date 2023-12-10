@@ -182,11 +182,10 @@ public class SmurfEntity implements EntityBase, Collidable{
         // physical feedback.
         // SetIsDone(true) --> allows you to delete the entity from the screen.
 
-        TileEntity tileEntity = _other instanceof TileEntity ? ((TileEntity ) _other) : null;
-
         if (_other.GetType() == "TileEntity") //Another Entity
         {
             //collide with ground
+            TileEntity tileEntity = _other instanceof TileEntity ? ((TileEntity ) _other) : null;
             //Log.d("Debug", "Collided with TileEntity");
             if (!tileEntity._isEmpty && getAngle(tileEntity.xPos, tileEntity.yPos) <= 180)
             {

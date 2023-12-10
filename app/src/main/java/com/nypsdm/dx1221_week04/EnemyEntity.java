@@ -20,6 +20,10 @@ public class EnemyEntity implements EntityBase, Collidable {
     private float direction = 1.0f; // Movement direction (1.0f for right, -1.0f for left)
     private float width, height; // Dimensions of the enemy bounding box
 
+
+    public float yVelocity;
+    public boolean onGround, touchingWall;
+
     @Override
     public boolean IsDone() { return isDone; }
 
@@ -69,6 +73,19 @@ public class EnemyEntity implements EntityBase, Collidable {
 
         // Update enemy position based on speed and direction
         //xPos += speed * direction * _dt;
+
+        // gravity
+        if (yVelocity < 200 && !onGround)
+        {
+            yVelocity += 200 * _dt;
+        }
+        else if (onGround)
+        {
+            yPos -= yVelocity * _dt;
+            yVelocity = 0;
+        }
+
+        yPos += yVelocity * _dt;
     }
 
     @Override
@@ -86,6 +103,12 @@ public class EnemyEntity implements EntityBase, Collidable {
     @Override
     public void SetRenderLayer(int _newLayer) { return; }
 
+    public static EnemyEntity Create() {
+        EnemyEntity result = new EnemyEntity();
+        EntityManager.Instance.AddEntity(result, ENTITY_TYPE.ENT_ENEMY);
+        return result;
+    }
+
     @Override
     public ENTITY_TYPE GetEntityType() { return ENTITY_TYPE.ENT_ENEMY; }
 
@@ -95,7 +118,7 @@ public class EnemyEntity implements EntityBase, Collidable {
     }
 
     @Override
-    public float GetPosX() { return xPos; }
+    public float GetPosX() { return (int)MovementButtonEntity.x + xPos; }
 
     @Override
     public float GetPosY() { return yPos; }
@@ -107,19 +130,42 @@ public class EnemyEntity implements EntityBase, Collidable {
 
     @Override
     public float GetWidth() {
-        return 64;
+        return 128;
     }
 
     @Override
     public float GetHeight() {
-        return 64;
+        return 128;
     }
 
     @Override
     public void OnHit(Collidable _other) {
+
         if (_other.GetType() == "SmurfEntity")
         {
             Log.d("Collision", "EnemyEntity collided with SmurfEntity");
+        }
+
+        TileEntity tileEntity = _other instanceof TileEntity ? ((TileEntity ) _other) : null;
+
+        if (_other.GetType() == "TileEntity") //Another Entity
+        {
+            //collide with ground
+            //Log.d("Debug", "Collided with TileEntity");
+            if (!tileEntity._isEmpty && getAngle(tileEntity.xPos, tileEntity.yPos) <= 180)
+            {
+                onGround = true;
+            }
+            else
+            {
+                onGround = false;
+            }
+
+            // collide with wall
+            if (!tileEntity._isEmpty && getAngle(tileEntity.xPos, tileEntity.yPos) > 180)
+            {
+                touchingWall = true;
+            }
         }
     }
 
@@ -135,9 +181,15 @@ public class EnemyEntity implements EntityBase, Collidable {
         return false;
     }
 
-    public static EnemyEntity Create() {
-        EnemyEntity result = new EnemyEntity();
-        EntityManager.Instance.AddEntity(result, ENTITY_TYPE.ENT_ENEMY);
-        return result;
+    public float getAngle(float x, float y)
+    {
+        float angle = (float) Math.toDegrees(Math.atan2(y - yPos, x - xPos));
+
+        if(angle < 0)
+        {
+            angle += 360;
+        }
+
+        return angle;
     }
 }

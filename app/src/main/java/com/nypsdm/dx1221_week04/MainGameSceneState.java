@@ -13,7 +13,6 @@ import java.util.List;
 public class MainGameSceneState implements StateBase {
     public static Camera camera;
     private SurfaceView view;
-    private SmurfEntity smurfEntity;
 
     private float timer = 0.0f;
 
@@ -90,7 +89,7 @@ public class MainGameSceneState implements StateBase {
 
 
         // Add more entities
-        smurfEntity = SmurfEntity.Create();
+        SmurfEntity.Create();
         EnemyEntity.Create();
 
         MovementButtonEntity moveEntity = MovementButtonEntity.Create();

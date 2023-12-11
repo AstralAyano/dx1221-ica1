@@ -207,6 +207,10 @@ public class NextPage extends Activity implements OnClickListener, StateBase
         while (LookForEntityType(currPlace) == "enemy")
         {
             p[randPlayer].TakeDamage(e[EntityInArray(currPlace)].GetATK());
+            if (p[randPlayer].GetHP() <= 0)
+            {
+                RemovePlayer(count);
+            }
             randPlayer = rand.nextInt(p.length);
 
             // progress fight
@@ -216,6 +220,28 @@ public class NextPage extends Activity implements OnClickListener, StateBase
                 currPlace = 1;
                 round++;
             }
+        }
+    }
+    private void RemovePlayer(int positionInArray)
+    {
+        Player[] temp = new Player[p.length - 1];
+
+        for(int i=0, k=0; i < p.length; i++)
+        {
+            if(i != positionInArray)
+            {
+                temp[k] = p[i];
+                k++;
+            }
+        }
+
+        p = new Player[temp.length];
+        p = temp;
+        if (p.length <= 0)
+        {
+            Intent intent = new Intent();
+            intent.setClass(this,LosePage.class);
+            startActivity(intent);
         }
     }
     private void RemoveEnemy(int positionInArray)
@@ -233,6 +259,12 @@ public class NextPage extends Activity implements OnClickListener, StateBase
 
         e = new Enemy[temp.length];
         e = temp;
+        if (e.length <= 0)
+        {
+            Intent intent = new Intent();
+            intent.setClass(this,WinPage.class);
+            startActivity(intent);
+        }
     }
     private int EntityInArray(int place)
     {

@@ -11,7 +11,7 @@ import java.util.List;
 
 public class CSVReader
 {
-    public static List<int[]> readCSVFile(Context context, String filePath)
+    public static List<int[]> ReadCSVFile(Context context, String filePath)
     {
         List<int[]> tileMap = new ArrayList<>();
 

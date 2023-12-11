@@ -42,7 +42,7 @@ public class MainGameSceneState implements StateBase {
         // Render TileSet and TileMap
         try
         {
-            List<int[]> tileMapList = CSVReader.readCSVFile(view.getContext(), "level1.csv");
+            List<int[]> tileMapList = CSVReader.ReadCSVFile(view.getContext(), "level1.csv");
 
             // Check if the list is not empty
             if (!tileMapList.isEmpty())

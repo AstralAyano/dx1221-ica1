@@ -98,7 +98,8 @@ public class MainGameSceneState implements StateBase {
         PauseButtonEntity.Create();
 
         RenderTextEntity.Create();
-        // Example to include another Renderview for Pause Button
+
+        Vibrator.Initialize((android.os.Vibrator)_view.getContext().getSystemService(_view.getContext().VIBRATOR_SERVICE));
     }
 
     @Override

@@ -208,6 +208,7 @@ public class SmurfEntity implements EntityBase, Collidable{
         if (_other.GetType() == "EnemyEntity")
         {
             Log.d("Collision", "SmurfEntity collided with EnemyEntity");
+            Vibrator.VibrateOneShot(150, 10);
             GamePage.Instance.ChangeToCombat();
         }
     }

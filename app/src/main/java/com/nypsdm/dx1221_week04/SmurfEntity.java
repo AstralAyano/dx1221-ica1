@@ -26,6 +26,7 @@ public class SmurfEntity implements EntityBase, Collidable{
     public float xVelocity, yVelocity;
     public boolean onGround, touchingWall;
     public boolean jump, jumping;
+    public boolean touchingEnemy;
     public float imgWidth, imgHeight;
 
     // For use with the TouchManager.class
@@ -205,11 +206,16 @@ public class SmurfEntity implements EntityBase, Collidable{
             }
         }
 
-        if (_other.GetType() == "EnemyEntity")
+        if (_other.GetType() == "EnemyEntity" && !touchingEnemy)
         {
+            touchingEnemy = true;
             Log.d("Collision", "SmurfEntity collided with EnemyEntity");
             Vibrator.VibrateOneShot(150, 10);
             GamePage.Instance.ChangeToCombat();
+        }
+        else
+        {
+            touchingEnemy = false;
         }
     }
 

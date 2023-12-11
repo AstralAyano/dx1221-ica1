@@ -64,6 +64,27 @@ public class NextPage extends Activity implements OnClickListener, StateBase
         StateManager.Instance.ChangeState("NextPage");
 
         count = 0;
+
+        CreateAndSortPlayers();
+        CreateAndSortEnemies(
+                GetRandomNumber(1, 5),
+                10, 15,
+                1, 2,
+                1, 5
+        );
+
+        randPlayer = rand.nextInt(p.length);
+
+        round = 1;
+        currPlace = 1;
+
+        PrintAllStats(round);
+        PrintRoundStatus();
+
+        if (LookForEntityType(currPlace) == "enemy")
+        {
+            DoDamage();
+        }
     }
 
     @Override
@@ -252,29 +273,10 @@ public class NextPage extends Activity implements OnClickListener, StateBase
     private void CreateAndSortPlayers()
     {
         p = new Player[3];
-        p[0] = new Player("Physical", 20, 2, 6, 1);
-        p[1] = new Player("Mental", 10, 4, 3, 2);
-        p[2] = new Player("Emotional", 15, 2, 4, 2);
-        for (int k = 0; k < p.length; k++)
-        {
-            for (int i = 0; i < p.length; i++)
-            {
-                if (i + 1 < p.length) {
-                    if (p[i].GetSPD() < p[i + 1].GetSPD())
-                    {
-                        Player temp = p[i];
-                        p[i] = p[i + 1];
-                        p[i + 1] = temp;
-                    }
-                }
-            }
-        }
-
-        /* p = new Player[3];
         for (int i = 0; i < p.length; i++)
         {
-            p[i] = StateManager.p[i];
-        } */
+            p[i] = SmurfEntity.p[i];
+        }
 
         entityCount += p.length;
     }
@@ -420,7 +422,7 @@ public class NextPage extends Activity implements OnClickListener, StateBase
     {
         for (int i = 0; i < p.length; i++)
         {
-            //StateManager.p[i] = p[i];
+            SmurfEntity.p[i] = p[i];
         }
     }
 

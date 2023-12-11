@@ -18,6 +18,8 @@ public class SmurfEntity implements EntityBase, Collidable{
     public Sprite spritesheet = null; // Define.
     private SurfaceView view;
 
+    public static Player[] p;
+
     private boolean isDone = false;
     private boolean isInit = false;
 
@@ -64,6 +66,27 @@ public class SmurfEntity implements EntityBase, Collidable{
         spritesheet.SetAnimationFrames(0,4);
 
         MovementButtonEntity.SetEntity(this);
+
+        // create players
+        p = new Player[3];
+        p[0] = new Player("Physical", 20, 2, 6, 1);
+        p[1] = new Player("Mental", 10, 4, 3, 2);
+        p[2] = new Player("Emotional", 15, 2, 4, 2);
+        // sort based on spd
+        for (int k = 0; k < p.length; k++)
+        {
+            for (int i = 0; i < p.length; i++)
+            {
+                if (i + 1 < p.length) {
+                    if (p[i].GetSPD() < p[i + 1].GetSPD())
+                    {
+                        Player temp = p[i];
+                        p[i] = p[i + 1];
+                        p[i + 1] = temp;
+                    }
+                }
+            }
+        }
     }
 
     @Override
@@ -83,16 +106,17 @@ public class SmurfEntity implements EntityBase, Collidable{
         }
 
         // gravity
-        if (yVelocity < 200 && !onGround)
-        {
-            yVelocity += 200 * _dt;
-            jump = false;
-        }
-        else if (onGround && !jump)
+        if (onGround && !jump)
         {
             jumping = false;
             yPos -= yVelocity * _dt;
             yVelocity = 0;
+        }
+
+        if (yVelocity < 200 && !onGround)
+        {
+            yVelocity += 200 * _dt;
+            jump = false;
         }
 
         // jump

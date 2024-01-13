@@ -126,7 +126,9 @@ public class MovementButtonEntity implements EntityBase
                 player.jump = true;
             }
         }
-        else {
+        else
+        {
+
         }
 
 //        if (MainGameSceneState.camera.collision)
@@ -139,7 +141,7 @@ public class MovementButtonEntity implements EntityBase
 //            }
 //        }
 
-        tileMap.SetPosition(x, 0);
+        //tileMap.SetPosition(x, 0);
     }
 
     @Override

@@ -4,6 +4,7 @@ import android.content.Intent;
 import android.graphics.Bitmap;
 import android.graphics.Canvas;
 import android.service.quicksettings.Tile;
+import android.util.DisplayMetrics;
 import android.util.Log;
 import android.view.SurfaceView;
 
@@ -25,6 +26,7 @@ public class SmurfEntity implements EntityBase, Collidable{
 
     // Variables to be used or can be used.
     public float xPos, yPos, xDir, yDir, lifeTime;
+    public float y;
     public float xVelocity, yVelocity;
     public boolean onGround, touchingWall;
     public boolean jump, jumping;
@@ -35,6 +37,8 @@ public class SmurfEntity implements EntityBase, Collidable{
     private boolean hasTouched = false;
 
     int ScreenWidth, ScreenHeight;
+
+    DisplayMetrics metrics;
 
     @Override
     public boolean IsDone() {
@@ -48,6 +52,7 @@ public class SmurfEntity implements EntityBase, Collidable{
 
     @Override
     public void Init(SurfaceView _view) {
+        metrics = _view.getResources().getDisplayMetrics();
         view = _view;
 
         // New method using our own resource manager : Returns pre-loaded one if exists
@@ -127,6 +132,11 @@ public class SmurfEntity implements EntityBase, Collidable{
         }
 
         yPos += yVelocity * _dt;
+
+        if (yPos > metrics.heightPixels - imgHeight)
+        {
+            y -= yVelocity * _dt;
+        }
     }
 
     @Override

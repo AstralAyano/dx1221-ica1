@@ -142,6 +142,8 @@ public class MovementButtonEntity implements EntityBase
 //            }
 //        }
 
+        y = player.y;
+
         tileMap.SetPosition(x, y);
     }
 

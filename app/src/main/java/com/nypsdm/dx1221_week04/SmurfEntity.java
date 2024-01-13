@@ -77,6 +77,7 @@ public class SmurfEntity implements EntityBase, Collidable{
         p[0] = new Player("Physical", 20, 2, 6, 1);
         p[1] = new Player("Mental", 10, 4, 3, 2);
         p[2] = new Player("Emotional", 15, 2, 4, 2);
+
         // sort based on spd
         for (int k = 0; k < p.length; k++)
         {
@@ -133,9 +134,9 @@ public class SmurfEntity implements EntityBase, Collidable{
 
         yPos += yVelocity * _dt;
 
-        if (yPos > metrics.heightPixels - imgHeight)
+        if (yPos > metrics.heightPixels - 500000)
         {
-            y -= yVelocity * _dt;
+            y -= yVelocity * 4 * _dt;
         }
     }
 

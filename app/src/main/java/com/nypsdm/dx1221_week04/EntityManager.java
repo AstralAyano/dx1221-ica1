@@ -1,6 +1,7 @@
 package com.nypsdm.dx1221_week04;
 
 import android.graphics.Canvas;
+import android.util.DisplayMetrics;
 import android.util.Log;
 import android.view.SurfaceView;
 
@@ -16,6 +17,8 @@ public class EntityManager {
     private LinkedList<EntityBase> entityList = new LinkedList<EntityBase>();
     private SurfaceView view = null;
     private Camera camera; // Add a private member variable for the camera
+
+    DisplayMetrics metrics;
 
     private static final EntityManager instance = new EntityManager();
 
@@ -37,6 +40,7 @@ public class EntityManager {
 
     public void Init(SurfaceView _view)
     {
+        metrics = _view.getResources().getDisplayMetrics();
         view = _view;
     }
 
@@ -77,6 +81,11 @@ public class EntityManager {
             {
                 Collidable first = (Collidable) currEntity;
 
+                if (first.GetPosX() > metrics.widthPixels || first.GetPosY() > metrics.heightPixels || first.GetPosX() < 0 || first.GetPosY() < 0)
+                {
+                    continue;
+                }
+
                 for (int j = i + 1; j < entityList.size(); ++j)
                 {
                     EntityBase otherEntity = entityList.get(j);
@@ -84,6 +93,11 @@ public class EntityManager {
                     if (otherEntity instanceof Collidable)
                     {
                         Collidable second = (Collidable) otherEntity;
+
+                        if (second.GetPosX() > metrics.widthPixels || second.GetPosY() > metrics.heightPixels || second.GetPosX() < 0 || second.GetPosY() < 0)
+                        {
+                            continue;
+                        }
 
                         //if (Collision.SphereToSphere(first.GetPosX(), first.GetPosY(), first.GetRadius(), second.GetPosX(), second.GetPosY(), second.GetRadius()))
                         if (Collision.AABBCollision(first.GetPosX(), first.GetPosY(), first.GetWidth(), first.GetHeight(), second.GetPosX(), second.GetPosY(), second.GetWidth(), second.GetHeight()))

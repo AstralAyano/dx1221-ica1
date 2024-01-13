@@ -72,7 +72,7 @@ public class TileEntity implements EntityBase, Collidable
     {
         if (!_isEmpty)
         {
-            _canvas.drawBitmap(tileSet, srcRect, new Rect((int)GetPosX(), (int)GetPosY(), (int)GetPosX() + 64, (int)GetPosY() + 64), null);
+            _canvas.drawBitmap(tileSet, srcRect, new Rect((int)GetPosX(), (int)GetPosY(), (int)GetPosX() + 256, (int)GetPosY() + 256), null);
         }
     }
 

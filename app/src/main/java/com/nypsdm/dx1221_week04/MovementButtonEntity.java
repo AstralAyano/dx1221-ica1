@@ -33,6 +33,7 @@ public class MovementButtonEntity implements EntityBase
     private float buttonDelay = 0;
 
     static float x;
+    static float y;
 
     private boolean left;
 
@@ -141,7 +142,7 @@ public class MovementButtonEntity implements EntityBase
 //            }
 //        }
 
-        //tileMap.SetPosition(x, 0);
+        tileMap.SetPosition(x, y);
     }
 
     @Override

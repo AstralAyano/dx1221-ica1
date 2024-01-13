@@ -37,7 +37,7 @@ public class MainGameSceneState implements StateBase {
         // 3. Create Background
         RenderBackground.Create();
 
-        /*TileMapEntity tileMapEntity = null;
+        TileMapEntity tileMapEntity = null;
 
         // Render TileSet and TileMap
         try
@@ -69,8 +69,8 @@ public class MainGameSceneState implements StateBase {
                 Bitmap tileSetImage = ResourceManager.Instance.GetBitmap(R.drawable.tileset);
 
                 // Set the width and height of each tile in pixels
-                tileWidth = 64;
-                tileHeight = 64;
+                tileWidth = 256;
+                tileHeight = 256;
 
                 tileMapEntity = new TileMapEntity(tileMap, tileWidth, tileHeight, tileSetImage);
                 EntityManager.Instance.AddEntity(tileMapEntity, EntityBase.ENTITY_TYPE.ENT_DEFAULT);
@@ -84,14 +84,14 @@ public class MainGameSceneState implements StateBase {
         {
             // Log any exception during initialization
             e.printStackTrace();
-        }*/
+        }
 
         // Add more entities
         SmurfEntity.Create();
         EnemyEntity.Create();
 
         MovementButtonEntity moveEntity = MovementButtonEntity.Create();
-        //moveEntity.tileMap = tileMapEntity;
+        moveEntity.tileMap = tileMapEntity;
 
         PauseButtonEntity.Create();
 

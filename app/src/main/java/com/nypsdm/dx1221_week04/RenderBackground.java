@@ -31,7 +31,7 @@ public class RenderBackground implements EntityBase {
         camera = EntityManager.Instance.GetCamera();
 
         //Load image from the resource
-        bmp = BitmapFactory.decodeResource(_view.getResources(),R.drawable.tilemap);
+        bmp = BitmapFactory.decodeResource(_view.getResources(),R.drawable.gamescene);
 
         //Screen Size
         DisplayMetrics metrics = _view.getResources().getDisplayMetrics();

@@ -3,6 +3,7 @@ package com.nypsdm.dx1221_week04;
 import android.graphics.Bitmap;
 import android.graphics.Canvas;
 import android.graphics.Rect;
+import android.util.DisplayMetrics;
 import android.util.Log;
 import android.view.SurfaceView;
 
@@ -24,6 +25,8 @@ public class TileMapEntity implements EntityBase
     private Canvas canvas;
     public float x, y;
 
+    DisplayMetrics metrics;
+
     public TileMapEntity(int[][] tileMap, int tileWidth, int tileHeight, Bitmap tileset)
     {
         this.tileMap = tileMap;
@@ -32,7 +35,8 @@ public class TileMapEntity implements EntityBase
         this.tileSet = tileset;
 
         // Add checks to ensure tileMap dimensions are valid
-        if (tileMap == null || tileMap.length == 0 || tileMap[0].length == 0) {
+        if (tileMap == null || tileMap.length == 0 || tileMap[0].length == 0)
+        {
             throw new IllegalArgumentException("Invalid tileMap dimensions");
         }
 
@@ -58,10 +62,15 @@ public class TileMapEntity implements EntityBase
                 tiles.get(index).xPos = xPos;
                 tiles.get(index).yPos = yPos;
 
+                if (xPos > metrics.widthPixels || yPos > metrics.heightPixels || xPos < 0 || yPos < 0)
+                {
+                    continue;
+                }
+
                 // Calculate the source rectangle to extract the tile from the tileset image
-                int srcX = (tileIndex % (tileSet.getWidth() / tileWidth)) * tileWidth;
-                int srcY = (tileIndex / (tileSet.getWidth() / tileWidth)) * tileHeight;
-                Rect srcRect = new Rect(srcX, srcY, srcX + tileWidth, srcY + tileHeight);
+                int srcX = (tileIndex % (tileSet.getWidth() / 64)) * 64;
+                int srcY = (tileIndex / (tileSet.getWidth() / 64)) * 64;
+                Rect srcRect = new Rect(srcX, srcY, srcX + 64, srcY + 64);
 
                 // Draw the tile on the canvas
                 tiles.get(index).RenderTile(canvas, tileSet, srcRect, new Rect((int)x + xPos, (int)y + yPos, (int)x + xPos + tileWidth, (int)y + yPos + tileHeight));
@@ -84,6 +93,8 @@ public class TileMapEntity implements EntityBase
     @Override
     public void Init(SurfaceView _view)
     {
+        metrics = _view.getResources().getDisplayMetrics();
+
         for (int row = 0; row < numRows; row++)
         {
             for (int col = 0; col < numCols; col++)
@@ -103,14 +114,14 @@ public class TileMapEntity implements EntityBase
                     newTile.yPos = yPos;
 
                     // Calculate the source rectangle to extract the tile from the tileset image
-                    int srcX = (tileIndex % (tileSet.getWidth() / tileWidth)) * tileWidth;
-                    int srcY = (tileIndex / (tileSet.getWidth() / tileWidth)) * tileHeight;
-                    Rect srcRect = new Rect(srcX, srcY, srcX + tileWidth, srcY + tileHeight);
+                    int srcX = (tileIndex % (tileSet.getWidth() / 64)) * 64;
+                    int srcY = (tileIndex / (tileSet.getWidth() / 64)) * 64;
+                    Rect srcRect = new Rect(srcX, srcY, srcX + 64, srcY + 64);
+
+                    tiles.add(newTile);
 
                     // Draw the tile on the canvas
                     newTile.RenderTile(canvas, tileSet, srcRect, new Rect((int)x + xPos, (int)y + yPos, (int)x + xPos + tileWidth, (int)y + yPos + tileHeight));
-
-                    tiles.add(newTile);
                 }
                 else
                 {

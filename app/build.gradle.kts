@@ -8,7 +8,7 @@ android {
 
     defaultConfig {
         applicationId = "com.nypsdm.dx1221_week04"
-        minSdk = 33
+        minSdk = 30
         targetSdk = 33
         versionCode = 1
         versionName = "1.0"

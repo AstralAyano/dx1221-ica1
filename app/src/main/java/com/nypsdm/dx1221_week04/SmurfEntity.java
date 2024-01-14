@@ -197,17 +197,17 @@ public class SmurfEntity implements EntityBase, Collidable{
     }
 
     public float GetRadius() {
-        return 64;
+        return 128;
     }
 
     @Override
     public float GetWidth() {
-        return 64;
+        return 128;
     }
 
     @Override
     public float GetHeight() {
-        return 64;
+        return 128;
     }
 
     @Override
@@ -223,9 +223,10 @@ public class SmurfEntity implements EntityBase, Collidable{
             //collide with ground
             TileEntity tileEntity = _other instanceof TileEntity ? ((TileEntity ) _other) : null;
             //Log.d("Debug", "Collided with TileEntity");
-            if (!tileEntity._isEmpty && getAngle(tileEntity.xPos, tileEntity.yPos) <= 180)
+            if (!tileEntity._isEmpty && getAngle(tileEntity.xPos, tileEntity.yPos) <= 180 && !onGround)
             {
                 onGround = true;
+                AudioManager.Instance.PlayAudio(R.raw.sfx_land, 0.5f, false);
             }
             else
             {

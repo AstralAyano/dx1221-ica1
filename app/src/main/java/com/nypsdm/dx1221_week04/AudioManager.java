@@ -11,7 +11,6 @@ public class AudioManager
 {
     public final static AudioManager Instance = new AudioManager();
 
-    private Resources res = null;
     private SurfaceView view = null;
     private HashMap<Integer, MediaPlayer> audioMap = new HashMap<Integer, MediaPlayer>();
 
@@ -23,7 +22,6 @@ public class AudioManager
     public void Init(SurfaceView _view)
     {
         view = _view;
-        res = _view.getResources();
         Release();
     }
 
@@ -39,7 +37,7 @@ public class AudioManager
         return result;
     }
 
-    public void PlayAudio(int _id, float _vol)
+    public void PlayAudio(int _id, float _vol, boolean _loop)
     {
         if (audioMap.containsKey(_id))
         {
@@ -49,12 +47,14 @@ public class AudioManager
             MediaPlayer curr = audioMap.get(_id);
             curr.seekTo(0);
             curr.setVolume(_vol, _vol);
+            curr.setLooping(_loop);
             curr.start();
         }
         else
         {
             MediaPlayer curr = MediaPlayer.create(view.getContext(), _id);
             audioMap.put(_id, curr);
+            curr.setLooping(_loop);
             curr.start();
         }
 
@@ -67,7 +67,9 @@ public class AudioManager
     public boolean IsPlaying(int _id)
     {
         if (!audioMap.containsKey(_id))
+        {
             return false;
+        }
 
         return audioMap.get(_id).isPlaying();
     }

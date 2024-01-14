@@ -29,6 +29,8 @@ public class MainMenu extends Activity implements OnClickListener, StateBase
         // 3. Create Background
 
         // Example to include another Renderview for Pause Button
+
+        AudioManager.Instance.PlayAudio(R.raw.bgm_sorrowful, 0.25f, true);
     }
 
     @Override
@@ -112,6 +114,7 @@ public class MainMenu extends Activity implements OnClickListener, StateBase
         {
             intent.setClass(this, SettingPage.class);
             StateManager.Instance.ChangeState("SettingPage");
+
         }
         else if (v == btn_quit)
         {

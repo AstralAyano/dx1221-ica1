@@ -72,7 +72,7 @@ public class SmurfEntity implements EntityBase, Collidable{
 
         MovementButtonEntity.SetEntity(this);
 
-        // create players
+        // create player characters
         p = new Player[3];
         p[0] = new Player("Physical", 20, 2, 6);
         p[1] = new Player("Mental", 10, 4, 3);
@@ -134,9 +134,9 @@ public class SmurfEntity implements EntityBase, Collidable{
 
         yPos += yVelocity * _dt;
 
-        if (yPos > metrics.heightPixels - 500000)
+        if (yPos > metrics.heightPixels / 2)
         {
-            y -= yVelocity * 4 * _dt;
+            y -= yVelocity * 5 * _dt;
         }
     }
 

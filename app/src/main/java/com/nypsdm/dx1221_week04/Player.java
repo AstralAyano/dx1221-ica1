@@ -32,17 +32,22 @@ public class Player extends Character
     {
         placeInTurn = place;
         Log.d("test", "<" + Name + ">");
-        Log.d("test", "HP(MAX)/ATK/SPD: " + GetHP() + "(" + GetMHP() + ")/" + GetATK() + "/" + GetSPD());
-        if (buffEndRound >= round)
-        {
-            Log.d("test", "x2 ATK (" + (buffEndRound - round) + " Round(s) Left)");
-        }
-        else if (buffEndRound < round)
+        if (buffEndRound <= round && initialStat != null)
         {
             switch (initialStat)
             {
                 case "ATK":
                     SetATK(initialStatValue);
+                    break;
+            }
+        }
+        Log.d("test", "HP(MAX)/ATK/SPD: " + GetHP() + "(" + GetMHP() + ")/" + GetATK() + "/" + GetSPD());
+        if (buffEndRound > round && initialStat != null)
+        {
+            switch (initialStat)
+            {
+                case "ATK":
+                    Log.d("test", "x" + GetATK() / initialStatValue + " " + initialStat + " (" + (buffEndRound - round) + " Round(s) Left)");
                     break;
             }
         }
@@ -67,11 +72,20 @@ public class Player extends Character
         {
             case "Physical":
                 // self ATK * 2
-                initialStat = "ATK";
-                initialStatValue = GetATK();
-                SetATK(GetATK() * 2);
-                // buff lasts for 3 turns
-                buffEndRound = round + 3;
+                if (initialStat != "ATK")
+                {
+                    initialStat = "ATK";
+                    initialStatValue = GetATK();
+                    SetATK(GetATK() * 2);
+                    // buff lasts for 3 turns
+                    buffEndRound = round + 3;
+                }
+                else if (initialStat == "ATK")
+                {
+                    SetATK(GetATK() + initialStatValue);
+                    // buff lasts for 3 turns
+                    buffEndRound = round + 3;
+                }
 
                 break;
 

@@ -74,9 +74,9 @@ public class SmurfEntity implements EntityBase, Collidable{
 
         // create players
         p = new Player[3];
-        p[0] = new Player("Physical", 20, 2, 6, 1);
-        p[1] = new Player("Mental", 10, 4, 3, 2);
-        p[2] = new Player("Emotional", 15, 2, 4, 2);
+        p[0] = new Player("Physical", 20, 2, 6);
+        p[1] = new Player("Mental", 10, 4, 3);
+        p[2] = new Player("Emotional", 15, 2, 4);
 
         // sort based on spd
         for (int k = 0; k < p.length; k++)

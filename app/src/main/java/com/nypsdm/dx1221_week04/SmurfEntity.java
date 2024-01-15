@@ -111,6 +111,7 @@ public class SmurfEntity implements EntityBase, Collidable{
             SmurfEntityKeyInputs.handleKeyEvent(keyCode, this);
         }
 
+        yPos += yVelocity * _dt;
         // gravity
         if (onGround && !jump)
         {
@@ -132,9 +133,7 @@ public class SmurfEntity implements EntityBase, Collidable{
             yVelocity = -400;
         }
 
-        yPos += yVelocity * _dt;
-
-        if (yPos > metrics.heightPixels / 2)
+        if (yPos > metrics.heightPixels / 2 + imgHeight)
         {
             y -= yVelocity * 5 * _dt;
         }

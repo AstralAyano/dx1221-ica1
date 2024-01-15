@@ -119,7 +119,6 @@ public class MovementButtonEntity implements EntityBase
                 Log.d("Debug", "TouchingWall : False");
                 hasMoved = false;
             }
-            MainGameSceneState.camera.SetPosition(x, MainGameSceneState.camera.GetY());
 
             if (Collision.SphereToSphere((TouchManager.Instance.GetPosX()), TouchManager.Instance.GetPosY(), 0.0f, ScreenWidth - 200, yPos, jumpButtonRadius))
             {
@@ -144,6 +143,7 @@ public class MovementButtonEntity implements EntityBase
 
         y = player.y;
 
+        MainGameSceneState.camera.SetPosition(x, y);
         tileMap.SetPosition(x, y);
     }
 

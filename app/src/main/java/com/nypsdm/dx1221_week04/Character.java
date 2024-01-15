@@ -4,7 +4,7 @@ import android.util.Log;
 
 public abstract class Character
 {
-    private int HP;
+    private int HP, MAXHP;
     private int ATK;
     private int SPD;
     public int placeInTurn;
@@ -27,6 +27,16 @@ public abstract class Character
     public int GetHP()
     {
         return HP;
+    }
+
+    public void SetMHP(int hp)
+    {
+        MAXHP = hp;
+    }
+
+    public int GetMHP()
+    {
+        return MAXHP;
     }
 
     public void SetATK(int atk)

@@ -12,49 +12,10 @@
         android:layout_height="50dp"
         android:layout_alignParentTop="true"
         android:layout_alignParentRight="true"
-        android:layout_marginTop="336dp"
-        android:layout_marginRight="554dp"
+        android:layout_marginTop="300dp"
+        android:layout_marginRight="550dp"
         android:background="@drawable/button"
         android:text="Back"
-        android:textColor="#bdfcf2"
-        android:textSize="18dp" />
-
-    <Button
-        android:id="@+id/btn_create"
-        android:layout_width="150dp"
-        android:layout_height="50dp"
-        android:layout_alignParentTop="true"
-        android:layout_alignParentRight="true"
-        android:layout_marginTop="182dp"
-        android:layout_marginRight="296dp"
-        android:background="@drawable/button"
-        android:text="Start Battle"
-        android:textColor="#bdfcf2"
-        android:textSize="18dp" />
-
-    <Button
-        android:id="@+id/btn_damage"
-        android:layout_width="150dp"
-        android:layout_height="50dp"
-        android:layout_alignParentTop="true"
-        android:layout_alignParentRight="true"
-        android:layout_marginTop="183dp"
-        android:layout_marginRight="143dp"
-        android:background="@drawable/button"
-        android:text="Attack"
-        android:textColor="#bdfcf2"
-        android:textSize="18dp" />
-
-    <Button
-        android:id="@+id/btn_heal"
-        android:layout_width="150dp"
-        android:layout_height="50dp"
-        android:layout_alignParentTop="true"
-        android:layout_alignParentRight="true"
-        android:layout_marginTop="235dp"
-        android:layout_marginRight="143dp"
-        android:background="@drawable/button"
-        android:text="Heal"
         android:textColor="#bdfcf2"
         android:textSize="18dp" />
 
@@ -64,10 +25,62 @@
         android:layout_height="50dp"
         android:layout_alignParentTop="true"
         android:layout_alignParentRight="true"
-        android:layout_marginTop="132dp"
-        android:layout_marginRight="143dp"
+        android:layout_marginTop="180dp"
+        android:layout_marginRight="300dp"
         android:background="@drawable/button"
         android:text="Change Target"
+        android:textColor="#bdfcf2"
+        android:textSize="18dp" />
+
+    <Button
+        android:id="@+id/btn_create"
+        android:layout_width="150dp"
+        android:layout_height="50dp"
+        android:layout_alignParentTop="true"
+        android:layout_alignParentRight="true"
+        android:layout_marginTop="180dp"
+        android:layout_marginRight="450dp"
+        android:background="@drawable/button"
+        android:text="Start Battle"
+        android:textColor="#bdfcf2"
+        android:textSize="18dp" />
+
+    <Button
+        android:id="@+id/btn_basic"
+        android:layout_width="150dp"
+        android:layout_height="50dp"
+        android:layout_alignParentTop="true"
+        android:layout_alignParentRight="true"
+        android:layout_marginTop="130dp"
+        android:layout_marginRight="150dp"
+        android:background="@drawable/button"
+        android:text="Basic Attack"
+        android:textColor="#bdfcf2"
+        android:textSize="18dp" />
+
+    <Button
+        android:id="@+id/btn_ultimate"
+        android:layout_width="150dp"
+        android:layout_height="50dp"
+        android:layout_alignParentTop="true"
+        android:layout_alignParentRight="true"
+        android:layout_marginTop="230dp"
+        android:layout_marginRight="150dp"
+        android:background="@drawable/button"
+        android:text="Ultimate"
+        android:textColor="#bdfcf2"
+        android:textSize="18dp" />
+
+    <Button
+        android:id="@+id/btn_skill"
+        android:layout_width="150dp"
+        android:layout_height="50dp"
+        android:layout_alignParentTop="true"
+        android:layout_alignParentRight="true"
+        android:layout_marginTop="180dp"
+        android:layout_marginRight="150dp"
+        android:background="@drawable/button"
+        android:text="Skill"
         android:textColor="#bdfcf2"
         android:textSize="18dp" />
 

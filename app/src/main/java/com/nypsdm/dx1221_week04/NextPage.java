@@ -197,7 +197,7 @@ public class NextPage extends Activity implements OnClickListener, StateBase
         // find player
         int i = EntityInArray(currPlace);
         // do skill code
-        p[i].UseSkill(p, e, count);
+        p[i].UseSkill(p, e, count, round);
         // consume skill point
         skillPoints--;
         // checks for any dead enemies and removes them from the fight
@@ -390,20 +390,20 @@ public class NextPage extends Activity implements OnClickListener, StateBase
                     }
                     else
                     {
-                        p[i].PrintStats(place);
+                        p[i].PrintStats(place, round);
                         place++;
                         break;
                     }
                 }
                 if (count >= e.length)
                 {
-                    p[i].PrintStats(place);
+                    p[i].PrintStats(place, round);
                     place++;
                 }
             }
             else
             {
-                p[i].PrintStats(place);
+                p[i].PrintStats(place, round);
                 place++;
             }
         }

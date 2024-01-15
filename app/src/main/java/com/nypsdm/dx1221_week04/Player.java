@@ -8,6 +8,9 @@ public class Player extends Character
 {
     public String Name;
     public int Energy;
+    public String initialStat;
+    public int initialStatValue;
+    public int buffEndRound;
 
     Player(String name, int hp, int atk, int spd)
     {
@@ -25,11 +28,24 @@ public class Player extends Character
         SetHP(GetHP() - i);
     }
 
-    public void PrintStats(int place)
+    public void PrintStats(int place, int round)
     {
         placeInTurn = place;
         Log.d("test", "<" + Name + ">");
         Log.d("test", "HP(MAX)/ATK/SPD: " + GetHP() + "(" + GetMHP() + ")/" + GetATK() + "/" + GetSPD());
+        if (buffEndRound >= round)
+        {
+            Log.d("test", "x2 ATK (" + (buffEndRound - round) + " Round(s) Left)");
+        }
+        else if (buffEndRound < round)
+        {
+            switch (initialStat)
+            {
+                case "ATK":
+                    SetATK(initialStatValue);
+                    break;
+            }
+        }
         Log.d("test", "");
     }
 
@@ -45,19 +61,17 @@ public class Player extends Character
         }
     }
 
-    public void UseSkill(Player[] players, Enemy[] enemies, int target)
+    public void UseSkill(Player[] players, Enemy[] enemies, int target, int round)
     {
         switch (Name)
         {
             case "Physical":
-                // hit an enemy for atk * 3
-                enemies[target].TakeDamage(GetATK() * 3);
-                // gain energy
-                Energy += GetATK() * 12;
-                if (Energy > 100)
-                {
-                    Energy = 100;
-                }
+                // self ATK * 2
+                initialStat = "ATK";
+                initialStatValue = GetATK();
+                SetATK(GetATK() * 2);
+                // buff lasts for 3 turns
+                buffEndRound = round + 3;
 
                 break;
 

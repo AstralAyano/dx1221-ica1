@@ -16,6 +16,7 @@ public class TileEntity implements EntityBase, Collidable
     public Bitmap tileSet;
     public Rect srcRect;
     public Rect newRect;
+    public int tileSize = 256;
 
     private boolean _isDone;
     private boolean _isInit;
@@ -30,17 +31,17 @@ public class TileEntity implements EntityBase, Collidable
 
     @Override
     public float GetRadius() {
-        return 256;
+        return tileSize;
     }
 
     @Override
     public float GetWidth() {
-        return 256;
+        return tileSize;
     }
 
     @Override
     public float GetHeight() {
-        return 256;
+        return tileSize;
     }
 
     @Override
@@ -72,7 +73,7 @@ public class TileEntity implements EntityBase, Collidable
     {
         if (!_isEmpty)
         {
-            _canvas.drawBitmap(tileSet, srcRect, new Rect((int)GetPosX(), (int)GetPosY(), (int)GetPosX() + 256, (int)GetPosY() + 256), null);
+            _canvas.drawBitmap(tileSet, srcRect, new Rect((int)GetPosX(), (int)GetPosY(), (int)GetPosX() + tileSize, (int)GetPosY() + tileSize), null);
         }
     }
 

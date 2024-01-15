@@ -69,8 +69,7 @@ public class MainGameSceneState implements StateBase {
                 Bitmap tileSetImage = ResourceManager.Instance.GetBitmap(R.drawable.tileset);
 
                 // Set the width and height of each tile in pixels
-                tileWidth = 256;
-                tileHeight = 256;
+                tileWidth = tileHeight = 256;
 
                 tileMapEntity = new TileMapEntity(tileMap, tileWidth, tileHeight, tileSetImage);
                 EntityManager.Instance.AddEntity(tileMapEntity, EntityBase.ENTITY_TYPE.ENT_DEFAULT);

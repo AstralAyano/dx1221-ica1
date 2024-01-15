@@ -133,9 +133,9 @@ public class SmurfEntity implements EntityBase, Collidable{
             yVelocity = -400;
         }
 
-        if (yPos > metrics.heightPixels / 2 + imgHeight)
+        if (yPos > metrics.heightPixels / 2)
         {
-            y -= yVelocity * 5 * _dt;
+            y -= yVelocity * 3 * _dt;
         }
     }
 

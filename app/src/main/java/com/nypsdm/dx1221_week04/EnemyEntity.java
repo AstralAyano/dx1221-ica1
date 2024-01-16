@@ -124,7 +124,7 @@ public class EnemyEntity implements EntityBase, Collidable {
     public float GetPosX() { return (int)MovementButtonEntity.x + xPos; }
 
     @Override
-    public float GetPosY() { return yPos - (int)MovementButtonEntity.y; }
+    public float GetPosY() { return yPos; }
 
     @Override
     public float GetRadius() {

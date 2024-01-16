@@ -47,7 +47,9 @@ public class SplashPage extends Activity
                     finish();
 
                     // Create new activity based on an intent with CurrentActivity
-                    Intent intent = new Intent(SplashPage.this, MainMenu.class);
+                    Intent intent = new Intent();
+                    intent.setClass(SplashPage.this, MainMenu.class);
+                    StateManager.Instance.ChangeState("MainMenu");
                     startActivity(intent);
                 }
             }

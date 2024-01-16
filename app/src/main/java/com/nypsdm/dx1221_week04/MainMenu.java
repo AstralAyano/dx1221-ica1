@@ -4,6 +4,7 @@ import android.app.Activity;
 import android.content.Intent;
 import android.graphics.Canvas;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.SurfaceView;
 import android.view.View;
 import android.view.View.OnClickListener;
@@ -30,7 +31,7 @@ public class MainMenu extends Activity implements OnClickListener, StateBase
 
         // Example to include another Renderview for Pause Button
 
-        AudioManager.Instance.PlayAudio(R.raw.bgm_sorrowful, 0.25f, true);
+        AudioManager.Instance.PlayAudio(R.raw.bgm_sorrowful, 0.5f, true);
     }
 
     @Override

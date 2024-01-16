@@ -87,6 +87,8 @@ public class EnemyEntity implements EntityBase, Collidable {
         }
 
         yPos += yVelocity * _dt;
+
+        onGround = false;
     }
 
     @Override
@@ -122,7 +124,7 @@ public class EnemyEntity implements EntityBase, Collidable {
     public float GetPosX() { return (int)MovementButtonEntity.x + xPos; }
 
     @Override
-    public float GetPosY() { return yPos; }
+    public float GetPosY() { return yPos - (int)MovementButtonEntity.y; }
 
     @Override
     public float GetRadius() {
@@ -156,10 +158,6 @@ public class EnemyEntity implements EntityBase, Collidable {
             if (!tileEntity._isEmpty && getAngle(tileEntity.xPos, tileEntity.yPos) <= 180)
             {
                 onGround = true;
-            }
-            else
-            {
-                onGround = false;
             }
 
             // collide with wall

@@ -37,6 +37,8 @@ public class MainGameSceneState implements StateBase {
         // 3. Create Background
         RenderBackground.Create();
 
+        AudioManager.Instance.PlayAudio(R.raw.bgm_sorrowful, 0.25f, true);
+
         TileMapEntity tileMapEntity = null;
 
         // Render TileSet and TileMap

@@ -66,8 +66,6 @@ public class StateManager {
 
         if (curr != null)
             curr.Update(_dt);
-
-        curr.Update(_dt);
     }
 
     void Render(Canvas _canvas)

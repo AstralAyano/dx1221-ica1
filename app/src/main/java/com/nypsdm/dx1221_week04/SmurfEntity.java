@@ -137,6 +137,8 @@ public class SmurfEntity implements EntityBase, Collidable{
         {
             y -= yVelocity * 3 * _dt;
         }
+
+        onGround = false;
     }
 
     @Override
@@ -226,11 +228,6 @@ public class SmurfEntity implements EntityBase, Collidable{
             {
                 onGround = true;
                 AudioManager.Instance.PlayAudio(R.raw.sfx_land, 0.5f, false);
-            }
-            else
-            {
-                onGround = false;
-                //Log.d("Debug", "OnGround : False");
             }
 
             // collide with wall

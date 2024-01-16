@@ -131,16 +131,6 @@ public class MovementButtonEntity implements EntityBase
 
         }
 
-//        if (MainGameSceneState.camera.collision)
-//        {
-//            Log.d("Debug", "Inside");
-//            player.yPos -= yVelocity * _dt;
-//            if (yVelocity != 0)
-//            {
-//                yVelocity = 0;
-//            }
-//        }
-
         y = player.y;
 
         MainGameSceneState.camera.SetPosition(x, y);

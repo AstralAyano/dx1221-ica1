@@ -111,18 +111,19 @@ public class SmurfEntity implements EntityBase, Collidable{
             SmurfEntityKeyInputs.handleKeyEvent(keyCode, this);
         }
 
-        yPos += yVelocity * _dt;
+        //yPos += yVelocity * _dt;
+        y -= yVelocity * _dt;
         // gravity
         if (onGround && !jump)
         {
             jumping = false;
-            yPos -= yVelocity * _dt;
+            y += yVelocity * _dt;
             yVelocity = 0;
         }
 
-        if (yVelocity < 200 && !onGround)
+        if (yVelocity < 1000 && !onGround)
         {
-            yVelocity += 200 * _dt;
+            yVelocity += 400 * _dt;
             jump = false;
         }
 
@@ -130,12 +131,7 @@ public class SmurfEntity implements EntityBase, Collidable{
         if (jump && !jumping)
         {
             jumping = true;
-            yVelocity = -400;
-        }
-
-        if (yPos > metrics.heightPixels / 2)
-        {
-            y -= yVelocity * 3 * _dt;
+            yVelocity = -600;
         }
 
         onGround = false;
@@ -231,7 +227,7 @@ public class SmurfEntity implements EntityBase, Collidable{
             }
 
             // collide with wall
-            if (!tileEntity._isEmpty && getAngle(tileEntity.xPos, tileEntity.yPos) > 180)
+            if (!tileEntity._isEmpty && getAngle(tileEntity.xPos, tileEntity.yPos) > 270)
             {
                 touchingWall = true;
                 Log.d("Debug", "TouchingWall : True");

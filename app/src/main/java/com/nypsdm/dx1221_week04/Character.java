@@ -8,7 +8,7 @@ public abstract class Character
     private int ATK;
     private int SPD;
     public int placeInTurn;
-    public String type;
+    public String type, healthType;
 
     //Change all stats
     public void ChangeStats(int hp, int atk, int spd)
@@ -17,6 +17,57 @@ public abstract class Character
         ATK = atk;
         SPD = spd;
     }
+
+    public void TakeDamage(int i, String type)
+    {
+        // check typing for weakness and resistance (x2 and /2 dmg respectively)
+        switch (type)
+        {
+            case "PHY":
+                if (healthType == "PHY")
+                {
+                    SetHP(GetHP() - i);
+                }
+                else if (healthType == "MEN")
+                {
+                    SetHP(GetHP() - i / 2);
+                }
+                else if (healthType == "EMO")
+                {
+                    SetHP(GetHP() - i * 2);
+                }
+                break;
+            case "MEN":
+                if (healthType == "PHY")
+                {
+                    SetHP(GetHP() - i * 2);
+                }
+                else if (healthType == "MEN")
+                {
+                    SetHP(GetHP() - i);
+                }
+                else if (healthType == "EMO")
+                {
+                    SetHP(GetHP() - i / 2);
+                }
+                break;
+            case "EMO":
+                if (healthType == "PHY")
+                {
+                    SetHP(GetHP() - i / 2);
+                }
+                else if (healthType == "MEN")
+                {
+                    SetHP(GetHP() - i * 2);
+                }
+                else if (healthType == "EMO")
+                {
+                    SetHP(GetHP() - i);
+                }
+                break;
+        }
+    }
+
 
     //Get & Set for stats
     public void SetHP(int hp)
@@ -57,5 +108,10 @@ public abstract class Character
     public int GetSPD()
     {
         return SPD;
+    }
+
+    public String GetHT()
+    {
+        return healthType;
     }
 }

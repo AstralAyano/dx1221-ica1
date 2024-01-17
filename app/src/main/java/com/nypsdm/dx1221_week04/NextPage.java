@@ -260,7 +260,7 @@ public class NextPage extends Activity implements OnClickListener, StateBase
             PrintRoundStatus();
             // do attack code on random player
             randPlayer = rand.nextInt(p.length);
-            p[randPlayer].TakeDamage(e[EntityInArray(currPlace)].GetATK());
+            p[randPlayer].TakeDamage(e[EntityInArray(currPlace)].GetATK(), e[EntityInArray(currPlace)].GetHT());
             // progress fight
             currPlace++;
             if (LookForEntityType(currPlace) == null)
@@ -341,7 +341,11 @@ public class NextPage extends Activity implements OnClickListener, StateBase
         e = new Enemy[amount];
         for (int i = 0; i < e.length; i++)
         {
-            e[i] = new Enemy("Enemy " + String.valueOf(i + 1), GetRandomNumber(minHP, maxHP), GetRandomNumber(minATK, maxATK), GetRandomNumber(minSPD, maxSPD));
+            e[i] = new Enemy("Enemy " + String.valueOf(i + 1),
+                    GetRandomNumber(minHP, maxHP),
+                    GetRandomNumber(minATK, maxATK),
+                    GetRandomNumber(minSPD, maxSPD),
+                    "PHY");
         }
         for (int k = 0; k < e.length; k++)
         {

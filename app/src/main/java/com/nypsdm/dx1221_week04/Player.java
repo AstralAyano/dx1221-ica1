@@ -12,20 +12,16 @@ public class Player extends Character
     public int initialStatValue;
     public int buffEndRound;
 
-    Player(String name, int hp, int atk, int spd)
+    Player(String name, int hp, int atk, int spd, String ht)
     {
         Name = name;
         ChangeStats(hp, atk, spd);
         SetMHP(GetHP());
         type = "player";
+        healthType = ht;
         Energy = 0;
         Log.d("test", "player created");
         Log.d("test", "");
-    }
-
-    public void TakeDamage(int i)
-    {
-        SetHP(GetHP() - i);
     }
 
     public void PrintStats(int place, int round)
@@ -57,7 +53,7 @@ public class Player extends Character
     public void BasicAttack(Enemy enemy)
     {
         // hit an enemy for atk
-        enemy.TakeDamage(GetATK());
+        enemy.TakeDamage(GetATK(), GetHT());
         // gain energy
         Energy += GetATK() * 10;
         if (Energy > 100)
@@ -124,7 +120,7 @@ public class Player extends Character
                 // hit all enemies for atk / 2
                 for(int i=0; i < enemies.length; i++)
                 {
-                    enemies[i].TakeDamage(GetATK() / 2);
+                    enemies[i].TakeDamage(GetATK() / 2, GetHT());
                     // gain energy
                     Energy += GetATK() / 2 * 6;
                     if (Energy > 100)
@@ -146,16 +142,9 @@ public class Player extends Character
         {
             case "Physical":
                 // hit an enemy for atk * 5
-                enemies[target].TakeDamage(GetATK() * 5);
-                // hit enemies beside that enemy for atk * 2
-                if (target - 1 >= 0)
-                {
-                    enemies[target - 1].TakeDamage(GetATK() * 2);
-                }
-                if (target + 1 < enemies.length)
-                {
-                    enemies[target + 1].TakeDamage(GetATK() * 2);
-                }
+                enemies[target].TakeDamage(GetATK() * 5, GetHT());
+                // hit the slowest enemy for atk * 3
+                enemies[enemies.length - 1].TakeDamage(GetATK() * 3, GetHT());
 
                 break;
 
@@ -184,7 +173,7 @@ public class Player extends Character
                 for(int i=0; i < 5; i++)
                 {
                     int randEnemy = rand.nextInt(enemies.length);
-                    enemies[randEnemy].TakeDamage(GetATK() / 2);
+                    enemies[randEnemy].TakeDamage(GetATK() / 2, GetHT());
                 }
 
                 break;

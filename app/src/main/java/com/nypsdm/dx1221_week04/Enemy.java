@@ -10,18 +10,14 @@ public class Enemy extends Character
     int randInt;
     public String Name;
 
-    Enemy(String name, int hp, int atk, int spd)
+    Enemy(String name, int hp, int atk, int spd, String ht)
     {
         Name = name;
         ChangeStats(hp, atk, spd);
         type = "enemy";
+        healthType = ht;
         Log.d("test", "enemy created");
         Log.d("test", "");
-    }
-
-    public void TakeDamage(int i)
-    {
-        SetHP(GetHP() - i);
     }
 
     public void PrintStats(int place)

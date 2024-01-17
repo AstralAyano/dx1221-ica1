@@ -84,7 +84,7 @@ public class NextPage extends Activity implements OnClickListener, StateBase
             // initializes fight
             CreateAndSortPlayers();
             CreateAndSortEnemies(
-                    GetRandomNumber(1, 5),
+                    GetRandomNumber(5, 5),
                     10, 15,
                     1, 2,
                     1, 5
@@ -428,12 +428,12 @@ public class NextPage extends Activity implements OnClickListener, StateBase
                 Log.d("test", "<" + p[EntityInArray(currPlace)].Name + ">'s Turn.");
                 Log.d("test", skillPoints + " Skill Point(s) Remaining.");
                 Log.d("test", "Ultimate Charge: " + p[EntityInArray(currPlace)].Energy + "/100.");
-                Log.d("test", "Targeting: <" + e[count].Name + ">.");
+                Log.d("test", "Targeting: <" + e[count].Name + "> [" + e[count].GetHT() + "]. " + CheckWeakness(p[EntityInArray(currPlace)].GetHT(), e[count].GetHT()));
             }
             else if (LookForEntityType(currPlace) == "enemy")
             {
                 Log.d("test", "<" + e[EntityInArray(currPlace)].Name + ">'s turn.");
-                Log.d("test", "Targeting: <" + p[randPlayer].Name + ">");
+                Log.d("test", "Targeting: <" + p[randPlayer].Name + ">" + CheckWeakness(p[EntityInArray(currPlace)].GetHT(), e[count].GetHT()));
             }
             Log.d("test", "====================");
             Log.d("test", "");
@@ -449,6 +449,56 @@ public class NextPage extends Activity implements OnClickListener, StateBase
             Log.d("test", "====================");
             Log.d("test", "");
         }
+    }
+    private String CheckWeakness(String ht1, String ht2)
+    {
+        switch (ht1)
+        {
+            case "PHY":
+                if (ht2 == "PHY")
+                {
+                    return "";
+                }
+                else if (ht2 == "MEN")
+                {
+                    return "(-)";
+                }
+                else if (ht2 == "EMO")
+                {
+                    return "(+)";
+                }
+                break;
+            case "MEN":
+                if (ht2 == "PHY")
+                {
+                    return "(+)";
+                }
+                else if (ht2 == "MEN")
+                {
+                    return "";
+                }
+                else if (ht2 == "EMO")
+                {
+                    return "(-)";
+                }
+                break;
+            case "EMO":
+                if (ht2 == "PHY")
+                {
+                    return "(-)";
+                }
+                else if (ht2 == "MEN")
+                {
+                    return "(+)";
+                }
+                else if (ht2 == "EMO")
+                {
+                    return "";
+                }
+                break;
+        }
+
+        return "";
     }
     private int GetRandomNumber(int lowest, int highest)
     {

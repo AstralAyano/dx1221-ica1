@@ -8,7 +8,8 @@ public abstract class Character
     private int ATK;
     private int SPD;
     public int placeInTurn;
-    public String type, healthType;
+    public String type;
+    private String healthType;
 
     //Change all stats
     public void ChangeStats(int hp, int atk, int spd)
@@ -108,6 +109,11 @@ public abstract class Character
     public int GetSPD()
     {
         return SPD;
+    }
+
+    public void SetHT(String ht)
+    {
+        healthType = ht;
     }
 
     public String GetHT()

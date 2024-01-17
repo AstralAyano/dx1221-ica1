@@ -15,7 +15,7 @@ public class Enemy extends Character
         Name = name;
         ChangeStats(hp, atk, spd);
         type = "enemy";
-        healthType = ht;
+        SetHT(ht);
         Log.d("test", "enemy created");
         Log.d("test", "");
     }
@@ -23,7 +23,7 @@ public class Enemy extends Character
     public void PrintStats(int place)
     {
         placeInTurn = place;
-        Log.d("test", "<" + Name + ">");
+        Log.d("test", "<" + Name + "> [" + GetHT() + "]");
         Log.d("test", "HP/ATK/SPD: " + GetHP() + "/" + GetATK() + "/" + GetSPD());
         Log.d("test", "");
     }

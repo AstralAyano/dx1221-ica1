@@ -18,7 +18,7 @@ public class Player extends Character
         ChangeStats(hp, atk, spd);
         SetMHP(GetHP());
         type = "player";
-        healthType = ht;
+        SetHT(ht);
         Energy = 0;
         Log.d("test", "player created");
         Log.d("test", "");
@@ -27,7 +27,7 @@ public class Player extends Character
     public void PrintStats(int place, int round)
     {
         placeInTurn = place;
-        Log.d("test", "<" + Name + ">");
+        Log.d("test", "<" + Name + "> [" + GetHT() + "]");
         if (buffEndRound <= round && initialStat != null)
         {
             switch (initialStat)

@@ -126,10 +126,6 @@ public class MovementButtonEntity implements EntityBase
                 player.jump = true;
             }
         }
-        else
-        {
-
-        }
 
         y = player.y;
 

@@ -44,7 +44,7 @@ public class EnemyEntity implements EntityBase, Collidable {
         Random ranGen = new Random(); // Random generator under the java utility library
 
         xPos = (int)MovementButtonEntity.x + _view.getWidth() / 2;
-        yPos = _view.getHeight() / 4;
+        yPos = _view.getHeight() / 4 - 150;
 
         isInit = true;
 
@@ -81,9 +81,9 @@ public class EnemyEntity implements EntityBase, Collidable {
             yVelocity = 0;
         }
 
-        if (yVelocity < 200 && !onGround)
+        if (yVelocity < 1000 && !onGround)
         {
-            yVelocity += 200 * _dt;
+            yVelocity += 400 * _dt;
         }
 
         yPos += yVelocity * _dt;
@@ -94,7 +94,7 @@ public class EnemyEntity implements EntityBase, Collidable {
     @Override
     public void Render(Canvas _canvas, float x, float y) {
         // This is for our sprite animation!
-        spritesheet.Render(_canvas, (int)MovementButtonEntity.x + (int)xPos, (int)yPos);
+        spritesheet.Render(_canvas, (int)MovementButtonEntity.x + (int)xPos, (int)yPos + (int)MovementButtonEntity.y);
     }
 
     @Override
@@ -124,7 +124,7 @@ public class EnemyEntity implements EntityBase, Collidable {
     public float GetPosX() { return (int)MovementButtonEntity.x + xPos; }
 
     @Override
-    public float GetPosY() { return yPos; }
+    public float GetPosY() { return yPos + (int)MovementButtonEntity.y; }
 
     @Override
     public float GetRadius() {
@@ -155,13 +155,13 @@ public class EnemyEntity implements EntityBase, Collidable {
         {
             //collide with ground
             //Log.d("Debug", "Collided with TileEntity");
-            if (!tileEntity._isEmpty && getAngle(tileEntity.xPos, tileEntity.yPos) <= 180)
+            if (!tileEntity._isEmpty && getAngle(tileEntity.xPos, tileEntity.yPos) <= 135)
             {
                 onGround = true;
             }
 
             // collide with wall
-            if (!tileEntity._isEmpty && getAngle(tileEntity.xPos, tileEntity.yPos) > 180)
+            if (!tileEntity._isEmpty && getAngle(tileEntity.xPos, tileEntity.yPos) > 135)
             {
                 touchingWall = true;
             }

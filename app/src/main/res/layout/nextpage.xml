@@ -3,7 +3,7 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:orientation="horizontal"
-    android:background="@drawable/blankbg">
+    android:background="@drawable/combatscene">
 
 
     <Button
@@ -12,8 +12,8 @@
         android:layout_height="50dp"
         android:layout_alignParentTop="true"
         android:layout_alignParentRight="true"
-        android:layout_marginTop="300dp"
-        android:layout_marginRight="550dp"
+        android:layout_marginTop="174dp"
+        android:layout_marginRight="709dp"
         android:background="@drawable/button"
         android:text="Back"
         android:textColor="#bdfcf2"
@@ -25,8 +25,8 @@
         android:layout_height="50dp"
         android:layout_alignParentTop="true"
         android:layout_alignParentRight="true"
-        android:layout_marginTop="180dp"
-        android:layout_marginRight="300dp"
+        android:layout_marginTop="109dp"
+        android:layout_marginRight="708dp"
         android:background="@drawable/button"
         android:text="Change Target"
         android:textColor="#bdfcf2"
@@ -38,8 +38,8 @@
         android:layout_height="50dp"
         android:layout_alignParentTop="true"
         android:layout_alignParentRight="true"
-        android:layout_marginTop="180dp"
-        android:layout_marginRight="450dp"
+        android:layout_marginTop="49dp"
+        android:layout_marginRight="708dp"
         android:background="@drawable/button"
         android:text="Start Battle"
         android:textColor="#bdfcf2"
@@ -51,10 +51,22 @@
         android:layout_height="50dp"
         android:layout_alignParentTop="true"
         android:layout_alignParentRight="true"
-        android:layout_marginTop="130dp"
-        android:layout_marginRight="150dp"
+        android:layout_marginTop="375dp"
+        android:layout_marginRight="575dp"
         android:background="@drawable/button"
         android:text="Basic Attack"
+        android:textColor="#bdfcf2"
+        android:textSize="18dp" />
+
+    <Button
+        android:id="@+id/btn_skill"
+        android:layout_width="150dp"
+        android:layout_height="50dp"
+        android:layout_centerHorizontal="true"
+        android:layout_alignParentTop="true"
+        android:layout_marginTop="375dp"
+        android:background="@drawable/button"
+        android:text="Skill"
         android:textColor="#bdfcf2"
         android:textSize="18dp" />
 
@@ -64,23 +76,10 @@
         android:layout_height="50dp"
         android:layout_alignParentTop="true"
         android:layout_alignParentRight="true"
-        android:layout_marginTop="230dp"
+        android:layout_marginTop="372dp"
         android:layout_marginRight="150dp"
         android:background="@drawable/button"
         android:text="Ultimate"
-        android:textColor="#bdfcf2"
-        android:textSize="18dp" />
-
-    <Button
-        android:id="@+id/btn_skill"
-        android:layout_width="150dp"
-        android:layout_height="50dp"
-        android:layout_alignParentTop="true"
-        android:layout_alignParentRight="true"
-        android:layout_marginTop="180dp"
-        android:layout_marginRight="150dp"
-        android:background="@drawable/button"
-        android:text="Skill"
         android:textColor="#bdfcf2"
         android:textSize="18dp" />
 

@@ -5,23 +5,18 @@ import android.graphics.Paint;
 import android.graphics.Typeface;
 import android.view.SurfaceView;
 
-public class RenderTextEntity implements EntityBase
+public class RenderAbilityTextEntity implements EntityBase
 {
     // Paint Object
     Paint paint = new Paint();
 
     // Variable to be used to set colors
-    private int red = 0, green = 0, blue = 0; // Colors range from 0 to 255
+    private int red = 255, green = 255, blue = 255; // Colors range from 0 to 255
 
     // We want to use our own font type,
     protected Typeface myfont;
 
-    // We want to render FPS as text on the screen
-    // variables that we want to use
-    int frameCount;
-    long lastTime = 0;
-    long lastFPSTime = 0;
-    float fps = 0;
+    float value = 1, value2 = 2;
 
     private boolean isDone = false;
     private boolean isInit = false;
@@ -47,14 +42,14 @@ public class RenderTextEntity implements EntityBase
     @Override
     public void Update(float _dt) {
         // Get the FPS
-        long currenttime = System.currentTimeMillis();
+        /*long currenttime = System.currentTimeMillis();
         long lastTime = currenttime;
         if (currenttime - lastFPSTime > 1000){
             fps = (frameCount * 1000) / (currenttime - lastFPSTime);
             lastFPSTime = currenttime;
             frameCount = 0;
         }
-        frameCount++;
+        frameCount++;*/
     }
 
     @Override
@@ -62,9 +57,9 @@ public class RenderTextEntity implements EntityBase
         paint.setARGB(255, red, green, blue); // U can put direct numbers here ranging from 0 to 255. If red = 255, it is red, 0 = black.
         // 255, 255 ,0, 0 -- red color
         paint.setTypeface(myfont);  // load the font we want using the font type.
-        paint.setTextSize(50); // Font size we want.
+        paint.setTextSize(60); // Font size we want.
 
-        _canvas.drawText("FPS: " + fps, 30, 80, paint);
+        _canvas.drawText("Skill Point : " + value + " | Ult Charge : " + value2, 100, 1075, paint);
     }
 
     @Override
@@ -83,9 +78,9 @@ public class RenderTextEntity implements EntityBase
         return;
     }
 
-    public static RenderTextEntity Create()
+    public static RenderAbilityTextEntity Create()
     {
-        RenderTextEntity result = new RenderTextEntity();
+        RenderAbilityTextEntity result = new RenderAbilityTextEntity();
         EntityManager.Instance.AddEntity(result, ENTITY_TYPE.ENT_TEXT);
         return result;
     }

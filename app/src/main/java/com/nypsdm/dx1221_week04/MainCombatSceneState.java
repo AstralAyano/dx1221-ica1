@@ -57,7 +57,10 @@ public class MainCombatSceneState implements StateBase {
         ButtonSkillEntity.Create();
         ButtonUltimateEntity.Create();
 
+        //Text
         RenderTextEntity.Create();
+        RenderAbilityTextEntity.Create();
+        RenderStatTextEntity.Create();
 
         Vibrator.Initialize((android.os.Vibrator)_view.getContext().getSystemService(_view.getContext().VIBRATOR_SERVICE));
     }

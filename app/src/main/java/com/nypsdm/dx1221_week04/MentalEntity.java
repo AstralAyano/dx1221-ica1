@@ -42,7 +42,6 @@ public class MentalEntity implements EntityBase, Collidable {
     public void Update(float _dt) {
         // Update spritesheet
         spritesheet.Update(_dt);
-        Log.d("Debug", Integer.toString(spritesheet.currentFrame));
     }
 
     @Override

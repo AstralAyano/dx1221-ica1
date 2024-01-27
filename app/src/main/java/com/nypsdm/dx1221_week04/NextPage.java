@@ -514,19 +514,19 @@ public class NextPage extends Activity implements OnClickListener, StateBase
     @Override
     public void Render(Canvas _canvas)
     {
-
+        EntityManager.Instance.Render(_canvas, 0, 0);
     }
 
     @Override
     public void OnEnter(SurfaceView _view)
     {
-
+        PhysicalEntity.Create();
     }
 
     @Override
     public void Update(float _dt)
     {
-
+        EntityManager.Instance.Update(_dt);
     }
 
     @Override
@@ -536,6 +536,8 @@ public class NextPage extends Activity implements OnClickListener, StateBase
         {
             SmurfEntity.p[i] = p[i];
         }
+
+        EntityManager.Instance.Clean();
     }
 
     @Override

@@ -17,7 +17,7 @@ public interface EntityBase
          ENT_BUTTON,
          ENT_PAUSE,
          ENT_TEXT,
-         //ENT_NEXT,
+         ENT_HEALTH,
          ENT_DEFAULT,
     }
 

@@ -29,6 +29,8 @@ public class GameSystem {
 
         // Please add state, MainGameSceneState.
         StateManager.Instance.AddState(new MainGameSceneState());
+
+        StateManager.Instance.AddState(new MainCombatSceneState());
     }
 
     public void SetIsPaused(boolean _newIsPaused)

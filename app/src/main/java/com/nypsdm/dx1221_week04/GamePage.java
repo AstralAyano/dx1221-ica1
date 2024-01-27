@@ -52,6 +52,7 @@ public class GamePage extends FragmentActivity
     {
         Intent intent = new Intent();
         intent.setClass(this, NextPage.class);
+        StateManager.Instance.ChangeState("MainCombat");
         startActivity(intent);
     }
 

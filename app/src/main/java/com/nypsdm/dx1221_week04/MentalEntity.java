@@ -1,13 +1,10 @@
 package com.nypsdm.dx1221_week04;
 
-import android.graphics.Bitmap;
 import android.graphics.Canvas;
 import android.util.Log;
 import android.view.SurfaceView;
 
-import java.util.Random;
-
-public class PhysicalEntity implements EntityBase, Collidable {
+public class MentalEntity implements EntityBase, Collidable {
     public Sprite spritesheet = null; // Define.
     private SurfaceView view;
 
@@ -30,10 +27,10 @@ public class PhysicalEntity implements EntityBase, Collidable {
 
         // New method using our own resource manager : Returns pre-loaded one if exists
         // 2. Loading spritesheet
-        spritesheet = new Sprite(ResourceManager.Instance.GetBitmap(R.drawable.physical), 1, 4, 30);
+        spritesheet = new Sprite(ResourceManager.Instance.GetBitmap(R.drawable.mental), 1, 4, 30);
 
-        xPos = _view.getWidth() / 4;
-        yPos = _view.getHeight() / 2 + 150;
+        xPos = _view.getWidth() / 4 + 200;
+        yPos = _view.getHeight() / 2 + 200;
 
         isInit = true;
 
@@ -63,8 +60,8 @@ public class PhysicalEntity implements EntityBase, Collidable {
     @Override
     public void SetRenderLayer(int _newLayer) { return; }
 
-    public static PhysicalEntity Create() {
-        PhysicalEntity result = new PhysicalEntity();
+    public static MentalEntity Create() {
+        MentalEntity result = new MentalEntity();
         EntityManager.Instance.AddEntity(result, ENTITY_TYPE.ENT_HEALTH);
         return result;
     }
@@ -74,7 +71,7 @@ public class PhysicalEntity implements EntityBase, Collidable {
 
     @Override
     public String GetType() {
-        return "PhysicalEntity";
+        return "MentalEntity";
     }
 
     @Override

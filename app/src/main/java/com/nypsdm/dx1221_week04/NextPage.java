@@ -44,6 +44,7 @@ public class NextPage extends Activity implements OnClickListener, StateBase
     {
         super.onCreate(saveInstanceState);
         setContentView(R.layout.nextpage);
+
         // Set Listener to this button --> Start Button
         btn_back = (Button)findViewById(R.id.btn_back);
         btn_back.setOnClickListener(this);
@@ -538,6 +539,8 @@ public class NextPage extends Activity implements OnClickListener, StateBase
         }
 
         EntityManager.Instance.Clean();
+
+        NextPage.Instance.finish();
     }
 
     @Override

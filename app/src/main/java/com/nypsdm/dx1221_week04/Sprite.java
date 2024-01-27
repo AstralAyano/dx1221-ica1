@@ -13,7 +13,7 @@ public class Sprite {
 
     private Bitmap bmp = null;
 
-    private int currentFrame = 0;
+    public int currentFrame = 0;
     private int startFrame = 0;
     private int endFrame = 0;
 

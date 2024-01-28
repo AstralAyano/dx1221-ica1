@@ -66,6 +66,8 @@ public class MainCombatSceneState implements StateBase {
             CombatEnemyEntity enemy1Sprite = CombatEnemyEntity.Create();
             enemy1Sprite.SetPos(baseX, baseY);
             ButtonEnemyEntity enemy1Button = ButtonEnemyEntity.Create();
+            enemy1Button.combatScene = this;
+            enemy1Button.enemyNo = 0;
             enemy1Button.SetPos(enemy1Sprite.GetPosX(), enemy1Sprite.GetPosY());
 
             if (amtOfEnemies == 2 || amtOfEnemies == 3)
@@ -73,6 +75,8 @@ public class MainCombatSceneState implements StateBase {
                 CombatEnemyEntity enemy2Sprite = CombatEnemyEntity.Create();
                 enemy2Sprite.SetPos(baseX + 200, baseY);
                 ButtonEnemyEntity enemy2Button = ButtonEnemyEntity.Create();
+                enemy2Button.combatScene = this;
+                enemy2Button.enemyNo = 1;
                 enemy2Button.SetPos(enemy2Sprite.GetPosX(), enemy2Sprite.GetPosY());
 
                 if (amtOfEnemies == 3)
@@ -80,6 +84,8 @@ public class MainCombatSceneState implements StateBase {
                     CombatEnemyEntity enemy3Sprite = CombatEnemyEntity.Create();
                     enemy3Sprite.SetPos(baseX + 400, baseY);
                     ButtonEnemyEntity enemy3Button = ButtonEnemyEntity.Create();
+                    enemy3Button.combatScene = this;
+                    enemy3Button.enemyNo = 2;
                     enemy3Button.SetPos(enemy3Sprite.GetPosX(), enemy3Sprite.GetPosY());
                 }
             }

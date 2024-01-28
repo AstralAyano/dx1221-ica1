@@ -7,6 +7,8 @@ import android.view.SurfaceView;
 
 public class ButtonEnemyEntity implements EntityBase
 {
+    public MainCombatSceneState combatScene;
+    public int enemyNo;
     private boolean isDone = false;
     private boolean isInit = false;
 
@@ -76,6 +78,7 @@ public class ButtonEnemyEntity implements EntityBase
                     Pressed = true;
 
                     // Functionality here (idk if you need "Pressed" boolean
+                    combatScene.count = enemyNo;
                 }
                 buttonDelay = 0;
             }

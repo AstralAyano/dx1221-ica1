@@ -68,7 +68,7 @@ public class ButtonNextEntity implements EntityBase
                 // Check Collision of the button here!!
                 float imgRadius = ScaledbmpP.getHeight() * 0.5f;
 
-                if (Collision.SphereToSphere((TouchManager.Instance.GetPosX()), TouchManager.Instance.GetPosY(), 0.0f, xPos, yPos, imgRadius) && buttonDelay >= 0.25) {
+                if (Collision.AABBCollision(TouchManager.Instance.GetPosX(), TouchManager.Instance.GetPosY(), 0, 0, xPos, yPos, 235, 85) && buttonDelay >= 0.25) {
                     Pressed = true;
 
                     // Functionality here (idk if you need "Pressed" boolean

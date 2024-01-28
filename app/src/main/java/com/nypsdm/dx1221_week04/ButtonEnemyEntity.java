@@ -47,7 +47,7 @@ public class ButtonEnemyEntity implements EntityBase
         ScreenWidth = metrics.widthPixels;
         ScreenHeight = metrics.heightPixels;
 
-        ScaledbmpP = Bitmap.createScaledBitmap(bmpP, 64, 85, true);
+        ScaledbmpP = Bitmap.createScaledBitmap(bmpP, 64, 96, true);
 
         // Position the button. As of now, it is default fix number.
         // You can use the screen width and height as a basis.
@@ -72,7 +72,7 @@ public class ButtonEnemyEntity implements EntityBase
                 // Check Collision of the button here!!
                 float imgRadius = ScaledbmpP.getHeight() * 0.5f;
 
-                if (Collision.SphereToSphere((TouchManager.Instance.GetPosX()), TouchManager.Instance.GetPosY(), 0.0f, xPos, yPos, imgRadius) && buttonDelay >= 0.25) {
+                if (Collision.AABBCollision(TouchManager.Instance.GetPosX(), TouchManager.Instance.GetPosY(), 0, 0, xPos, yPos, 64, 96) && buttonDelay >= 0.25) {
                     Pressed = true;
 
                     // Functionality here (idk if you need "Pressed" boolean

@@ -59,7 +59,7 @@ public class RenderTurnOrderTextEntity implements EntityBase
         paint.setTypeface(myfont);  // load the font we want using the font type.
         paint.setTextSize(60); // Font size we want.
 
-        _canvas.drawText("Turn : " + eList[0] + " > " + eList[1] + " > " + eList[2] + " > " + eList[3] + " > " + eList[4] + " > " + eList[5], 900, 250, paint);
+        _canvas.drawText("Turn : " + eList[0] + " > " + eList[1] + " > " + eList[2] + " > " + eList[3] + " > " + eList[4] + " > " + eList[5], 450, 250, paint);
     }
 
     @Override
@@ -106,7 +106,7 @@ public class RenderTurnOrderTextEntity implements EntityBase
             int k = i + place - 1;
             if (k >= eList.length)
             {
-                k = place - 1 + offset;
+                k = offset;
                 offset++;
             }
             eList[i] = list[k];

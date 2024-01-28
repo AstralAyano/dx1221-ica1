@@ -76,7 +76,7 @@ public class ButtonStartEntity implements EntityBase
                     // initializes fight
                     combatScene.CreateAndSortPlayers();
                     combatScene.CreateAndSortEnemies(
-                            combatScene.GetRandomNumber(1, 5),
+                            combatScene.GetRandomNumber(3, 3),
                             10, 15,
                             1, 2,
                             1, 5

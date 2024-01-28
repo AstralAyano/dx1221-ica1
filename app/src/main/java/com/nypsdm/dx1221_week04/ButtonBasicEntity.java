@@ -7,6 +7,7 @@ import android.view.SurfaceView;
 
 public class ButtonBasicEntity implements EntityBase
 {
+    public MainCombatSceneState combatScene;
     private boolean isDone = false;
     private boolean isInit = false;
 
@@ -74,6 +75,7 @@ public class ButtonBasicEntity implements EntityBase
                     Pressed = true;
 
                     // Functionality here (idk if you need "Pressed" boolean
+                    combatScene.DoDamage();
                 }
                 buttonDelay = 0;
             }

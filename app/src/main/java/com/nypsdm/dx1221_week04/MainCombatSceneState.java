@@ -48,9 +48,12 @@ public class MainCombatSceneState implements StateBase {
         ButtonNextEntity.Create();
 
         // Actual Combat Buttons
-        ButtonBasicEntity.Create();
-        ButtonSkillEntity.Create();
-        ButtonUltimateEntity.Create();
+        ButtonBasicEntity basicBtn = ButtonBasicEntity.Create();
+        basicBtn.combatScene = this;
+        ButtonSkillEntity skillBtn = ButtonSkillEntity.Create();
+        skillBtn.combatScene = this;
+        ButtonUltimateEntity ultimateBtn = ButtonUltimateEntity.Create();
+        ultimateBtn.combatScene = this;
 
         // Enemies
         int amtOfEnemies = 3;
@@ -247,7 +250,7 @@ public class MainCombatSceneState implements StateBase {
         e = new Enemy[temp.length];
         e = temp;
     }
-    private int EntityInArray(int place)
+    public int EntityInArray(int place)
     {
         // find an entities position in its respective array
         for (int i = 0; i < p.length; i++)

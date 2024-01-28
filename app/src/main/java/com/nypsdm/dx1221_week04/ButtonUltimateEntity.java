@@ -7,6 +7,7 @@ import android.view.SurfaceView;
 
 public class ButtonUltimateEntity implements EntityBase
 {
+    public MainCombatSceneState combatScene;
     private boolean isDone = false;
     private boolean isInit = false;
 
@@ -74,6 +75,13 @@ public class ButtonUltimateEntity implements EntityBase
                     Pressed = true;
 
                     // Functionality here (idk if you need "Pressed" boolean
+                    // find player
+                    int i = combatScene.EntityInArray(combatScene.currPlace);
+                    //ultimate is charged
+                    if (combatScene.p[i].Energy == 100)
+                    {
+                        combatScene.DoUltimate(i);
+                    }
                 }
                 buttonDelay = 0;
             }

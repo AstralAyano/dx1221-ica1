@@ -276,6 +276,27 @@ public class MainCombatSceneState implements StateBase {
             {
                 currPlace = 1;
                 round++;
+
+            }
+
+            // check if player(s) is dead
+            int count = 0;
+            while (p[EntityInArray(currPlace)].GetHP() <= 0)
+            {
+                count++;
+                // progress fight
+                currPlace++;
+                if (LookForEntityType(currPlace) == null)
+                {
+                    currPlace = 1;
+                    round++;
+
+                }
+            }
+            // if all players dead
+            if (count == 3)
+            {
+                NextPage.Instance.ChangeToLose();
             }
         }
     }

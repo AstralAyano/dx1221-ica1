@@ -27,6 +27,8 @@ public class MainCombatSceneState implements StateBase {
 
     RenderAbilityTextEntity abilityText;
     RenderStatTextEntity statText;
+    RenderRoundTextEntity roundText;
+    RenderTurnOrderTextEntity turnOrderText;
 
     @Override
     public String GetName() {
@@ -98,6 +100,8 @@ public class MainCombatSceneState implements StateBase {
         RenderTextEntity.Create();
         abilityText = RenderAbilityTextEntity.Create();
         statText = RenderStatTextEntity.Create();
+        roundText = RenderRoundTextEntity.Create();
+        turnOrderText = RenderTurnOrderTextEntity.Create();
 
         Vibrator.Initialize((android.os.Vibrator)_view.getContext().getSystemService(_view.getContext().VIBRATOR_SERVICE));
     }

@@ -25,6 +25,10 @@ public class MainCombatSceneState implements StateBase {
     public int entityCount;
     public int currPlace;
 
+    public ButtonEnemyEntity enemy1Button;
+    public ButtonEnemyEntity enemy2Button;
+    public ButtonEnemyEntity enemy3Button;
+
     RenderAbilityTextEntity abilityText;
     RenderStatTextEntity statText;
     RenderRoundTextEntity roundText;
@@ -62,15 +66,14 @@ public class MainCombatSceneState implements StateBase {
 
         // Enemies
         int amtOfEnemies = 3;
-        //int baseX = 1600;
-        int baseX = 1200;
+        int baseX = 1600;
         int baseY = 945;
 
         if (amtOfEnemies == 1 || amtOfEnemies == 2 || amtOfEnemies == 3)
         {
             CombatEnemyEntity enemy1Sprite = CombatEnemyEntity.Create();
             enemy1Sprite.SetPos(baseX, baseY);
-            ButtonEnemyEntity enemy1Button = ButtonEnemyEntity.Create();
+            enemy1Button = ButtonEnemyEntity.Create();
             enemy1Button.combatScene = this;
             enemy1Button.enemyNo = 0;
             enemy1Button.SetPos(enemy1Sprite.GetPosX(), enemy1Sprite.GetPosY());
@@ -79,7 +82,7 @@ public class MainCombatSceneState implements StateBase {
             {
                 CombatEnemyEntity enemy2Sprite = CombatEnemyEntity.Create();
                 enemy2Sprite.SetPos(baseX + 200, baseY);
-                ButtonEnemyEntity enemy2Button = ButtonEnemyEntity.Create();
+                enemy2Button = ButtonEnemyEntity.Create();
                 enemy2Button.combatScene = this;
                 enemy2Button.enemyNo = 1;
                 enemy2Button.SetPos(enemy2Sprite.GetPosX(), enemy2Sprite.GetPosY());
@@ -88,7 +91,7 @@ public class MainCombatSceneState implements StateBase {
                 {
                     CombatEnemyEntity enemy3Sprite = CombatEnemyEntity.Create();
                     enemy3Sprite.SetPos(baseX + 400, baseY);
-                    ButtonEnemyEntity enemy3Button = ButtonEnemyEntity.Create();
+                    enemy3Button = ButtonEnemyEntity.Create();
                     enemy3Button.combatScene = this;
                     enemy3Button.enemyNo = 2;
                     enemy3Button.SetPos(enemy3Sprite.GetPosX(), enemy3Sprite.GetPosY());
@@ -104,6 +107,28 @@ public class MainCombatSceneState implements StateBase {
         turnOrderText = RenderTurnOrderTextEntity.Create();
 
         Vibrator.Initialize((android.os.Vibrator)_view.getContext().getSystemService(_view.getContext().VIBRATOR_SERVICE));
+
+        CreateAndSortPlayers();
+        CreateAndSortEnemies(
+                GetRandomNumber(3, 3),
+                10, 15,
+                1, 2,
+                1, 5
+        );
+
+        randPlayer = rand.nextInt(p.length);
+
+        round = 1;
+        currPlace = 1;
+        skillPoints = 3;
+
+        PrintAllStats(round);
+        PrintRoundStatus();
+
+        if (LookForEntityType(currPlace) == "enemy")
+        {
+            DoDamage();
+        }
     }
 
     @Override
@@ -135,6 +160,13 @@ public class MainCombatSceneState implements StateBase {
 			//6. Example of touch on screen in the main game to trigger back to Main menu
             //StateManager.Instance.ChangeState("MainMenu");
         }
+    }
+
+    public void ResetEnemyButtonImage()
+    {
+        enemy1Button.SetImage(R.drawable.blank);
+        enemy2Button.SetImage(R.drawable.blank);
+        enemy3Button.SetImage(R.drawable.blank);
     }
 
     public void DoDamage()
@@ -418,7 +450,7 @@ public class MainCombatSceneState implements StateBase {
             if (LookForEntityType(currPlace) == "player")
             {
                 Log.d("test", "<" + p[EntityInArray(currPlace)].Name + ">'s Turn.");
-                statText.SetValues(p[EntityInArray(currPlace)].GetHP(), p[EntityInArray(currPlace)].GetATK(), p[EntityInArray(currPlace)].GetSPD());
+                statText.SetValues(p[EntityInArray(currPlace)].GetHP(), p[EntityInArray(currPlace)].GetMHP(), p[EntityInArray(currPlace)].GetATK(), p[EntityInArray(currPlace)].GetSPD());
                 Log.d("test", skillPoints + " Skill Point(s) Remaining.");
                 Log.d("test", "Ultimate Charge: " + p[EntityInArray(currPlace)].Energy + "/100.");
                 abilityText.value = skillPoints;

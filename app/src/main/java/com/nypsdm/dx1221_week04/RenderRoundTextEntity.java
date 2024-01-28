@@ -59,7 +59,7 @@ public class RenderRoundTextEntity implements EntityBase
         paint.setTypeface(myfont);  // load the font we want using the font type.
         paint.setTextSize(60); // Font size we want.
 
-        _canvas.drawText("Round : " + roundNo, 1000, 200, paint);
+        _canvas.drawText("Round : " + roundNo, 1250, 200, paint);
     }
 
     @Override

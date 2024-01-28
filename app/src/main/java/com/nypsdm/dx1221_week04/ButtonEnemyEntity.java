@@ -28,6 +28,8 @@ public class ButtonEnemyEntity implements EntityBase
 
     private float buttonDelay = 0;
 
+    public int imgID = R.drawable.blank;
+
 
     @Override
     public boolean IsDone() {
@@ -43,7 +45,7 @@ public class ButtonEnemyEntity implements EntityBase
     public void Init(SurfaceView _view) {
         // indicate the images to be used.
         // Load the images.
-        bmpP = ResourceManager.Instance.GetBitmap(R.drawable.blank);
+        bmpP = ResourceManager.Instance.GetBitmap(imgID);
 
         DisplayMetrics metrics = _view.getResources().getDisplayMetrics();
         ScreenWidth = metrics.widthPixels;
@@ -55,6 +57,13 @@ public class ButtonEnemyEntity implements EntityBase
         // You can use the screen width and height as a basis.
 
         isInit = true;
+    }
+
+    public void SetImage(int img)
+    {
+        imgID = img;
+        bmpP = ResourceManager.Instance.GetBitmap(img);
+        ScaledbmpP = Bitmap.createScaledBitmap(bmpP, 64, 108, true);
     }
 
     public void SetPos(float x, float y)
@@ -79,6 +88,8 @@ public class ButtonEnemyEntity implements EntityBase
 
                     // Functionality here (idk if you need "Pressed" boolean
                     combatScene.count = enemyNo;
+                    combatScene.ResetEnemyButtonImage();
+                    SetImage(R.drawable.selected);
                 }
                 buttonDelay = 0;
             }

@@ -16,7 +16,7 @@ public class RenderStatTextEntity implements EntityBase
     // We want to use our own font type,
     protected Typeface myfont;
 
-    float value = 1, value2 = 2, value3 = 3;
+    int value = 1, value2 = 2, value3 = 3, value4 = 4;
 
     private boolean isDone = false;
     private boolean isInit = false;
@@ -59,7 +59,7 @@ public class RenderStatTextEntity implements EntityBase
         paint.setTypeface(myfont);  // load the font we want using the font type.
         paint.setTextSize(60); // Font size we want.
 
-        _canvas.drawText("HP : " + value + " | ATK : " + value2 + " | SPD : " + value3, 1100, 1075, paint);
+        _canvas.drawText("HP : " + value + "/" + value2 + " | ATK : " + value3 + " | SPD : " + value4, 1300, 1075, paint);
     }
 
     @Override
@@ -98,10 +98,11 @@ public class RenderStatTextEntity implements EntityBase
         return 0;
     }
 
-    public void SetValues(float v1, float v2, float v3)
+    public void SetValues(int v1, int v2, int v3, int v4)
     {
         value = v1;
         value2 = v2;
         value3 = v3;
+        value4 = v4;
     }
 }

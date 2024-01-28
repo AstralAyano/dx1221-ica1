@@ -74,27 +74,7 @@ public class ButtonStartEntity implements EntityBase
 
                     // Functionality here (idk if you need "Pressed" boolean
                     // initializes fight
-                    combatScene.CreateAndSortPlayers();
-                    combatScene.CreateAndSortEnemies(
-                            combatScene.GetRandomNumber(3, 3),
-                            10, 15,
-                            1, 2,
-                            1, 5
-                    );
 
-                    combatScene.randPlayer = combatScene.rand.nextInt(combatScene.p.length);
-
-                    combatScene.round = 1;
-                    combatScene.currPlace = 1;
-                    combatScene.skillPoints = 3;
-
-                    combatScene.PrintAllStats(combatScene.round);
-                    combatScene.PrintRoundStatus();
-
-                    if (combatScene.LookForEntityType(combatScene.currPlace) == "enemy")
-                    {
-                        combatScene.DoDamage();
-                    }
                 }
                 buttonDelay = 0;
             }

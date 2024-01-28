@@ -16,7 +16,7 @@ public class RenderTurnOrderTextEntity implements EntityBase
     // We want to use our own font type,
     protected Typeface myfont;
 
-    String e1 = "a", e2 = "b", e3 = "c";
+    String[] eList = new String[6];
 
     private boolean isDone = false;
     private boolean isInit = false;
@@ -59,7 +59,7 @@ public class RenderTurnOrderTextEntity implements EntityBase
         paint.setTypeface(myfont);  // load the font we want using the font type.
         paint.setTextSize(60); // Font size we want.
 
-        _canvas.drawText("Turn : " + e1 + " > " + e2 + " > " + e3, 900, 250, paint);
+        _canvas.drawText("Turn : " + eList[0] + " > " + eList[1] + " > " + eList[2] + " > " + eList[3] + " > " + eList[4] + " > " + eList[5], 900, 250, paint);
     }
 
     @Override
@@ -98,10 +98,8 @@ public class RenderTurnOrderTextEntity implements EntityBase
         return 0;
     }
 
-    public void SetValues(String first, String second, String third)
+    public void SetValues(String[] list)
     {
-        e1 = first;
-        e2 = second;
-        e3 = third;
+        eList = list;
     }
 }

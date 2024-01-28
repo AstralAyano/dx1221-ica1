@@ -349,11 +349,15 @@ public class MainCombatSceneState implements StateBase {
         // prints round details
         Log.d("test", "===============");
         Log.d("test", "Round: " + String.valueOf(roundNo));
+        roundText.SetValues(roundNo);
         Log.d("test", "===============");
         Log.d("test", "");
 
         int count = 0;
         int place = 1;
+
+        String[] turnOrderList = new String[6];
+        int entityNo = 0;
 
         //prints all entities in order of speed
         for (int i = 0; i < p.length; i++)
@@ -365,12 +369,16 @@ public class MainCombatSceneState implements StateBase {
                     if (p[i].GetSPD() < e[k].GetSPD())
                     {
                         e[k].PrintStats(place);
+                        turnOrderList[entityNo] = "E" + k;
+                        entityNo++;
                         place++;
                         count++;
                     }
                     else
                     {
                         p[i].PrintStats(place, round);
+                        turnOrderList[entityNo] = p[i].GetHT();
+                        entityNo++;
                         place++;
                         break;
                     }
@@ -378,20 +386,28 @@ public class MainCombatSceneState implements StateBase {
                 if (count >= e.length)
                 {
                     p[i].PrintStats(place, round);
+                    turnOrderList[entityNo] = p[i].GetHT();
+                    entityNo++;
                     place++;
                 }
             }
             else
             {
                 p[i].PrintStats(place, round);
+                turnOrderList[entityNo] = p[i].GetHT();
+                entityNo++;
                 place++;
             }
         }
         for (int k = count; k < e.length; k++)
         {
             e[k].PrintStats(place);
+            turnOrderList[entityNo] = "E" + k;
+            entityNo++;
             place++;
         }
+
+        turnOrderText.SetValues(turnOrderList);
     }
     public void PrintRoundStatus()
     {

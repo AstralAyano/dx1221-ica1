@@ -1,5 +1,6 @@
 package com.nypsdm.dx1221_week04;
 
+import android.content.Intent;
 import android.graphics.Bitmap;
 import android.graphics.Canvas;
 import android.util.Log;
@@ -280,6 +281,11 @@ public class MainCombatSceneState implements StateBase {
     }
     private void RemoveEnemy(int positionInArray)
     {
+        if (e.length - 1 <= 0)
+        {
+            // change to win
+            
+        }
         // removes the dead enemy and resizes enemy array
         Enemy[] temp = new Enemy[e.length - 1];
 

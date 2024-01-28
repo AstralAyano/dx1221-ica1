@@ -57,6 +57,29 @@ public class MainCombatSceneState implements StateBase {
         ButtonSkillEntity.Create();
         ButtonUltimateEntity.Create();
 
+        // Enemies
+        int amtOfEnemies = 3;
+
+        if (amtOfEnemies == 1 || amtOfEnemies == 2 || amtOfEnemies == 3)
+        {
+            //CombatEnemyEntity enemy1Sprite = CombatEnemyEntity.Create();
+            //enemy1Sprite.SetPos(0, 150);
+            // ButtonEnemyEntity enemy1 = ButtonEnemyEntity.Create();
+            // enemy1.SetPos(enemy1Sprite.GetPosX(), enemy1Sprite.GetPosY());
+
+            if (amtOfEnemies == 2 || amtOfEnemies == 3)
+            {
+                // ButtonEnemyEntity enemy2 = ButtonEnemyEntity.Create();
+                // enemy2.SetPos(200, 150);
+
+                if (amtOfEnemies == 3)
+                {
+                    // ButtonEnemyEntity enemy3 = ButtonEnemyEntity.Create();
+                    // enemy3.SetPos(400, 150);
+                }
+            }
+        }
+
         //Text
         RenderTextEntity.Create();
         RenderAbilityTextEntity.Create();

@@ -25,6 +25,9 @@ public class MainCombatSceneState implements StateBase {
     public int entityCount;
     public int currPlace;
 
+    RenderAbilityTextEntity abilityText;
+    RenderStatTextEntity statText;
+
     @Override
     public String GetName() {
         return "MainCombat";
@@ -93,8 +96,8 @@ public class MainCombatSceneState implements StateBase {
 
         //Text
         RenderTextEntity.Create();
-        RenderAbilityTextEntity.Create();
-        RenderStatTextEntity.Create();
+        abilityText = RenderAbilityTextEntity.Create();
+        statText = RenderStatTextEntity.Create();
 
         Vibrator.Initialize((android.os.Vibrator)_view.getContext().getSystemService(_view.getContext().VIBRATOR_SERVICE));
     }
@@ -395,25 +398,17 @@ public class MainCombatSceneState implements StateBase {
             if (LookForEntityType(currPlace) == "player")
             {
                 Log.d("test", "<" + p[EntityInArray(currPlace)].Name + ">'s Turn.");
+                statText.SetValues(p[EntityInArray(currPlace)].GetHP(), p[EntityInArray(currPlace)].GetATK(), p[EntityInArray(currPlace)].GetSPD());
                 Log.d("test", skillPoints + " Skill Point(s) Remaining.");
                 Log.d("test", "Ultimate Charge: " + p[EntityInArray(currPlace)].Energy + "/100.");
+                abilityText.value = skillPoints;
+                abilityText.value2 = p[EntityInArray(currPlace)].Energy;
                 Log.d("test", "Targeting: <" + e[count].Name + "> [" + e[count].GetHT() + "]. " + CheckWeakness(p[EntityInArray(currPlace)].GetHT(), e[count].GetHT()));
             }
             else if (LookForEntityType(currPlace) == "enemy")
             {
                 Log.d("test", "<" + e[EntityInArray(currPlace)].Name + ">'s turn.");
                 Log.d("test", "Targeting: <" + p[randPlayer].Name + ">" + CheckWeakness(p[EntityInArray(currPlace)].GetHT(), e[count].GetHT()));
-            }
-            Log.d("test", "====================");
-            Log.d("test", "");
-        }
-        // if player win
-        else
-        {
-            Log.d("test", "====================");
-            if (LookForEntityType(currPlace) == "player")
-            {
-                Log.d("test", "You Win!");
             }
             Log.d("test", "====================");
             Log.d("test", "");

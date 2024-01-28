@@ -97,4 +97,11 @@ public class RenderStatTextEntity implements EntityBase
     public float GetPosY() {
         return 0;
     }
+
+    public void SetValues(float v1, float v2, float v3)
+    {
+        value = v1;
+        value2 = v2;
+        value3 = v3;
+    }
 }

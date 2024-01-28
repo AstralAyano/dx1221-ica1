@@ -100,12 +100,14 @@ public class RenderTurnOrderTextEntity implements EntityBase
 
     public void SetValues(String[] list, int place)
     {
+        int offset = 0;
         for (int i = 0; i < eList.length; i++)
         {
             int k = i + place - 1;
             if (k >= eList.length)
             {
-                k = place - 1;
+                k = place - 1 + offset;
+                offset++;
             }
             eList[i] = list[k];
         }

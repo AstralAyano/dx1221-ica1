@@ -53,8 +53,9 @@ public class MainCombatSceneState implements StateBase {
 
         // Enemies
         int amtOfEnemies = 3;
-        int baseX = 1600;
-        int baseY = 950;
+        //int baseX = 1600;
+        int baseX = 1200;
+        int baseY = 945;
 
         if (amtOfEnemies == 1 || amtOfEnemies == 2 || amtOfEnemies == 3)
         {

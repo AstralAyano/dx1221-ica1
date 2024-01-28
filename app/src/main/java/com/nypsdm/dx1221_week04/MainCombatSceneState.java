@@ -12,18 +12,18 @@ import java.util.Random;
 // Created by TanSiewLan2021
 
 public class MainCombatSceneState implements StateBase {
-    private Player[] p;
-    private int skillPoints;
-    private Enemy[] e;
+    public Player[] p;
+    public int skillPoints;
+    public Enemy[] e;
 
-    private int count;
+    public int count;
 
-    private Random rand = new Random();
+    public Random rand = new Random();
 
-    int randPlayer;
-    int round;
-    int entityCount;
-    int currPlace;
+    public int randPlayer;
+    public int round;
+    public int entityCount;
+    public int currPlace;
 
     @Override
     public String GetName() {
@@ -43,7 +43,8 @@ public class MainCombatSceneState implements StateBase {
         EmotionalEntity.Create();
 
         // Temp
-        ButtonStartEntity.Create();
+        ButtonStartEntity startBtn = ButtonStartEntity.Create();
+        startBtn.combatScene = this;
         ButtonNextEntity.Create();
 
         // Actual Combat Buttons
@@ -120,7 +121,7 @@ public class MainCombatSceneState implements StateBase {
         }
     }
 
-    private void DoDamage()
+    public void DoDamage()
     {
         if (LookForEntityType(currPlace) == "player")
         {
@@ -151,7 +152,7 @@ public class MainCombatSceneState implements StateBase {
         PrintAllStats(round);
         PrintRoundStatus();
     }
-    private void DoSkill()
+    public void DoSkill()
     {
         // find player
         int i = EntityInArray(currPlace);
@@ -181,7 +182,7 @@ public class MainCombatSceneState implements StateBase {
         PrintAllStats(round);
         PrintRoundStatus();
     }
-    private void DoUltimate(int i)
+    public void DoUltimate(int i)
     {
         // do ultimate code
         p[i].UseUltimate(p, e, count);
@@ -209,7 +210,7 @@ public class MainCombatSceneState implements StateBase {
         PrintAllStats(round);
         PrintRoundStatus();
     }
-    private void DoEnemyTurns()
+    public void DoEnemyTurns()
     {
         // while its the enemy turn
         while (LookForEntityType(currPlace) == "enemy")
@@ -265,7 +266,7 @@ public class MainCombatSceneState implements StateBase {
         }
         return -1;
     }
-    private String LookForEntityType(int place)
+    public String LookForEntityType(int place)
     {
         // finds the entity type in a specific place
         for (int i = 0; i < p.length; i++)
@@ -284,7 +285,7 @@ public class MainCombatSceneState implements StateBase {
         }
         return null;
     }
-    private void CreateAndSortPlayers()
+    public void CreateAndSortPlayers()
     {
         p = new Player[3];
         for (int i = 0; i < p.length; i++)
@@ -294,7 +295,7 @@ public class MainCombatSceneState implements StateBase {
 
         entityCount += p.length;
     }
-    private void CreateAndSortEnemies(int amount, int minHP, int maxHP, int minATK, int maxATK, int minSPD, int maxSPD)
+    public void CreateAndSortEnemies(int amount, int minHP, int maxHP, int minATK, int maxATK, int minSPD, int maxSPD)
     {
         // creates a random amount of enemies with random stats
         e = new Enemy[amount];
@@ -327,7 +328,7 @@ public class MainCombatSceneState implements StateBase {
         }
         entityCount += e.length;
     }
-    private void PrintAllStats(int roundNo)
+    public void PrintAllStats(int roundNo)
     {
         // prints round details
         Log.d("test", "===============");
@@ -376,7 +377,7 @@ public class MainCombatSceneState implements StateBase {
             place++;
         }
     }
-    private void PrintRoundStatus()
+    public void PrintRoundStatus()
     {
         // normal flow
         if (e.length > 0)
@@ -459,7 +460,7 @@ public class MainCombatSceneState implements StateBase {
 
         return "";
     }
-    private int GetRandomNumber(int lowest, int highest)
+    public int GetRandomNumber(int lowest, int highest)
     {
         return rand.nextInt(highest - lowest + 1) + lowest;
     }

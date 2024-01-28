@@ -7,6 +7,7 @@ import android.view.SurfaceView;
 
 public class ButtonStartEntity implements EntityBase
 {
+    public MainCombatSceneState combatScene;
     private boolean isDone = false;
     private boolean isInit = false;
 
@@ -72,6 +73,28 @@ public class ButtonStartEntity implements EntityBase
                     Pressed = true;
 
                     // Functionality here (idk if you need "Pressed" boolean
+                    // initializes fight
+                    combatScene.CreateAndSortPlayers();
+                    combatScene.CreateAndSortEnemies(
+                            combatScene.GetRandomNumber(1, 5),
+                            10, 15,
+                            1, 2,
+                            1, 5
+                    );
+
+                    combatScene.randPlayer = combatScene.rand.nextInt(combatScene.p.length);
+
+                    combatScene.round = 1;
+                    combatScene.currPlace = 1;
+                    combatScene.skillPoints = 3;
+
+                    combatScene.PrintAllStats(combatScene.round);
+                    combatScene.PrintRoundStatus();
+
+                    if (combatScene.LookForEntityType(combatScene.currPlace) == "enemy")
+                    {
+                        combatScene.DoDamage();
+                    }
                 }
                 buttonDelay = 0;
             }

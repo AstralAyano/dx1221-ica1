@@ -33,7 +33,7 @@ public class PhysicalEntity implements EntityBase, Collidable {
         spritesheet = new Sprite(ResourceManager.Instance.GetBitmap(R.drawable.physical), 1, 4, 30);
 
         xPos = _view.getWidth() / 4;
-        yPos = _view.getHeight() / 2 + 150;
+        yPos = _view.getHeight() / 2 + 100;
 
         isInit = true;
 

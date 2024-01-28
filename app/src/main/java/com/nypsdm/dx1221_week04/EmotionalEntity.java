@@ -30,7 +30,7 @@ public class EmotionalEntity implements EntityBase, Collidable {
         spritesheet = new Sprite(ResourceManager.Instance.GetBitmap(R.drawable.emotional), 1, 4, 30);
 
         xPos = _view.getWidth() / 4 + 400;
-        yPos = _view.getHeight() / 2 + 200;
+        yPos = _view.getHeight() / 2 + 150;
 
         isInit = true;
 

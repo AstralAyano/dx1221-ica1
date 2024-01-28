@@ -49,7 +49,7 @@ public class ButtonEnemyEntity implements EntityBase
         ScreenWidth = metrics.widthPixels;
         ScreenHeight = metrics.heightPixels;
 
-        ScaledbmpP = Bitmap.createScaledBitmap(bmpP, 64, 96, true);
+        ScaledbmpP = Bitmap.createScaledBitmap(bmpP, 64, 108, true);
 
         // Position the button. As of now, it is default fix number.
         // You can use the screen width and height as a basis.

@@ -369,7 +369,7 @@ public class MainCombatSceneState implements StateBase {
                     if (p[i].GetSPD() < e[k].GetSPD())
                     {
                         e[k].PrintStats(place);
-                        turnOrderList[entityNo] = "E" + k;
+                        turnOrderList[entityNo] = "E" + (k + 1);
                         entityNo++;
                         place++;
                         count++;
@@ -402,12 +402,12 @@ public class MainCombatSceneState implements StateBase {
         for (int k = count; k < e.length; k++)
         {
             e[k].PrintStats(place);
-            turnOrderList[entityNo] = "E" + k;
+            turnOrderList[entityNo] = "E" + (k + 1);
             entityNo++;
             place++;
         }
 
-        turnOrderText.SetValues(turnOrderList);
+        turnOrderText.SetValues(turnOrderList, currPlace);
     }
     public void PrintRoundStatus()
     {

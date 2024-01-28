@@ -26,12 +26,12 @@ public class CombatEnemyEntity implements EntityBase, Collidable {
 
         // New method using our own resource manager : Returns pre-loaded one if exists
         // 2. Loading spritesheet
-        spritesheet = new Sprite(ResourceManager.Instance.GetBitmap(R.drawable.physical), 1, 4, 30);
+        spritesheet = new Sprite(ResourceManager.Instance.GetBitmap(R.drawable.enemy1), 5, 4, 30);
 
         isInit = true;
 
         // To Set the Animation Frames
-        spritesheet.SetAnimationFrames(0,3);
+        spritesheet.SetAnimationFrames(16, 19);
     }
 
     public void SetPos(int x, int y)

@@ -57,10 +57,10 @@ public class SmurfEntity implements EntityBase, Collidable{
 
         // New method using our own resource manager : Returns pre-loaded one if exists
         // 2. Loading spritesheet
-        spritesheet = new Sprite(ResourceManager.Instance.GetBitmap(R.drawable.playerspritesheet), 7, 4, 28);
+        spritesheet = new Sprite(ResourceManager.Instance.GetBitmap(R.drawable.playerspritesheet), 7, 4, 30);
 
         // 3. Get some random position of x and y
-        Random ranGen = new Random(); // Random generator under the java utility library
+        //Random ranGen = new Random(); // Random generator under the java utility library
 
         xPos = _view.getWidth() / 2;
         yPos = _view.getHeight() / 2;

@@ -49,7 +49,7 @@ public class EnemyEntity implements EntityBase, Collidable {
         isInit = true;
 
         // To Set the Animation Frames
-        spritesheet.SetAnimationFrames(16,19);
+        spritesheet.SetAnimationFrames(16, 19);
     }
 
     @Override

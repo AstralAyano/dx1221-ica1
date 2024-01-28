@@ -70,7 +70,7 @@ public class EmotionalEntity implements EntityBase, Collidable {
 
     @Override
     public String GetType() {
-        return "MentalEntity";
+        return "EmotionalEntity";
     }
 
     @Override

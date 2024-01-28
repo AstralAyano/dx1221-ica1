@@ -51,16 +51,14 @@ public class ButtonEnemyEntity implements EntityBase
 
         // Position the button. As of now, it is default fix number.
         // You can use the screen width and height as a basis.
-        xPos = ScreenWidth / 2 - 500;
-        yPos = (ScreenHeight / 4) * 3 + 50;
 
         isInit = true;
     }
 
-    public void SetPos(int x, int y)
+    public void SetPos(float x, float y)
     {
-        xPos = ScreenWidth / 4 * 3 + x;
-        yPos = ScreenHeight / 2 + y;
+        xPos = (int)x;
+        yPos = (int)y;
     }
 
     @Override

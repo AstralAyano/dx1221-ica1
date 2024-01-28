@@ -28,9 +28,6 @@ public class CombatEnemyEntity implements EntityBase, Collidable {
         // 2. Loading spritesheet
         spritesheet = new Sprite(ResourceManager.Instance.GetBitmap(R.drawable.physical), 1, 4, 30);
 
-        xPos = _view.getWidth() / 4;
-        yPos = _view.getHeight() / 2 + 150;
-
         isInit = true;
 
         // To Set the Animation Frames
@@ -39,8 +36,8 @@ public class CombatEnemyEntity implements EntityBase, Collidable {
 
     public void SetPos(int x, int y)
     {
-        xPos = view.getWidth() / 4 * 3 + x;
-        yPos = view.getHeight() / 2 + y;
+        xPos = x;
+        yPos = y;
     }
 
     @Override

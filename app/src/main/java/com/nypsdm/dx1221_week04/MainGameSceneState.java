@@ -107,6 +107,8 @@ public class MainGameSceneState implements StateBase {
         // 4. Clear any instance instantiated via EntityManager.
         EntityManager.Instance.Clean();
 
+        Log.d("Debug", "EntityCount : " + Integer.toString(EntityManager.Instance.GetEntityCount()));
+
         // 5. Clear or end any instance instantiated via GamePage.
         GamePage.Instance.finish();
     }

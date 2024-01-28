@@ -153,6 +153,11 @@ public class EntityManager {
     {
         entityList.clear();
     }
+
+    public int GetEntityCount()
+    {
+        return entityList.size();
+    }
 }
 
 

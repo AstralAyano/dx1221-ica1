@@ -12,11 +12,6 @@ import java.util.Random;
 // Created by TanSiewLan2021
 
 public class MainCombatSceneState implements StateBase {
-    public static Camera camera;
-    private SurfaceView view;
-
-    private float timer = 0.0f;
-
     private Player[] p;
     private int skillPoints;
     private Enemy[] e;
@@ -38,7 +33,6 @@ public class MainCombatSceneState implements StateBase {
     @Override
     public void OnEnter(SurfaceView _view)
     {
-        // 3. Create Background
         RenderCombatBackground.Create();
 
         AudioManager.Instance.PlayAudio(R.raw.bgm_sorrowful, 0.25f, true);
@@ -59,23 +53,29 @@ public class MainCombatSceneState implements StateBase {
 
         // Enemies
         int amtOfEnemies = 3;
+        int baseX = 1200;
+        int baseY = 860;
 
         if (amtOfEnemies == 1 || amtOfEnemies == 2 || amtOfEnemies == 3)
         {
-            //CombatEnemyEntity enemy1Sprite = CombatEnemyEntity.Create();
-            //enemy1Sprite.SetPos(0, 150);
-            // ButtonEnemyEntity enemy1 = ButtonEnemyEntity.Create();
-            // enemy1.SetPos(enemy1Sprite.GetPosX(), enemy1Sprite.GetPosY());
+            CombatEnemyEntity enemy1Sprite = CombatEnemyEntity.Create();
+            enemy1Sprite.SetPos(baseX, baseY);
+            ButtonEnemyEntity enemy1Button = ButtonEnemyEntity.Create();
+            enemy1Button.SetPos(enemy1Sprite.GetPosX(), enemy1Sprite.GetPosY());
 
             if (amtOfEnemies == 2 || amtOfEnemies == 3)
             {
-                // ButtonEnemyEntity enemy2 = ButtonEnemyEntity.Create();
-                // enemy2.SetPos(200, 150);
+                CombatEnemyEntity enemy2Sprite = CombatEnemyEntity.Create();
+                enemy2Sprite.SetPos(baseX + 200, baseY);
+                ButtonEnemyEntity enemy2Button = ButtonEnemyEntity.Create();
+                enemy2Button.SetPos(enemy2Sprite.GetPosX(), enemy2Sprite.GetPosY());
 
                 if (amtOfEnemies == 3)
                 {
-                    // ButtonEnemyEntity enemy3 = ButtonEnemyEntity.Create();
-                    // enemy3.SetPos(400, 150);
+                    CombatEnemyEntity enemy3Sprite = CombatEnemyEntity.Create();
+                    enemy3Sprite.SetPos(baseX + 400, baseY);
+                    ButtonEnemyEntity enemy3Button = ButtonEnemyEntity.Create();
+                    enemy3Button.SetPos(enemy3Sprite.GetPosX(), enemy3Sprite.GetPosY());
                 }
             }
         }
@@ -91,10 +91,10 @@ public class MainCombatSceneState implements StateBase {
     @Override
     public void OnExit()
     {
-        for (int i = 0; i < p.length; i++)
+        /*for (int i = 0; i < p.length; i++)
         {
             SmurfEntity.p[i] = p[i];
-        }
+        }*/
 
         EntityManager.Instance.Clean();
 

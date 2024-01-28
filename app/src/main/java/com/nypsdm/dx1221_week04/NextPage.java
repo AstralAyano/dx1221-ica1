@@ -23,13 +23,6 @@ public class NextPage extends FragmentActivity
 {
     public static NextPage Instance = null;
 
-    private Button btn_back;
-    private Button btn_create;
-    private Button btn_basic;
-    private Button btn_skill;
-    private Button btn_ultimate;
-    private Button btn_cycle;
-
     @Override
     protected void onCreate(Bundle savedInstanceState)
     {

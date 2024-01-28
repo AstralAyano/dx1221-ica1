@@ -283,8 +283,7 @@ public class MainCombatSceneState implements StateBase {
     {
         if (e.length - 1 <= 0)
         {
-            // change to win
-            
+            NextPage.Instance.ChangeToWin();
         }
         // removes the dead enemy and resizes enemy array
         Enemy[] temp = new Enemy[e.length - 1];

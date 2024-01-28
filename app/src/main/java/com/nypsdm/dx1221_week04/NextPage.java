@@ -50,4 +50,20 @@ public class NextPage extends FragmentActivity
         KeyboardManager.getInstance().handleKeyEvent(event);
         return super.onKeyDown(keyCode, event);
     }
+
+    public void ChangeToWin()
+    {
+        Intent intent = new Intent();
+        intent.setClass(this, WinPage.class);
+        StateManager.Instance.ChangeState("WinPage");
+        startActivity(intent);
+    }
+
+    public void ChangeToLose()
+    {
+        Intent intent = new Intent();
+        intent.setClass(this, LosePage.class);
+        StateManager.Instance.ChangeState("LosePage");
+        startActivity(intent);
+    }
 }

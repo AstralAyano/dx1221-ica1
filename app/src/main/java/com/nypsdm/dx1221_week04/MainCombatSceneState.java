@@ -309,6 +309,23 @@ public class MainCombatSceneState implements StateBase {
         {
             NextPage.Instance.ChangeToWin();
         }
+
+        switch (positionInArray)
+        {
+            case 0:
+                enemy1Sprite.SetIsDone(true);
+                enemy1Button.SetIsDone(true);
+                break;
+            case 1:
+                enemy2Sprite.SetIsDone(true);
+                enemy2Button.SetIsDone(true);
+                break;
+            case 2:
+                enemy3Sprite.SetIsDone(true);
+                enemy3Button.SetIsDone(true);
+                break;
+        }
+
         // removes the dead enemy and resizes enemy array
         Enemy[] temp = new Enemy[e.length - 1];
 
@@ -341,7 +358,7 @@ public class MainCombatSceneState implements StateBase {
                 return i;
             }
         }
-        return -1;
+        return 0;
     }
     public String LookForEntityType(int place)
     {
@@ -475,24 +492,17 @@ public class MainCombatSceneState implements StateBase {
         // normal flow
         if (e.length > 0)
         {
-            Log.d("test", "====================");
             if (LookForEntityType(currPlace) == "player")
             {
-                Log.d("test", "<" + p[EntityInArray(currPlace)].Name + ">'s Turn.");
                 statText.SetValues(p[EntityInArray(currPlace)].GetHP(), p[EntityInArray(currPlace)].GetMHP(), p[EntityInArray(currPlace)].GetATK(), p[EntityInArray(currPlace)].GetSPD());
-                Log.d("test", skillPoints + " Skill Point(s) Remaining.");
-                Log.d("test", "Ultimate Charge: " + p[EntityInArray(currPlace)].Energy + "/100.");
                 abilityText.value = skillPoints;
                 abilityText.value2 = p[EntityInArray(currPlace)].Energy;
-                Log.d("test", "Targeting: <" + e[count].Name + "> [" + e[count].GetHT() + "]. " + CheckWeakness(p[EntityInArray(currPlace)].GetHT(), e[count].GetHT()));
             }
             else if (LookForEntityType(currPlace) == "enemy")
             {
                 Log.d("test", "<" + e[EntityInArray(currPlace)].Name + ">'s turn.");
                 Log.d("test", "Targeting: <" + p[randPlayer].Name + ">" + CheckWeakness(p[EntityInArray(currPlace)].GetHT(), e[count].GetHT()));
             }
-            Log.d("test", "====================");
-            Log.d("test", "");
         }
     }
     private String CheckWeakness(String ht1, String ht2)

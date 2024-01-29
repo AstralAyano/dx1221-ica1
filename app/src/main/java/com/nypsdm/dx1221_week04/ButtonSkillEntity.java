@@ -75,7 +75,10 @@ public class ButtonSkillEntity implements EntityBase
                     Pressed = true;
 
                     // Functionality here (idk if you need "Pressed" boolean
-                    combatScene.DoSkill();
+                    if (combatScene.skillPoints > 0)
+                    {
+                        combatScene.DoSkill();
+                    }
                 }
                 buttonDelay = 0;
             }

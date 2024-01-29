@@ -38,6 +38,10 @@ public class MainCombatSceneState implements StateBase {
     public ButtonEnemyEntity enemy2Button;
     public ButtonEnemyEntity enemy3Button;
 
+    public RenderEnemyHPTextEntity enemy1HP;
+    public RenderEnemyHPTextEntity enemy2HP;
+    public RenderEnemyHPTextEntity enemy3HP;
+
     RenderAbilityTextEntity abilityText;
     RenderStatTextEntity statText;
     RenderRoundTextEntity roundText;
@@ -81,6 +85,9 @@ public class MainCombatSceneState implements StateBase {
             enemy1Button.combatScene = this;
             enemy1Button.enemyNo = 0;
             enemy1Button.SetPos(enemy1Sprite.GetPosX(), enemy1Sprite.GetPosY());
+            enemy1HP = RenderEnemyHPTextEntity.Create();
+            enemy1HP.enemy = 0;
+            enemy1HP.SetPos(enemy1Button.GetPosX() - 50, enemy1Button.GetPosY() - 100);
 
             if (amtOfEnemies == 2 || amtOfEnemies == 3)
             {
@@ -90,6 +97,9 @@ public class MainCombatSceneState implements StateBase {
                 enemy2Button.combatScene = this;
                 enemy2Button.enemyNo = 1;
                 enemy2Button.SetPos(enemy2Sprite.GetPosX(), enemy2Sprite.GetPosY());
+                enemy2HP = RenderEnemyHPTextEntity.Create();
+                enemy2HP.enemy = 1;
+                enemy2HP.SetPos(enemy2Button.GetPosX() - 50, enemy2Button.GetPosY() - 100);
 
                 if (amtOfEnemies == 3)
                 {
@@ -99,6 +109,9 @@ public class MainCombatSceneState implements StateBase {
                     enemy3Button.combatScene = this;
                     enemy3Button.enemyNo = 2;
                     enemy3Button.SetPos(enemy3Sprite.GetPosX(), enemy3Sprite.GetPosY());
+                    enemy3HP = RenderEnemyHPTextEntity.Create();
+                    enemy3HP.enemy = 2;
+                    enemy3HP.SetPos(enemy3Button.GetPosX() - 50, enemy3Button.GetPosY() - 100);
                 }
             }
         }
@@ -353,14 +366,17 @@ public class MainCombatSceneState implements StateBase {
             case 0:
                 enemy1Sprite.SetIsDone(true);
                 enemy1Button.SetIsDone(true);
+                enemy1HP.SetIsDone(true);
                 break;
             case 1:
                 enemy2Sprite.SetIsDone(true);
                 enemy2Button.SetIsDone(true);
+                enemy2HP.SetIsDone(true);
                 break;
             case 2:
                 enemy3Sprite.SetIsDone(true);
                 enemy3Button.SetIsDone(true);
+                enemy3HP.SetIsDone(true);
                 break;
         }
     }
@@ -507,6 +523,10 @@ public class MainCombatSceneState implements StateBase {
             entityNo++;
             place++;
         }
+
+        enemy1HP.SetHealthText(e[0].GetHP());
+        enemy2HP.SetHealthText(e[1].GetHP());
+        enemy3HP.SetHealthText(e[2].GetHP());
 
         turnOrderText.SetValues(turnOrderList, currPlace);
     }

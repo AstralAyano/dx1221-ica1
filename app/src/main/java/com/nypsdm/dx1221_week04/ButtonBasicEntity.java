@@ -76,9 +76,6 @@ public class ButtonBasicEntity implements EntityBase
                 if (Collision.AABBCollision(TouchManager.Instance.GetPosX(), TouchManager.Instance.GetPosY(), 0, 0, xPos, yPos, 235, 85) && buttonDelay >= 0.25) {
                     Pressed = true;
 
-                    // Functionality here (idk if you need "Pressed" boolean
-                    combatScene.DoDamage();
-
                     ButtonEnemyEntity enemyTarget = new ButtonEnemyEntity();
 
                     switch (combatScene.count)
@@ -106,6 +103,9 @@ public class ButtonBasicEntity implements EntityBase
                             combatScene.emoChar.AttackEnemy(enemyTarget.GetPosX(), enemyTarget.GetPosY());
                             break;
                     }
+
+                    // Functionality here (idk if you need "Pressed" boolean
+                    combatScene.DoDamage();
                 }
                 buttonDelay = 0;
             }

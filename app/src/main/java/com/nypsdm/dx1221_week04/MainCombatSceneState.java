@@ -318,18 +318,35 @@ public class MainCombatSceneState implements StateBase {
         // set enemy to dead
         e[positionInArray].isDead = true;
         // check if all enemies are dead
-        int count = 0;
+        int k = 0;
         for (int i = 0; i < e.length; i++)
         {
             if (e[i].isDead)
             {
-                count++;
+                k++;
             }
         }
-        if (count == e.length)
+        // if all enemies are dead
+        if (k == e.length)
         {
             NextPage.Instance.ChangeToWin();
         }
+        else // set target to next enemy
+        {
+            count++;
+            if (count == e.length)
+            {
+                for (int i = 0; i < e.length; i++)
+                {
+                    if (!e[i].isDead)
+                    {
+                        count = i;
+                        break;
+                    }
+                }
+            }
+        }
+
         // un-render enemy
         switch (positionInArray)
         {
@@ -345,16 +362,6 @@ public class MainCombatSceneState implements StateBase {
                 enemy3Sprite.SetIsDone(true);
                 enemy3Button.SetIsDone(true);
                 break;
-        }
-        // set target to next enemy
-        count = positionInArray + 1;
-        if (count >= e.length)
-        {
-            count = 0;
-        }
-        while (e[count].isDead)
-        {
-            count++;
         }
     }
     public int EntityInArray(int place)

@@ -15,6 +15,11 @@ public class PhysicalEntity implements EntityBase, Collidable {
     private boolean isInit = false;
 
     private float xPos, yPos; // Current position of the enemy
+    private float originXPos, originYPos;
+    private float enemyXPos, enemyYPos;
+
+    private boolean startMovement = false, returnMovement = false;
+    private float timer = 0;
 
     @Override
     public boolean IsDone() { return isDone; }
@@ -35,16 +40,60 @@ public class PhysicalEntity implements EntityBase, Collidable {
         xPos = _view.getWidth() / 4;
         yPos = _view.getHeight() / 2 + 100;
 
+        originXPos = xPos;
+        originYPos = yPos;
+
         isInit = true;
 
         // To Set the Animation Frames
         spritesheet.SetAnimationFrames(0,3);
     }
 
+    public void AttackEnemy(float enemyX, float enemyY)
+    {
+        startMovement = true;
+        enemyXPos = enemyX;
+        enemyYPos = enemyY;
+
+        Log.d("Debug", "enemyX : " + Float.toString(enemyXPos));
+    }
+
     @Override
     public void Update(float _dt) {
         // Update spritesheet
         spritesheet.Update(_dt);
+
+        if (startMovement)
+        {
+            if (xPos <= enemyXPos && !returnMovement)
+            {
+                xPos += 800 * _dt;
+            }
+            else
+            {
+                returnMovement = true;
+            }
+
+            if (returnMovement)
+            {
+                timer += _dt;
+
+                if (timer > 0.5f)
+                {
+                    if (xPos >= originXPos)
+                    {
+                        xPos -= 800 * _dt;
+                    }
+                    else
+                    {
+                        xPos = originXPos;
+                        timer = 0;
+                        startMovement = false;
+                        returnMovement = false;
+                    }
+                }
+            }
+        }
     }
 
     @Override
@@ -57,7 +106,7 @@ public class PhysicalEntity implements EntityBase, Collidable {
     public boolean IsInit() { return isInit; }
 
     @Override
-    public int GetRenderLayer() { return LayerConstants.SMURF_LAYER; }
+    public int GetRenderLayer() { return LayerConstants.PLAYER_LAYER; }
 
     @Override
     public void SetRenderLayer(int _newLayer) { return; }

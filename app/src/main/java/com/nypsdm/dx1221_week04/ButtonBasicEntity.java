@@ -2,7 +2,9 @@ package com.nypsdm.dx1221_week04;
 
 import android.graphics.Bitmap;
 import android.graphics.Canvas;
+import android.graphics.Interpolator;
 import android.util.DisplayMetrics;
+import android.util.Log;
 import android.view.SurfaceView;
 
 public class ButtonBasicEntity implements EntityBase
@@ -76,6 +78,34 @@ public class ButtonBasicEntity implements EntityBase
 
                     // Functionality here (idk if you need "Pressed" boolean
                     combatScene.DoDamage();
+
+                    ButtonEnemyEntity enemyTarget = new ButtonEnemyEntity();
+
+                    switch (combatScene.count)
+                    {
+                        case 0:
+                            enemyTarget = combatScene.enemy1Button;
+                            break;
+                        case 1:
+                            enemyTarget = combatScene.enemy2Button;
+                            break;
+                        case 2:
+                            enemyTarget = combatScene.enemy3Button;
+                            break;
+                    }
+
+                    switch (combatScene.p[combatScene.EntityInArray(combatScene.currPlace)].GetHT())
+                    {
+                        case "PHY":
+                            combatScene.phyChar.AttackEnemy(enemyTarget.GetPosX(), enemyTarget.GetPosY());
+                            break;
+                        case "MEN":
+                            combatScene.menChar.AttackEnemy(enemyTarget.GetPosX(), enemyTarget.GetPosY());
+                            break;
+                        case "EMO":
+                            combatScene.emoChar.AttackEnemy(enemyTarget.GetPosX(), enemyTarget.GetPosY());
+                            break;
+                    }
                 }
                 buttonDelay = 0;
             }

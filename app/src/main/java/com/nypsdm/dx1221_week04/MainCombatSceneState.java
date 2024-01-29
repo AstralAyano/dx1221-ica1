@@ -26,6 +26,14 @@ public class MainCombatSceneState implements StateBase {
     public int entityCount;
     public int currPlace;
 
+    public PhysicalEntity phyChar;
+    public MentalEntity menChar;
+    public EmotionalEntity emoChar;
+
+    public CombatEnemyEntity enemy1Sprite;
+    public CombatEnemyEntity enemy2Sprite;
+    public CombatEnemyEntity enemy3Sprite;
+
     public ButtonEnemyEntity enemy1Button;
     public ButtonEnemyEntity enemy2Button;
     public ButtonEnemyEntity enemy3Button;
@@ -48,14 +56,9 @@ public class MainCombatSceneState implements StateBase {
         AudioManager.Instance.PlayAudio(R.raw.bgm_sorrowful, 0.25f, true);
 
         // Player Entities
-        PhysicalEntity.Create();
-        MentalEntity.Create();
-        EmotionalEntity.Create();
-
-        // Temp
-        ButtonStartEntity startBtn = ButtonStartEntity.Create();
-        startBtn.combatScene = this;
-        ButtonNextEntity.Create();
+        phyChar = PhysicalEntity.Create();
+        menChar = MentalEntity.Create();
+        emoChar = EmotionalEntity.Create();
 
         // Actual Combat Buttons
         ButtonBasicEntity basicBtn = ButtonBasicEntity.Create();
@@ -72,7 +75,7 @@ public class MainCombatSceneState implements StateBase {
 
         if (amtOfEnemies == 1 || amtOfEnemies == 2 || amtOfEnemies == 3)
         {
-            CombatEnemyEntity enemy1Sprite = CombatEnemyEntity.Create();
+            enemy1Sprite = CombatEnemyEntity.Create();
             enemy1Sprite.SetPos(baseX, baseY);
             enemy1Button = ButtonEnemyEntity.Create();
             enemy1Button.combatScene = this;
@@ -81,7 +84,7 @@ public class MainCombatSceneState implements StateBase {
 
             if (amtOfEnemies == 2 || amtOfEnemies == 3)
             {
-                CombatEnemyEntity enemy2Sprite = CombatEnemyEntity.Create();
+                enemy2Sprite = CombatEnemyEntity.Create();
                 enemy2Sprite.SetPos(baseX + 200, baseY);
                 enemy2Button = ButtonEnemyEntity.Create();
                 enemy2Button.combatScene = this;
@@ -90,7 +93,7 @@ public class MainCombatSceneState implements StateBase {
 
                 if (amtOfEnemies == 3)
                 {
-                    CombatEnemyEntity enemy3Sprite = CombatEnemyEntity.Create();
+                    enemy3Sprite = CombatEnemyEntity.Create();
                     enemy3Sprite.SetPos(baseX + 400, baseY);
                     enemy3Button = ButtonEnemyEntity.Create();
                     enemy3Button.combatScene = this;

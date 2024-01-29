@@ -131,11 +131,11 @@ public class ButtonEnemyEntity implements EntityBase
 
     @Override
     public float GetPosX() {
-        return 0;
+        return xPos;
     }
 
     @Override
     public float GetPosY() {
-        return 0;
+        return yPos;
     }
 }

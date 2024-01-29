@@ -7,9 +7,9 @@ import android.os.Bundle;
 import android.view.MotionEvent;
 import android.view.SurfaceView;
 
-public class SettingPage extends Activity implements StateBase
+public class HelpPage extends Activity implements StateBase
 {
-    public static SettingPage Instance = null;
+    public static HelpPage Instance = null;
 
     protected boolean _active = true;
     // Boolean use to check for whether the page is active and running
@@ -81,7 +81,7 @@ public class SettingPage extends Activity implements StateBase
                     finish();
 
                     // Create new activity based on an intent with CurrentActivity
-                    Intent intent = new Intent(SettingPage.this, MainMenu.class);
+                    Intent intent = new Intent(HelpPage.this, MainMenu.class);
                     startActivity(intent);
                 }
             }

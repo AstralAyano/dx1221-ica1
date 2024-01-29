@@ -15,6 +15,7 @@ public class Enemy extends Character
         Name = name;
         ChangeStats(hp, atk, spd);
         type = "enemy";
+        isDead = false;
         SetHT(ht);
         Log.d("test", "enemy created");
         Log.d("test", "");

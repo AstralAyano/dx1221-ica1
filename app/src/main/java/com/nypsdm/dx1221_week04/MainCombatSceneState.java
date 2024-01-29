@@ -267,12 +267,24 @@ public class MainCombatSceneState implements StateBase {
         // while its the enemy turn
         while (LookForEntityType(currPlace) == "enemy")
         {
-            // continue turn order
-            PrintAllStats(round);
-            PrintRoundStatus();
-            // do attack code on random player
-            randPlayer = rand.nextInt(p.length);
-            p[randPlayer].TakeDamage(e[EntityInArray(currPlace)].GetATK(), e[EntityInArray(currPlace)].GetHT());
+            if (!p[EntityInArray(currPlace)].isDead)
+            {
+                // continue turn order
+                PrintAllStats(round);
+                PrintRoundStatus();
+                // do attack code on random player
+                randPlayer = rand.nextInt(p.length);
+                //check if player is dead
+                if (!p[randPlayer].isDead)
+                {
+                    p[randPlayer].TakeDamage(e[EntityInArray(currPlace)].GetATK(), e[EntityInArray(currPlace)].GetHT());
+                    //check if player is dead
+                    if (p[randPlayer].GetHP() <= 0)
+                    {
+                        p[randPlayer].isDead = true;
+                    }
+                }
+            }
             // progress fight
             currPlace++;
             if (LookForEntityType(currPlace) == null)
@@ -281,12 +293,11 @@ public class MainCombatSceneState implements StateBase {
                 round++;
 
             }
-
-            // check if player(s) is dead
-            int count = 0;
-            while (p[EntityInArray(currPlace)].GetHP() <= 0)
+        }
+        while (LookForEntityType(currPlace) == "player")
+        {
+            if (p[EntityInArray(currPlace)].isDead)
             {
-                count++;
                 // progress fight
                 currPlace++;
                 if (LookForEntityType(currPlace) == null)
@@ -296,20 +307,30 @@ public class MainCombatSceneState implements StateBase {
 
                 }
             }
-            // if all players dead
-            if (count == 3)
+            else
             {
-                NextPage.Instance.ChangeToLose();
+                break;
             }
         }
     }
     private void RemoveEnemy(int positionInArray)
     {
-        if (e.length - 1 <= 0)
+        // set enemy to dead
+        e[positionInArray].isDead = true;
+        // check if all enemies are dead
+        int count = 0;
+        for (int i = 0; i < e.length; i++)
+        {
+            if (e[i].isDead)
+            {
+                count++;
+            }
+        }
+        if (count == e.length)
         {
             NextPage.Instance.ChangeToWin();
         }
-
+        // un-render enemy
         switch (positionInArray)
         {
             case 0:
@@ -325,21 +346,16 @@ public class MainCombatSceneState implements StateBase {
                 enemy3Button.SetIsDone(true);
                 break;
         }
-
-        // removes the dead enemy and resizes enemy array
-        Enemy[] temp = new Enemy[e.length - 1];
-
-        for(int i=0, k=0; i < e.length; i++)
+        // set target to next enemy
+        count = positionInArray + 1;
+        if (count >= e.length)
         {
-            if(i != positionInArray)
-            {
-                temp[k] = e[i];
-                k++;
-            }
+            count = 0;
         }
-
-        e = new Enemy[temp.length];
-        e = temp;
+        while (e[count].isDead)
+        {
+            count++;
+        }
     }
     public int EntityInArray(int place)
     {

@@ -18,6 +18,7 @@ public class Player extends Character
         ChangeStats(hp, atk, spd);
         SetMHP(GetHP());
         type = "player";
+        isDead = false;
         SetHT(ht);
         Energy = 0;
         Log.d("test", "player created");

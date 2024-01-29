@@ -9,6 +9,7 @@ public abstract class Character
     private int SPD;
     public int placeInTurn;
     public String type;
+    public boolean isDead;
     private String healthType;
 
     //Change all stats

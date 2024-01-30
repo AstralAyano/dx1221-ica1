@@ -1,5 +1,6 @@
 package com.nypsdm.dx1221_week04;
 
+// Whole script done by Bernard Ng
 public class Camera {
     private float x;
     private float y;

@@ -47,6 +47,7 @@ public class MovementButtonEntity implements EntityBase
         isDone = _isDone;
     }
 
+    // Done by Bernard Ng
     @Override
     public void Init(SurfaceView _view) {
         x = MainGameSceneState.camera.GetX();
@@ -74,6 +75,7 @@ public class MovementButtonEntity implements EntityBase
         isInit = true;
     }
 
+    // Done by Kodey Chin
     @Override
     public void Update(float _dt) {
 
@@ -133,6 +135,7 @@ public class MovementButtonEntity implements EntityBase
         tileMap.SetPosition(x, y);
     }
 
+    // Done by Bernard Ng
     @Override
     public void Render(Canvas _canvas, float x, float y) {
         _canvas.drawBitmap(ScaledbmpLeft, xPos - ScaledbmpLeft.getWidth() * 0.5f, yPos - ScaledbmpLeft.getHeight() * 0.5f, null);

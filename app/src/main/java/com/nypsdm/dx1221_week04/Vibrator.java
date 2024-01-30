@@ -4,6 +4,7 @@ import android.os.VibrationEffect;
 import android.os.VibratorManager;
 import android.util.Log;
 
+// Whole script done by Bernard Ng
 public class Vibrator
 {
     private static android.os.Vibrator _vibrator;

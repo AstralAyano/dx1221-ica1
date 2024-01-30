@@ -10,6 +10,7 @@ import android.view.SurfaceView;
 import java.util.ArrayList;
 import java.util.List;
 
+// Whole script done by Bernard Ng
 public class TileMapEntity implements EntityBase
 {
     private int[][] tileMap; // Represents the layout of the tilemap

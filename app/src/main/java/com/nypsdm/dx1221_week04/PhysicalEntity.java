@@ -7,6 +7,7 @@ import android.view.SurfaceView;
 
 import java.util.Random;
 
+// Whole script done by Bernard Ng
 public class PhysicalEntity implements EntityBase, Collidable {
     public Sprite spritesheet = null; // Define.
     private SurfaceView view;

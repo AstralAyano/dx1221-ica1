@@ -5,6 +5,7 @@ import android.content.Intent;
 import android.os.Bundle;
 import android.view.MotionEvent;
 
+// Whole script done by Bernard Ng
 public class SplashPage extends Activity
 {
     protected boolean _active = true;

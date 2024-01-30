@@ -67,18 +67,18 @@ public class SmurfEntity implements EntityBase, Collidable{
 
         isInit = true;
 
-        // To Set the Animation Frames
+        // To Set the Animation Frames by Bernard Ng
         spritesheet.SetAnimationFrames(0,4);
 
         MovementButtonEntity.SetEntity(this);
 
-        // create player characters
+        // create player characters by Kodey CHin
         p = new Player[3];
         p[0] = new Player("Physical", 20, 2, 6, "PHY");
         p[1] = new Player("Mental", 10, 4, 3, "MEN");
         p[2] = new Player("Emotional", 15, 2, 4, "EMO");
 
-        // sort based on spd
+        // sort based on spd by Kodey Chin
         for (int k = 0; k < p.length; k++)
         {
             for (int i = 0; i < p.length; i++)
@@ -95,6 +95,7 @@ public class SmurfEntity implements EntityBase, Collidable{
         }
     }
 
+    // Done by Kodey Chin
     @Override
     public void Update(float _dt)
     {
@@ -207,6 +208,7 @@ public class SmurfEntity implements EntityBase, Collidable{
         return 128;
     }
 
+    // Done by Kodey Chin
     @Override
     public void OnHit(Collidable _other) {
         // This allows you to check collision between 2 entities.
@@ -247,6 +249,7 @@ public class SmurfEntity implements EntityBase, Collidable{
         }
     }
 
+    // Done by Kodey Chin
     public float getAngle(float x, float y)
     {
         float angle = (float) Math.toDegrees(Math.atan2(y - yPos, x - xPos));

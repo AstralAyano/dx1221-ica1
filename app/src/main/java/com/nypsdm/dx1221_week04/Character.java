@@ -2,6 +2,7 @@ package com.nypsdm.dx1221_week04;
 
 import android.util.Log;
 
+// Whole script done by Kodey Chin
 public abstract class Character
 {
     private int HP, MAXHP;

@@ -9,6 +9,7 @@ import android.view.SurfaceView;
 
 import androidx.constraintlayout.helper.widget.Layer;
 
+// Whole script done by Bernard Ng
 public class TileEntity implements EntityBase, Collidable
 {
     public TileMapEntity tileMap;

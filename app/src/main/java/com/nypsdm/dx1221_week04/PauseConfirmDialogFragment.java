@@ -7,6 +7,7 @@ import android.os.Bundle;
 
 import androidx.fragment.app.DialogFragment;
 
+// Whole script done by Bernard Ng
 public class PauseConfirmDialogFragment extends DialogFragment
 {
 

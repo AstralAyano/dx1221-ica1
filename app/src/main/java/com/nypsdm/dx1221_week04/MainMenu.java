@@ -9,6 +9,7 @@ import android.view.View;
 import android.view.View.OnClickListener;
 import android.widget.Button;
 
+// Whole script done by Bernard Ng
 public class MainMenu extends Activity implements OnClickListener, StateBase
 {
     public static MainMenu Instance = null;

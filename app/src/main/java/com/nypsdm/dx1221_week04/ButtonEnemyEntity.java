@@ -5,6 +5,7 @@ import android.graphics.Canvas;
 import android.util.DisplayMetrics;
 import android.view.SurfaceView;
 
+// Whole script done by Bernard Ng
 public class ButtonEnemyEntity implements EntityBase
 {
     public MainCombatSceneState combatScene;

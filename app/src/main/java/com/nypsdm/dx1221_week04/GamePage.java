@@ -13,7 +13,7 @@ import android.view.KeyEvent;
 import android.view.MotionEvent;
 import android.view.SurfaceView;
 
-// extends FragmentActivity
+// Whole script done by Bernard Ng
 public class GamePage extends FragmentActivity
 {
     public static GamePage Instance = null;

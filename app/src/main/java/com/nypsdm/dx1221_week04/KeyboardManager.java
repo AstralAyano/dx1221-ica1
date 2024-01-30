@@ -2,6 +2,7 @@ package com.nypsdm.dx1221_week04;
 
 import android.view.KeyEvent;
 
+// Whole script done by Bernard Ng
 public class KeyboardManager
 {
     private static KeyboardManager instance;

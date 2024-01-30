@@ -9,6 +9,7 @@ import android.view.SurfaceView;
 import android.view.View;
 import android.widget.Button;
 
+// Whole script done by Bernard Ng
 public class LosePage extends Activity implements View.OnClickListener, StateBase
 {
     public static LosePage Instance = null;

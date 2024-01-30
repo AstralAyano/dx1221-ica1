@@ -4,6 +4,7 @@ import android.graphics.Canvas;
 import android.util.Log;
 import android.view.SurfaceView;
 
+// Whole script done by Bernard Ng
 public class EmotionalEntity implements EntityBase, Collidable {
     public Sprite spritesheet = null; // Define.
     private SurfaceView view;

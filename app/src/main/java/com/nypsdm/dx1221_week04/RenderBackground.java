@@ -6,6 +6,7 @@ import android.graphics.Canvas;
 import android.util.DisplayMetrics;
 import android.view.SurfaceView;
 
+// Whole script done by Bernard Ng
 public class RenderBackground implements EntityBase {
 
 	//7. Render a scrolling background

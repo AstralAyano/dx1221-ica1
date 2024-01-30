@@ -7,6 +7,7 @@ import android.view.SurfaceView;
 
 import java.util.Random;
 
+// Whole script done by Bernard Ng (Other than those with comments for Kodey)
 public class EnemyEntity implements EntityBase, Collidable {
     public Bitmap bmp = null; // Usual method of loading a bmp/image
     public Sprite spritesheet = null; // Define.
@@ -141,6 +142,7 @@ public class EnemyEntity implements EntityBase, Collidable {
         return 128;
     }
 
+    // Done by Kodey Chin
     @Override
     public void OnHit(Collidable _other) {
 
@@ -180,6 +182,7 @@ public class EnemyEntity implements EntityBase, Collidable {
         return false;
     }
 
+    // Done by Kodey Chin
     public float getAngle(float x, float y)
     {
         float angle = (float) Math.toDegrees(Math.atan2(y - yPos, x - xPos));

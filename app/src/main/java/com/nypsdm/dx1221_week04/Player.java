@@ -4,6 +4,7 @@ import android.util.Log;
 
 import java.util.Random;
 
+// Whole script done by Kodey Chin
 public class Player extends Character
 {
     public String Name;

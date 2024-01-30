@@ -7,6 +7,8 @@ import android.view.SurfaceView;
 
 import java.util.HashMap;
 
+
+// Whole script done by Bernard Ng
 public class AudioManager
 {
     public final static AudioManager Instance = new AudioManager();

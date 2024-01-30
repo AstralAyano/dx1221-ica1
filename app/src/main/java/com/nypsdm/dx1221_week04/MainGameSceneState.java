@@ -10,6 +10,7 @@ import java.util.List;
 
 // Created by TanSiewLan2021
 
+// Whole script done by Bernard Ng
 public class MainGameSceneState implements StateBase {
     public static Camera camera;
     private SurfaceView view;

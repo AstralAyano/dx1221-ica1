@@ -55,16 +55,17 @@ public class MainCombatSceneState implements StateBase {
     @Override
     public void OnEnter(SurfaceView _view)
     {
+        // Done by Bernard Ng
         RenderCombatBackground.Create();
 
         AudioManager.Instance.PlayAudio(R.raw.bgm_sorrowful, 0.25f, true);
 
-        // Player Entities
+        // Player Entities by Bernard Ng
         phyChar = PhysicalEntity.Create();
         menChar = MentalEntity.Create();
         emoChar = EmotionalEntity.Create();
 
-        // Actual Combat Buttons
+        // Actual Combat Buttons by Bernard Ng
         ButtonBasicEntity basicBtn = ButtonBasicEntity.Create();
         basicBtn.combatScene = this;
         ButtonSkillEntity skillBtn = ButtonSkillEntity.Create();
@@ -72,7 +73,7 @@ public class MainCombatSceneState implements StateBase {
         ButtonUltimateEntity ultimateBtn = ButtonUltimateEntity.Create();
         ultimateBtn.combatScene = this;
 
-        // Enemies
+        // Enemies by Bernard Ng
         int amtOfEnemies = 3;
         int baseX = 1600;
         int baseY = 945;
@@ -116,15 +117,17 @@ public class MainCombatSceneState implements StateBase {
             }
         }
 
-        //Text
+        // Text by Bernard Ng
         RenderTextEntity.Create();
         abilityText = RenderAbilityTextEntity.Create();
         statText = RenderStatTextEntity.Create();
         roundText = RenderRoundTextEntity.Create();
         turnOrderText = RenderTurnOrderTextEntity.Create();
 
+        // Done by Bernard Ng
         Vibrator.Initialize((android.os.Vibrator)_view.getContext().getSystemService(_view.getContext().VIBRATOR_SERVICE));
 
+        // Done by Kodey Chin
         CreateAndSortPlayers();
         CreateAndSortEnemies(
                 GetRandomNumber(3, 3),
@@ -151,11 +154,6 @@ public class MainCombatSceneState implements StateBase {
     @Override
     public void OnExit()
     {
-        /*for (int i = 0; i < p.length; i++)
-        {
-            SmurfEntity.p[i] = p[i];
-        }*/
-
         EntityManager.Instance.Clean();
 
         NextPage.Instance.finish();
@@ -179,6 +177,7 @@ public class MainCombatSceneState implements StateBase {
         }
     }
 
+    // Done by Bernard Ng
     public void ResetEnemyButtonImage()
     {
         enemy1Button.SetImage(R.drawable.blank);
@@ -186,6 +185,7 @@ public class MainCombatSceneState implements StateBase {
         enemy3Button.SetImage(R.drawable.blank);
     }
 
+    // Done by Kodey Chin
     public void DoDamage()
     {
         if (LookForEntityType(currPlace) == "player")
@@ -217,6 +217,8 @@ public class MainCombatSceneState implements StateBase {
         PrintAllStats(round);
         PrintRoundStatus();
     }
+
+    // Done by Kodey Chin
     public void DoSkill()
     {
         // find player
@@ -247,6 +249,8 @@ public class MainCombatSceneState implements StateBase {
         PrintAllStats(round);
         PrintRoundStatus();
     }
+
+    // Done by Kodey Chin
     public void DoUltimate(int i)
     {
         // do ultimate code
@@ -275,6 +279,8 @@ public class MainCombatSceneState implements StateBase {
         PrintAllStats(round);
         PrintRoundStatus();
     }
+
+    // Done by Kodey Chin
     public void DoEnemyTurns()
     {
         // while its the enemy turn
@@ -326,6 +332,8 @@ public class MainCombatSceneState implements StateBase {
             }
         }
     }
+
+    // Done by Kodey Chin
     private void RemoveEnemy(int positionInArray)
     {
         // set enemy to dead
@@ -360,7 +368,7 @@ public class MainCombatSceneState implements StateBase {
             }
         }
 
-        // un-render enemy
+        // un-render enemy by Bernard Ng
         switch (positionInArray)
         {
             case 0:
@@ -380,6 +388,8 @@ public class MainCombatSceneState implements StateBase {
                 break;
         }
     }
+
+    // Done by Kodey Chin
     public int EntityInArray(int place)
     {
         // find an entities position in its respective array
@@ -399,6 +409,8 @@ public class MainCombatSceneState implements StateBase {
         }
         return 0;
     }
+
+    // Done by Kodey Chin
     public String LookForEntityType(int place)
     {
         // finds the entity type in a specific place
@@ -418,6 +430,8 @@ public class MainCombatSceneState implements StateBase {
         }
         return null;
     }
+
+    // Done by Kodey Chin
     public void CreateAndSortPlayers()
     {
         p = new Player[3];
@@ -428,6 +442,8 @@ public class MainCombatSceneState implements StateBase {
 
         entityCount += p.length;
     }
+
+    // Done by Kodey Chin
     public void CreateAndSortEnemies(int amount, int minHP, int maxHP, int minATK, int maxATK, int minSPD, int maxSPD)
     {
         // creates a random amount of enemies with random stats
@@ -461,6 +477,8 @@ public class MainCombatSceneState implements StateBase {
         }
         entityCount += e.length;
     }
+
+    // Done by Kodey Chin
     public void PrintAllStats(int roundNo)
     {
         // prints round details
@@ -530,6 +548,8 @@ public class MainCombatSceneState implements StateBase {
 
         turnOrderText.SetValues(turnOrderList, currPlace);
     }
+
+    // Done by Kodey Chin
     public void PrintRoundStatus()
     {
         // normal flow
@@ -548,6 +568,8 @@ public class MainCombatSceneState implements StateBase {
             }
         }
     }
+
+    // Done by Kodey Chin
     private String CheckWeakness(String ht1, String ht2)
     {
         switch (ht1)
@@ -598,6 +620,8 @@ public class MainCombatSceneState implements StateBase {
 
         return "";
     }
+
+    // Done by Kodey Chin
     public int GetRandomNumber(int lowest, int highest)
     {
         return rand.nextInt(highest - lowest + 1) + lowest;

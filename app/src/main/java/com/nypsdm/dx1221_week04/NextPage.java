@@ -19,6 +19,7 @@ import androidx.fragment.app.FragmentActivity;
 import java.util.Arrays;
 import java.util.Random;
 
+// Whole script done by Bernard Ng
 public class NextPage extends FragmentActivity
 {
     public static NextPage Instance = null;

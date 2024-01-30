@@ -7,6 +7,7 @@ import android.util.DisplayMetrics;
 import android.util.Log;
 import android.view.SurfaceView;
 
+// Whole script done by Bernard Ng
 public class ButtonBasicEntity implements EntityBase
 {
     public MainCombatSceneState combatScene;

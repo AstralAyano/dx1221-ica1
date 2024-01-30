@@ -3,6 +3,7 @@ package com.nypsdm.dx1221_week04;
 import android.graphics.Canvas;
 import android.view.SurfaceView;
 
+// Whole script done by Bernard Ng
 public class CombatEnemyEntity implements EntityBase, Collidable {
     public Sprite spritesheet = null; // Define.
     private SurfaceView view;

@@ -5,6 +5,7 @@ import android.graphics.Paint;
 import android.graphics.Typeface;
 import android.view.SurfaceView;
 
+// Whole script done by Bernard Ng
 public class RenderTextEntity implements EntityBase
 {
     // Paint Object
